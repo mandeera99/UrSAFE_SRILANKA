@@ -3,18 +3,17 @@ import { Fragment } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 
-class Upcoming extends React.Component {
-    render() {
+const Upcoming = ()=> {
+
         return (
             <Fragment>
                 <div>
-                    <Header />
 {/*                     <!-- Start Coming Soon Area -->
- */}        <div class="coming-soon-area">
-			<div class="d-table">
-				<div class="d-table-cell">
-					<div class="container">
-						<div class="coming-soon-content">
+ */}        <div className="coming-soon-area">
+			<div className="d-table">
+				<div className="d-table-cell">
+					<div className="container">
+						<div className="coming-soon-content">
 							<h1>Coming Soon</h1>
 							<p>What are the new details and updates about our application to know that enter  your mail address.</p>
 
@@ -25,34 +24,34 @@ class Upcoming extends React.Component {
 								<div id="seconds"></div>
 							</div>
 							
-							<form class="newsletter-form" data-toggle="validator">
-								<input type="email" class="input-newsletter" placeholder="Enter email address" name="EMAIL" required autocomplete="off"/>
+							<form className="newsletter-form" data-toggle="validator">
+								<input type="email" className="input-newsletter" placeholder="Enter email address" name="EMAIL" required autocomplete="off"/>
 			
-								<button type="submit" class="default-btn">
+								<button type="submit" className="default-btn">
 									Notify Me
 								</button>
-								<div id="validator-newsletter" class="form-result"></div>
+								<div id="validator-newsletter" className="form-result"></div>
 							</form> 
 
-							<ul class="header-content-right">
+							<ul className="header-content-right">
 								<li>
 									<a href="#">
-										<i class="bx bxl-facebook"></i>
+										<i className="bx bxl-facebook"></i>
 									</a>
 								</li>
 								<li>
 									<a href="#">
-										<i class="bx bxl-twitter"></i>
+										<i className="bx bxl-twitter"></i>
 									</a>
 								</li>
 								<li>
 									<a href="#">
-										<i class="bx bxl-pinterest-alt"></i>
+										<i className="bx bxl-pinterest-alt"></i>
 									</a>
 								</li>
 								<li>
 									<a href="#">
-										<i class="bx bxl-instagram"></i>
+										<i className="bx bxl-instagram"></i>
 									</a>
 								</li>
 							</ul>
@@ -62,10 +61,10 @@ class Upcoming extends React.Component {
 			</div>
 		</div>
 {/* 		<!-- End Coming Soon Area -->
- */}                    <Footer />
+ */}             
                 </div>
             </Fragment>
         )
     }
-}
+
 export default Upcoming;

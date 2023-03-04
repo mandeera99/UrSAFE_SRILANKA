@@ -3,31 +3,29 @@ import { Fragment } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 
-class Blog extends React.Component {
-    render() {
+function Blog() {
         return (
             <Fragment>
                 <div>
-                    <Header />
 
                    {/*  <!-- Inner Banner --> */}
-        <div class="inner-banner inner-bg4">
-            <div class="container">
-                <div class="inner-title">
+        <div className="inner-banner inner-bg4">
+            <div className="container">
+                <div className="inner-title">
                     <h3> Blog </h3>
                     <ul>
                         <li>
-                            <a href="/">Home</a>
+                            <a href="/" className="link-underlines">Home</a>
                         </li>
                         <li> Blog </li>
                     </ul>
                 </div>
             </div>
-            <div class="inner-banner-shape">
-                <div class="shape1">
+            <div className="inner-banner-shape">
+                <div className="shape1">
                     <img src="assets/img/inner-banner/inner-banner-shape1.png" alt="Images"/>
                 </div>
-                <div class="shape2">
+                <div className="shape2">
                     <img src="assets/img/inner-banner/inner-banner-shape2.png" alt="Images"/>
                 </div>
             </div>
@@ -35,13 +33,13 @@ class Blog extends React.Component {
        {/*  <!-- Inner Banner End -->
 
        <!-- Blog Area --> */}
-       <div class="blog-area blog-area-item pt-100 pb-70">
-            <div class="container">
-                <div class="section-title text-center">
+       <div className="blog-area blog-area-item pt-100 pb-70">
+            <div className="container">
+                <div className="section-title text-center">
                     <h2>Our News & Updates</h2>
-                    <div class="section-icon">
-                        <div class="icon">
-                            <i class="flaticon-dna"></i>
+                    <div className="section-icon">
+                        <div className="icon">
+                            <i className="flaticon-dna"></i>
                         </div>
                     </div>
                     <p>
@@ -49,22 +47,22 @@ class Blog extends React.Component {
                         for your better understand that we are always at your side.
                     </p>
                 </div>
-                <div class="row pt-45">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-item-img">
+                <div className="row pt-45">
+                    <div className="col-lg-4 col-md-6">
+                        <div className="blog-item">
+                            <div className="blog-item-img">
                                 <a href="blog-details.html">
                                     <img src="assets/img/blog/blog-img.jpg" alt="Images"/>
                                 </a>
-                                <div class="date">
+                                <div className="date">
                                     <ul>
                                         <li>16</li>
                                         <li>Sep</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="content">
-                                <span class="topic">
+                            <div className="content">
+                                <span className="topic">
                                     <a href="#">Healthcare</a>
                                 </span>
                                 <h3>
@@ -74,21 +72,21 @@ class Blog extends React.Component {
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-item-img">
+                    <div className="col-lg-4 col-md-6">
+                        <div className="blog-item">
+                            <div className="blog-item-img">
                                 <a href="blog-details.html">
                                     <img src="assets/img/blog/blog-img2.jpg" alt="Images"/>
                                 </a>
-                                <div class="date">
+                                <div className="date">
                                     <ul>
                                         <li>18</li>
                                         <li>Sep</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="content">
-                                <span class="topic">
+                            <div className="content">
+                                <span className="topic">
                                     <a href="#">Medicine</a>
                                 </span>
                                 <h3>
@@ -98,21 +96,21 @@ class Blog extends React.Component {
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-item-img">
+                    <div className="col-lg-4 col-md-6">
+                        <div className="blog-item">
+                            <div className="blog-item-img">
                                 <a href="blog-details.html">
                                     <img src="assets/img/blog/blog-img3.jpg" alt="Images"/>
                                 </a>
-                                <div class="date">
+                                <div className="date">
                                     <ul>
                                         <li>28</li>
                                         <li>Sep</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="content">
-                                <span class="topic">
+                            <div className="content">
+                                <span className="topic">
                                     <a href="#">Healthcare</a>
                                 </span>
                                 <h3>
@@ -122,21 +120,21 @@ class Blog extends React.Component {
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-item-img">
+                    <div className="col-lg-4 col-md-6">
+                        <div className="blog-item">
+                            <div className="blog-item-img">
                                 <a href="blog-details.html">
                                     <img src="assets/img/blog/blog-img4.jpg" alt="Images"/>
                                 </a>
-                                <div class="date">
+                                <div className="date">
                                     <ul>
                                         <li>14</li>
                                         <li>Sep</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="content">
-                                <span class="topic">
+                            <div className="content">
+                                <span className="topic">
                                     <a href="#">Healthcare</a>
                                 </span>
                                 <h3>
@@ -146,21 +144,21 @@ class Blog extends React.Component {
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-item-img">
+                    <div className="col-lg-4 col-md-6">
+                        <div className="blog-item">
+                            <div className="blog-item-img">
                                 <a href="blog-details.html">
                                     <img src="assets/img/blog/blog-img5.jpg" alt="Images"/>
                                 </a>
-                                <div class="date">
+                                <div className="date">
                                     <ul>
                                         <li>17</li>
                                         <li>Sep</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="content">
-                                <span class="topic">
+                            <div className="content">
+                                <span className="topic">
                                     <a href="#">Medicine</a>
                                 </span>
                                 <h3>
@@ -170,21 +168,21 @@ class Blog extends React.Component {
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-item-img">
+                    <div className="col-lg-4 col-md-6">
+                        <div className="blog-item">
+                            <div className="blog-item-img">
                                 <a href="blog-details.html">
                                     <img src="assets/img/blog/blog-img6.jpg" alt="Images"/>
                                 </a>
-                                <div class="date">
+                                <div className="date">
                                     <ul>
                                         <li>19</li>
                                         <li>Sep</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="content">
-                                <span class="topic">
+                            <div className="content">
+                                <span className="topic">
                                     <a href="#">Healthcare</a>
                                 </span>
                                 <h3>
@@ -194,21 +192,21 @@ class Blog extends React.Component {
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-item-img">
+                    <div className="col-lg-4 col-md-6">
+                        <div className="blog-item">
+                            <div className="blog-item-img">
                                 <a href="blog-details.html">
                                     <img src="assets/img/blog/blog-img7.jpg" alt="Images"/>
                                 </a>
-                                <div class="date">
+                                <div className="date">
                                     <ul>
                                         <li>21</li>
                                         <li>Sep</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="content">
-                                <span class="topic">
+                            <div className="content">
+                                <span className="topic">
                                     <a href="#">Medicine</a>
                                 </span>
                                 <h3>
@@ -218,21 +216,21 @@ class Blog extends React.Component {
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-item-img">
+                    <div className="col-lg-4 col-md-6">
+                        <div className="blog-item">
+                            <div className="blog-item-img">
                                 <a href="blog-details.html">
                                     <img src="assets/img/blog/blog-img8.jpg" alt="Images"/>
                                 </a>
-                                <div class="date">
+                                <div className="date">
                                     <ul>
                                         <li>23</li>
                                         <li>Sep</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="content">
-                                <span class="topic">
+                            <div className="content">
+                                <span className="topic">
                                     <a href="#">Health</a>
                                 </span>
                                 <h3>
@@ -242,21 +240,21 @@ class Blog extends React.Component {
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-item-img">
+                    <div className="col-lg-4 col-md-6">
+                        <div className="blog-item">
+                            <div className="blog-item-img">
                                 <a href="blog-details.html">
                                     <img src="assets/img/blog/blog-img9.jpg" alt="Images"/>
                                 </a>
-                                <div class="date">
+                                <div className="date">
                                     <ul>
                                         <li>29</li>
                                         <li>Sep</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="content">
-                                <span class="topic">
+                            <div className="content">
+                                <span className="topic">
                                     <a href="#">Medicine</a>
                                 </span>
                                 <h3>
@@ -266,32 +264,31 @@ class Blog extends React.Component {
                         </div>
                     </div>
 
-                    <div class="col-lg-12 col-md-12">
-                        <div class="pagination-area">
-                            <a href="#" class="prev page-numbers">
-                                <i class="bx bx-chevron-left"></i>
+                    <div className="col-lg-12 col-md-12">
+                        <div className="pagination-area">
+                            <a href="#" className="prev page-numbers">
+                                <i className="bx bx-chevron-left"></i>
                             </a>
 
-                            <span class="page-numbers current" aria-current="page">1</span>
-                            <a href="#" class="page-numbers">2</a>
-                            <a href="#" class="page-numbers">3</a>
+                            <span className="page-numbers current" aria-current="page">1</span>
+                            <a href="#" className="page-numbers">2</a>
+                            <a href="#" className="page-numbers">3</a>
                             
-                            <a href="#" class="next page-numbers">
-                                <i class="bx bx-chevron-right"></i>
+                            <a href="#" className="next page-numbers">
+                                <i className="bx bx-chevron-right"></i>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="blog-shape-icon">
-                <i class="flaticon-dna"></i>
+            <div className="blog-shape-icon">
+                <i className="flaticon-dna"></i>
             </div>
         </div>
         {/* <!-- Blog Area End --> */}
-                    <Footer />
                 </div>
             </Fragment>
         )
     }
-}
+
 export default Blog;

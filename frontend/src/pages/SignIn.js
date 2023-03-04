@@ -2,18 +2,16 @@ import React from "react";
 import { Fragment } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
+import { Link } from "react-router-dom";
 
-class SignIn extends React.Component {
-    render() {
+function SignIn() {
+
         return (
             <Fragment>
                 <div>
-                    <Header />
-
-
-                    <div class="inner-banner inner-bg2">
-            <div class="container">
-                <div class="inner-title">
+                    <div className="inner-banner inner-bg2">
+            <div className="container">
+                <div className="inner-title">
                     <h3>Sign In</h3>
                     <ul>
                         <li>
@@ -23,11 +21,11 @@ class SignIn extends React.Component {
                     </ul>
                 </div>
             </div>
-            <div class="inner-banner-shape">
-                <div class="shape1">
+            <div className="inner-banner-shape">
+                <div className="shape1">
                     <img src="assets/img/inner-banner/inner-banner-shape1.png" alt="Images"/>
                 </div>
-                <div class="shape2">
+                <div className="shape2">
                     <img src="assets/img/inner-banner/inner-banner-shape2.png" alt="Images"/>
                 </div>
             </div>
@@ -35,32 +33,32 @@ class SignIn extends React.Component {
         {/*   <!-- Inner Banner End -->
 
         <!-- Sign In Area --> */}
-        <div class="sign-in-area pt-100 pb-70">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="user-all-form">
-                            <div class="contact-form">
-                                <div class="section-title text-center">
+        <div className="sign-in-area pt-100 pb-70">
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="user-all-form">
+                            <div className="contact-form">
+                                <div className="section-title text-center">
                                     <span>Sign In</span>
                                     <h2>Sign In to Your Account!</h2>
                                 </div>
                                 <form id="contactForm">
-                                    <div class="row">
-                                        <div class="col-lg-12 ">
-                                            <div class="form-group">
-                                                <input type="text" name="name" id="name" class="form-control" required data-error="Please enter your Username or Email" placeholder="Username or Email"/>
+                                    <div className="row">
+                                        <div className="col-lg-12 ">
+                                            <div className="form-group">
+                                                <input type="text" name="name" id="name" className="form-control" required data-error="Please enter your Username or Email" placeholder="Username or Email"/>
                                             </div>
                                         </div>
 
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <input class="form-control" type="password" name="password" placeholder="Password"/>
+                                        <div className="col-12">
+                                            <div className="form-group">
+                                                <input className="form-control" type="password" name="password" placeholder="Password"/>
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-6 col-sm-6 form-condition">
-                                            <div class="agree-label">
+                                        <div className="col-lg-6 col-sm-6 form-condition">
+                                            <div className="agree-label">
                                                 <input type="checkbox" id="chb1"/>
                                                 <label for="chb1">
                                                     Remember Me
@@ -68,20 +66,20 @@ class SignIn extends React.Component {
                                             </div>
                                         </div>
             
-                                        <div class="col-lg-6 col-sm-6">
-                                            <a class="forget" href="#">Forgot my password?</a>
+                                        <div className="col-lg-6 col-sm-6">
+                                            <a className="forget" href="#">Forgot my password?</a>
                                         </div>
         
-                                        <div class="col-lg-12 col-md-12 text-center">
-                                            <button type="submit" class="default-btn">
+                                        <div className="col-lg-12 col-md-12 text-center">
+                                            <button type="submit" className="default-btn">
                                                 Sign In Now
                                             </button>
                                         </div>
 
-                                        <div class="col-12">
-                                            <p class="account-desc">
+                                        <div className="col-12">
+                                            <p className="account-desc">
                                                 Not a member?
-                                                <a href="sign-up.html">Sign Up</a>
+                                                <Link to={"/SignUp"}> Sign Up </Link>
                                             </p>
                                         </div>
                                     </div>
@@ -95,10 +93,10 @@ class SignIn extends React.Component {
 {/*         <!-- Sign In Area End -->
  */}
 
-                    <Footer/>
+
                 </div>
             </Fragment>
         )
     }
-}
+
 export default SignIn;

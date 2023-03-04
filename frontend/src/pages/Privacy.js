@@ -3,31 +3,31 @@ import { Fragment } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 
-class Privacy extends React.Component {
-    render() {
+const Privacy = () => {
+
         return (
             <Fragment>
                 <div>
-                    <Header />
+ 
 
                     {/* <!-- Inner Banner --> */}
-        <div class="inner-banner inner-bg6">
-            <div class="container">
-                <div class="inner-title">
+        <div className="inner-banner inner-bg6">
+            <div className="container">
+                <div className="inner-title">
                     <h3>Privacy Policy</h3>
                     <ul>
                         <li>
-                            <a href="/">Home</a>
+                            <a href="/" className="link-underlines">Home</a>
                         </li>
                         <li>Privacy Policy</li>
                     </ul>
                 </div>
             </div>
-            <div class="inner-banner-shape">
-                <div class="shape1">
+            <div className="inner-banner-shape">
+                <div className="shape1">
                     <img src="assets/img/inner-banner/inner-banner-shape1.png" alt="Images"/>
                 </div>
-                <div class="shape2">
+                <div className="shape2">
                     <img src="assets/img/inner-banner/inner-banner-shape2.png" alt="Images"/>
                 </div>
             </div>
@@ -35,16 +35,16 @@ class Privacy extends React.Component {
         {/* <!-- Inner Banner End -->
 
         <!-- Privacy-Policy Area --> */}
-        <div class="privacy-policy-area pt-100 pb-70">
-            <div class="container">
-                <div class="section-title text-center">
+        <div className="privacy-policy-area pt-100 pb-70">
+            <div className="container">
+                <div className="section-title text-center">
                     <span>Privacy Policy</span>
                     <h2>UrSAFE Privacy Policy</h2>
                     <p>This Policy Was Last Updated Feb 01, 2023.</p>
                 </div>
-                <div class="row pt-45">
-                    <div class="col-lg-12">
-                        <div class="single-content">
+                <div className="row pt-45">
+                    <div className="col-lg-12">
+                        <div className="single-content">
                             <h3>Information collection</h3>
                             <p>
                             Information that you entered to our system is safely saved and only admin can see those informations.we are responsible for your informations.Your payement card details are not saved and we use safely way to get your payments.
@@ -54,7 +54,7 @@ class Privacy extends React.Component {
 
                        
 
-                        <div class="single-content">
+                        <div className="single-content">
                             <h3>The Collection, Process and Use of Personal Data</h3>
                             <p>
                             Information that you entered to our system is safely saved and only admin can see those informations.we are responsible for your informations.Your payement card details are not saved and we use safely way to get your payments.
@@ -64,7 +64,7 @@ class Privacy extends React.Component {
                         </div>
 
                      
-                        <div class="single-content">
+                        <div className="single-content">
                             <h3> Data Protection</h3>
                             <p>
                            Data are protected you can enter your details without any problem.data are only use for check the authentication and the payment stage and also we need to know where to deliver.
@@ -82,10 +82,10 @@ class Privacy extends React.Component {
         {/* <!-- Privacy-Policy Area End --> */}
         
 
-                    <Footer />
+
                 </div>
             </Fragment>
         )
     }
-}
+
 export default Privacy;

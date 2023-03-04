@@ -1,32 +1,29 @@
 import React from "react";
 import { Fragment } from "react";
-import Footer from "./Footer";
-import Header from "./Header";
 
-class About extends React.Component {
-    render() {
+
+function About () {
         return (
             <Fragment>
                 <div>
-                    <Header />
                     {/* <!-- Inner Banner --> */}
-                    <div class="inner-banner inner-bg1">
-                        <div class="container">
-                            <div class="inner-title">
+                    <div className="inner-banner inner-bg1">
+                        <div className="container">
+                            <div className="inner-title">
                                 <h3>About Us</h3>
                                 <ul>
                                     <li>
-                                        <a href="/">Home</a>
+                                        <a href="/" className="link-underlines">Home</a>
                                     </li>
                                     <li>About Us</li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="inner-banner-shape">
-                            <div class="shape1">
+                        <div className="inner-banner-shape">
+                            <div className="shape1">
                                 <img src="assets/img/inner-banner/inner-banner-shape1.png" alt="Images" />
                             </div>
-                            <div class="shape2">
+                            <div className="shape2">
                                 <img src="assets/img/inner-banner/inner-banner-shape2.png" alt="Images" />
                             </div>
                         </div>
@@ -34,13 +31,13 @@ class About extends React.Component {
                     {/*         <!-- Inner Banner End -->
 
         <!-- About Area --> */}
-                    <div class="about-area pt-100 pb-70">
-                        <div class="container">
-                            <div class="row align-items-center">
-                                <div class="col-lg-6">
-                                    <div class="about-right-img">
+                    <div className="about-area pt-100 pb-70">
+                        <div className="container">
+                            <div className="row align-items-center">
+                                <div className="col-lg-6">
+                                    <div className="about-right-img">
                                         <img src="assets/img/about-img/about-img.jpg" alt="Images" />
-                                        <div class="about-open-hours">
+                                        <div className="about-open-hours">
                                             <h3>This application was created by BCS students</h3>
                                             <ul>
                                                 <li>
@@ -73,9 +70,9 @@ class About extends React.Component {
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
-                                    <div class="about-content">
-                                        <div class="section-title">
+                                <div className="col-lg-6">
+                                    <div className="about-content">
+                                        <div className="section-title">
                                             <span>About Us</span>
                                             <h2>We Are Your Trusted Friend</h2>
                                             <p>UrSAFE SL is a trusted name of Medical Services who is always at your side and your health is our first priority.</p>
@@ -84,17 +81,17 @@ class About extends React.Component {
                                                 UrSAFE SL is a web based application which mainly support customer to search and find medicines.
                                             </p>
                                         </div>
-                                        <div class="about-card">
-                                            <i class='flaticon-24-hours bg-three'></i>
-                                            <div class="content">
+                                        <div className="about-card">
+                                            <i className='flaticon-24-hours bg-three'></i>
+                                            <div className="content">
                                                 <span>24/7 Support</span>
                                                 <p>Our medical team of  different department for long term illness writers and editors makes all the </p>
                                             </div>
                                         </div>
 
-                                        <div class="about-card">
-                                            <i class='flaticon-ambulance-2 bg-three'></i>
-                                            <div class="content">
+                                        <div className="about-card">
+                                            <i className='flaticon-ambulance-2 bg-three'></i>
+                                            <div className="content">
                                                 <span>Emergency Support</span>
                                                 <p>You can place oders at any time  </p>
                                             </div>
@@ -113,14 +110,11 @@ class About extends React.Component {
                     {/*         <!-- About Area End --> */}
 
 
-                    <Footer />
-
-
                     {/*         <!-- Color Switch Button --> 
- */}                    <div class="switch-box">
-                        <label id="switch" class="switch">
+ */}                    <div className="switch-box">
+                        <label id="switch" className="switch">
                             <input type="checkbox" onchange="toggleTheme()" id="slider" />
-                            <span class="slider round"></span>
+                            <span className="slider round"></span>
                         </label>
                     </div>
 
@@ -129,5 +123,5 @@ class About extends React.Component {
             </Fragment>
         )
     }
-}
+
 export default About;

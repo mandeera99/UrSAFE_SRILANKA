@@ -1,14 +1,10 @@
 import React from "react";
 import { Fragment } from "react";
-import Footer from "./Footer";
-import Header from "./Header";
 
-class FAQ extends React.Component {
-    render() {
+const FAQ = () => {
         return (
             <Fragment>
                 <div>
-                    <Header />
 
 
                     {/* <!-- Faq Area -->
@@ -115,11 +111,10 @@ class FAQ extends React.Component {
                     {/*  <!-- Faq Area End --> */}
                     
                     
-                    <Footer />
 
                 </div>
             </Fragment>
         )
     }
-}
+
 export default FAQ;

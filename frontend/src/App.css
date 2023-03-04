@@ -7,6 +7,21 @@
   pointer-events: none;
 }
 
+.link-underline{
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: 600;
+}
+.link-underlines{
+  text-decoration: none;
+ 
+}
+a.link-underlines{
+  text-decoration: none;
+ 
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

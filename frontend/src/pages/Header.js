@@ -8,58 +8,58 @@ function Header() {
         <Fragment>
            
             {/*  <!-- Top Header Start -->  */}
-            <header class="top-header top-header-bg">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-8 col-md-8">
-                            <div class="header-left">
-                                <div class="header-left-card">
+            <header className="top-header top-header-bg">
+                <div className="container">
+                    <div className="row align-items-center">
+                        <div className="col-lg-8 col-md-8">
+                            <div className="header-left">
+                                <div className="header-left-card">
                                     <ul>
                                         <li>
                                             <div class="head-icon">
                                                 <i class='bx bx-mail-send'></i>
                                             </div>
-                                            <a href="mailto:nomashikarunadasa@gmail.com">hello@UrSAFE.com</a>
+                                            <a href="mailto:nomashikarunadasa@gmail.com" className="link-underlines">hello@UrSAFE.com</a>
                                         </li>
 
                                         <li>
-                                            <div class="head-icon">
-                                                <i class='bx bx-time-five'></i>
+                                            <div className="head-icon">
+                                                <i className='bx bx-time-five'></i>
                                             </div>
-                                            <a href="#">Mon - Sun: 24/7</a>
+                                            <a href="#" className="link-underlines">Mon - Sun: 24/7</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-lg-4 col-md-4">
-                            <div class="header-right">
-                                <div class="top-social-link">
+                        <div className="col-lg-4 col-md-4">
+                            <div className="header-right">
+                                <div className="top-social-link">
                                     <ul>
                                         <li>
                                             <a href="#" target="_blank">
-                                                <i class='bx bxl-facebook'></i>
+                                                <i className='bx bxl-facebook'></i>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#" target="_blank">
-                                                <i class='bx bxl-twitter'></i>
+                                                <i className='bx bxl-twitter'></i>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#" target="_blank">
-                                                <i class='bx bxl-youtube'></i>
+                                                <i className='bx bxl-youtube'></i>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#" target="_blank">
-                                                <i class='bx bxl-instagram'></i>
+                                                <i className='bx bxl-instagram'></i>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#" target="_blank">
-                                                <i class='bx bxl-google-plus'></i>
+                                                <i className='bx bxl-google-plus'></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -72,94 +72,94 @@ function Header() {
             {/* <!-- Top Header End -->
 
         <!-- Start Navbar Area --> */}
-            <div class="navbar-area">
+            <div className="navbar-area">
                 {/* <!-- Menu For Mobile Device --> */}
-                <div class="mobile-nav">
-                    <a href="index.html" class="logo">
-                        <img src="assets/img/logo ursafe-bg.png" class="logo-one" alt="Logo" width="100%" height="100%" />
+                <div className="mobile-nav">
+                    <a href="index.html" className="logo">
+                        <img src="assets/img/logo ursafe-bg.png" className="logo-one" alt="Logo" width="100%" height="100%" />
 
                     </a>
                 </div>
 
                 {/*    <!-- Menu For Desktop Device --> */}
-                <div class="main-nav">
-                    <div class="container">
-                        <nav class="navbar navbar-expand-md navbar-light ">
-                            <a class="navbar-brand" href="index.html">
-                                <img src="assets/img/logo.png" class="logo-one" alt="Logo" width="110px" height="80px" />
-                                <img src="assets/img/logo.png" class="logo-two" alt="Logo" width="110px" height="80px" />
+                <div className="main-nav">
+                    <div className="container">
+                        <nav className="navbar navbar-expand-md navbar-light ">
+                            <a className="navbar-brand" href="index.html">
+                                <img src="assets/img/logo.png" className="logo-one" alt="Logo" width="110px" height="80px" />
+                                <img src="assets/img/logo.png" className="logo-two" alt="Logo" width="110px" height="80px" />
                             </a>
 
-                            <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-                                <ul class="navbar-nav m-auto">
-                                    <li class="nav-item">
-                                        <a href="/" class="nav-link active">
+                            <div className="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                                <ul className="navbar-nav m-auto">
+                                    <li className="nav-item">
+                                        <a href="/" className="nav-link active">
                                             Home
 
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="/about" class="nav-link">
+                                    <li className="nav-item">
+                                        <a href="/about" className="nav-link">
                                             About
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                    <li className="nav-item">
+                                        <a href="#" className="nav-link">
                                             Pages
-                                            <i class='bx bx-chevron-down'></i>
+                                            <i className='bx bx-chevron-down'></i>
                                         </a>
-                                        <ul class="dropdown-menu">
+                                        <ul className="dropdown-menu">
                                             <li class="nav-item">
-                                                <a href="/fAQ" class="nav-link">
+                                                <a href="/fAQ" className="nav-link">
                                                     FAQ
                                                 </a>
                                             </li>
 
                                            
-                                            <li class="nav-item">
-                                                <a href="/signIn" class="nav-link">
+                                            <li className="nav-item">
+                                                <a href="/signIn" className="nav-link">
                                                     Sign In
                                                 </a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="/signUp" class="nav-link">
+                                            <li className="nav-item">
+                                                <a href="/signUp" className="nav-link">
                                                     Sign Up
                                                 </a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="/condition" class="nav-link">
+                                            <li className="nav-item">
+                                                <a href="/condition" className="nav-link">
                                                     Terms & Conditions
                                                 </a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="/privacy" class="nav-link">
+                                            <li className="nav-item">
+                                                <a href="/privacy" className="nav-link">
                                                     Privacy Policy
                                                 </a>
                                             </li>
                                           
-                                            <li class="nav-item">
-                                                <a href="/upcoming" class="nav-link">
+                                            <li className="nav-item">
+                                                <a href="/upcoming" className="nav-link">
                                                     Up coming details
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
 
-                                    <li class="nav-item">
-                                        <a href="/medicine" class="nav-link">
+                                    <li className="nav-item">
+                                        <a href="/medicine" className="nav-link">
                                             Medicine
                                         </a>
                                        
                                     </li>
 
-                                    <li class="nav-item">
-                                        <a href="/services" class="nav-link">
+                                    <li className="nav-item">
+                                        <a href="/services" className="nav-link">
                                             Services
                                         </a>
                                      
                                     </li>
 
-                                    <li class="nav-item">
+                                    <li className="nav-item">
                                         <a href="/blog" class="nav-link">
                                             Blog
                                         </a>
@@ -168,14 +168,14 @@ function Header() {
 
 
 
-                                    <li class="nav-item">
-                                        <a href="contact.html" class="nav-link">
+                                    <li className="nav-item">
+                                        <a href="contact.html" className="nav-link">
                                             Contact
                                         </a>
                                     </li>
                                 </ul>
 
-                                <div class="others-options d-flex align-items-center">
+                                <div className="others-options d-flex align-items-center">
                                     <div className="buttons">
                                         <a href="/signIn" className="btn btn-dark">
                                             <i className=""></i>sign in</a>
@@ -183,10 +183,10 @@ function Header() {
                                             <i className=""></i>sign up</a>
                                     </div>
 
-                                    <div class="option-item">
-                                        <div class="add-cart-btn">
-                                            <a href="/cart" class="cart-btn-icon">
-                                                <i class='bx bx-shopping-bag ms-2'></i>
+                                    <div className="option-item">
+                                        <div className="add-cart-btn">
+                                            <a href="/cart" className="cart-btn-icon">
+                                                <i className='bx bx-shopping-bag ms-2'></i>
                                                 <span>0</span>
                                             </a>
                                         </div>
@@ -201,9 +201,9 @@ function Header() {
                     <div className="container">
                         <div className="dot-menu">
                             <div className="circle-inner">
-                                <div class="circle circle-one"></div>
-                                <div class="circle circle-two"></div>
-                                <div class="circle circle-three"></div>
+                                <div className="circle circle-one"></div>
+                                <div className="circle circle-two"></div>
+                                <div className="circle circle-three"></div>
                             </div>
                         </div>
 
@@ -213,19 +213,19 @@ function Header() {
                                     <div className="side-item">
 
 
-                                        <div class="option-item">
-                                            <div class="add-cart-btn">
-                                                <a href="/cart" class="cart-btn-icon">
-                                                    <i class='bx bx-shopping-bag'></i>
+                                        <div className="option-item">
+                                            <div className="add-cart-btn">
+                                                <a href="/cart" className="cart-btn-icon">
+                                                    <i className='bx bx-shopping-bag'></i>
                                                     <span>0</span>
                                                 </a>
                                             </div>
                                         </div>
-                                        <div class="option-item">
+                                        <div className="option-item">
                                             <div className="buttons">
                                                 <a href="/signIn" className="btn btn-dark">
                                                     <i className=""></i>sign in</a>
-                                                <a href="/signUp" className="btn btn-dark ms-2">
+                                                <a href="/user/signUp" className="btn btn-dark ms-2">
                                                     <i className=""></i>sign up</a>
                                             </div>
                                         </div>
