@@ -1,0 +1,44 @@
+[{
+    "Lot_No": 1,
+    "Medicine_name": "Paracetamol",
+    "Brand": "Panadol",
+    "Quantity": 110,
+    "Expiry_Date": "07-08-2023",
+    "Supplier_Name": "Nimal"
+
+  },
+  {
+    "Lot_No": 2,
+    "Medicine_name": "Piriton",
+    "Brand": "Pollenase",
+    "Quantity": 10,
+    "Expiry_Date": "24-06-2023",
+    "Supplier_Name": "Kamal"
+  },
+  {
+    "Lot_No": 3,
+    "Medicine_name": "Furosemide",
+    "Brand": "Lasix",
+    "Quantity": 270,
+    "Expiry_Date": "17-06-2025",
+    "Supplier_Name": "Amal"
+  },
+  
+    {
+      "Lot_No": 4,
+      "Medicine_name": "Amiodarone",
+      "Brand": "Pecerone",
+      "Quantity": 50,
+      "Expiry_Date": "04-02-2025",
+      "Supplier_Name": "Saman"
+    },
+
+    {
+      "Lot_No": 5,
+      "Medicine_name": "Kcl",
+      "Brand": "Kaakay-er",
+      "Quantity": 110,
+      "Expiry_Date": "10-04-2024",
+      "Supplier_Name": "Sam"
+    }
+]

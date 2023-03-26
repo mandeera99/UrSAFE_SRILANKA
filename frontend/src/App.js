@@ -15,6 +15,10 @@ import Cart from './pages/Cart';
 import UserProfilePage from "./pages/user/UserProfilePage";
 import Header from './pages/Header';
 import Footer from './pages/Footer';
+import Store from './pages/Store';
+import Expiredmedreport from './pages/Expiredmedreport';
+import Analysis from './pages/Analysis';
+import Profile from './pages/Profile';
 
 
 
@@ -37,6 +41,10 @@ function App() {
           <Route path='/blog' element={<Blog/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/user-profile' element={<UserProfilePage/>}/>
+          <Route path='/view-store' element={<Store/>}/>
+          <Route path='/view-more2' element={<Expiredmedreport/>}/>
+          <Route path='/analysis' element={<Analysis/>}/>
+          <Route path="/profile" element={<Profile />}/>
 
 
 

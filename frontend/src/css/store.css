@@ -1,0 +1,20 @@
+figcaption{
+    position: absolute;
+    align-content: center;
+    /* bottom: 2rem;
+    margin: 0 2rem; */
+    color:white;
+    /* font-size: 1.5rem; */
+    
+}
+
+
+@media screen and (max-width:768px) {
+    figcaption{
+        position: inherit;
+        align-content:inherit;
+        /* margin: .25em 0px; */
+        /* font-size: inherit; */
+        color:inherit;
+    }
+}
