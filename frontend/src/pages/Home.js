@@ -1,13 +1,14 @@
 import React from "react";
 import { Fragment } from "react";
-import Footer from "./Footer";
-import Header from "./Header";
 import SearchIcon from '@mui/icons-material/Search';
+import UserChatComponent from "../componenets/user/UserChatComponent";
 
 function Home() {
         return (
             <Fragment fluid>
+                
                 <div fluid>
+                    <UserChatComponent/>
 
                     {/* <!-- Pre Loader --> */}
                     {/*      <div className="preloader">

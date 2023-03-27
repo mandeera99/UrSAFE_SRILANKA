@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Form, Button, Alert,Card } from "react-bootstrap";
 import { useState } from "react";
-// import ProfileImageUpload from "./ProfileImageUpload";
+import ProfileImageUpload from "./ProfileImageUpload";
 import "./ProfileImageUpload.css";
 
 

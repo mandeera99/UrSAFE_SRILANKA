@@ -15,6 +15,7 @@ import Cart from './pages/Cart';
 import UserProfilePage from "./pages/user/UserProfilePage";
 import Header from './pages/Header';
 import Footer from './pages/Footer';
+import UserCartDetailsPage from './pages/user/UserCartDetailsPage';
 
 
 
@@ -37,6 +38,7 @@ function App() {
           <Route path='/blog' element={<Blog/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/user-profile' element={<UserProfilePage/>}/>
+          <Route path='/user-cart-details' element={<UserCartDetailsPage/>}/>
 
 
 

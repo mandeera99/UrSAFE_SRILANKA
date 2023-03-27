@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-// import './ProfileImageUpload.css';
-// const Img1 = "/images/BackgrounImages/side_1.jpg";
+import './ProfileImageUpload.css';
+const Img1 = "/images/BackgroundImages/side_1.jpg";
 
 function ProfileImageUpload() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -19,7 +19,7 @@ function ProfileImageUpload() {
     <div >
         
       <div className='container'>
-      {/* <img src={Img1} alt="" onClick={<input type="file" accept="image/*" onChange={handleImageChange} />}></img> */}
+       <img src={Img1} alt="" onClick={<input type="file" accept="image/*" onChange={handleImageChange} />}></img> 
       <input type="checkbox" id="check" />
       <div className="chat-btn2 " htmlFor="check" >
         <i className="bi bi-person-circle comment"></i>

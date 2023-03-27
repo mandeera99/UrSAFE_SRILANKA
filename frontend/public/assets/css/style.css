@@ -891,6 +891,12 @@ Main Banner Area
 .banner-bg {
   background-image: url(../img/home-one/home-one-bg.jpg);
 }
+.banner-bg3 {
+  background-image: url(../img/home-one/cartBG.jpg);
+}
+.banner-bg4 {
+  background-image: url(../img/home-one/cartBG2.jpg);
+}
 
 .banner-content {
   position: relative;
@@ -1380,6 +1386,12 @@ Inner Banner
 
 .inner-bg13 {
   background-image: url(../img/inner-banner/inner-banner-13.jpg);
+}
+.inner-bg14 {
+  background-image: url(../img/home-one/cartBG2.jpg);
+}
+.inner-bg15 {
+  background-image: url(../img/home-one/cartBG.jpg);
 }
 
 /*================================

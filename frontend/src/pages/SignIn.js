@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 
 function SignIn() {
 
-        return (
+    return (
             <Fragment>
                 <div>
+
                     <div className="inner-banner inner-bg2">
             <div className="container">
                 <div className="inner-title">
@@ -92,8 +93,6 @@ function SignIn() {
         </div>
 {/*         <!-- Sign In Area End -->
  */}
-
-
                 </div>
             </Fragment>
         )
