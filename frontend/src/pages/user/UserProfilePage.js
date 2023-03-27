@@ -1,10 +1,5 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col, Form, Button, Alert,Card } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useState } from "react";
-// import ProfileImageUpload from "./ProfileImageUpload";
-import "./ProfileImageUpload.css";
-
 
 const UserProfilePage = () => {
   const [validated, setValidated] = useState(false);
@@ -28,22 +23,11 @@ const UserProfilePage = () => {
 
     setValidated(true);
   };
-
   return (
-    
-    <div className="container2">
-    <Container className="mt-5 justify-content-md-center mb-5">
-      <Row >
-        <Col md={2}></Col>
-        <Col>
-        <Card style={{ width: '50rem' }} className ="justify-content-md-center">
+    <Container>
       <Row className="mt-5 justify-content-md-center">
-          <Col md={8}>
-            <Row>
-              <Col md={6}><h1 style={{color: "#1EABE3"}}>Change Your Profile</h1></Col>
-               {/* <Col md={2}><ProfileImageUpload/></Col>  */}
-            </Row>
-          
+        <Col md={6}>
+          <h1>Change your profile</h1>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="validationCustom01">
               <Form.Label>Your name</Form.Label>
@@ -164,44 +148,11 @@ const UserProfilePage = () => {
               User updated
             </Alert>
           </Form>
-          
         </Col>
-
-      </Row>
-      </Card>
-      </Col>
-      <Col md={2}>
-      <Card style={{ width: '18rem' }} variant="flush" className="mt-5">
-      <Card.Img crossorigin="anonymous" variant="top" src="holder.js/100px180" />
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
-
-    <Card style={{ width: '18rem' }} variant="flush" className="mt-5">
-      <Card.Img crossorigin="anonymous" variant="top" src="holder.js/100px180" />
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
-
-      </Col>
       </Row>
     </Container>
-    </div>
   );
 };
 
 export default UserProfilePage;
-
 
