@@ -82,7 +82,7 @@ function App() {
           <Route path='/analysis' element={<Analysis/>}/>
           <Route path="/profile" element={<Profile />}/>
 
-          //shashika
+          
           <Route path="/adminhome" element={<HomePage/>}/>
 	<Route path="/product-list" element={<ProductListPage/>}/>
         <Route path="/cart" element={<CartPage/>}/>
@@ -96,7 +96,7 @@ function App() {
         <Route path="/dashboard/user" element={<PawanUserAcc/>}/>
         <Route path="/dashboard/pharmacy" element={<PawanPharmacyAcc/>}/>
 
-        //shashika dashboard
+       
         
         <Route path="/dashboard/charts" element={<Charts/>}/>
         <Route path="/dashboard/table" element={<Table/>}/>
@@ -108,7 +108,7 @@ function App() {
         <Route path="/dashboard/skillbar" element={<SkillBar/>}/>
 
 
-      //shashika user
+      
       <Route path="/user" element={<UserProfilePage/>}/>
         <Route path="/user/my-orders" element={<UserOrderPage/>}/>
         <Route path="/user/cart-details" element={<UserCartDetailsPage/>}/>
@@ -117,7 +117,7 @@ function App() {
           element={<UserOredrDetailsPage/>}
         />
 
-        //shashika admin
+     
         <Route path="/admin/users" element={<AdminUsersPage/>}/>
         <Route path="/admin/edit-user" element={<AdminEditUserPage/>}/>
         <Route path="/admin/products" element={<AdminProductsPage/>}/>
