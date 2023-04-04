@@ -6,7 +6,7 @@ import Header from "./Header";
 const Privacy = () => {
 
         return (
-            <Fragment>
+            <Fragment><Header/>
                 <div>
  
 

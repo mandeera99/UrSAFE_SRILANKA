@@ -5,7 +5,7 @@ import Header from "./Header";
 
 function Medicine () {
         return (
-            <Fragment>
+            <Fragment><Header/>
                 <div>
 
 {/*                     <!-- Inner Banner -->

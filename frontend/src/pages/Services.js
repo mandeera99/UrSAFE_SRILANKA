@@ -1,10 +1,10 @@
 import React from "react";
 import { Fragment } from "react";
-
+import Header from "./Header";
 
 const Services= (props) => {
         return (
-            <Fragment>
+            <Fragment><Header/>
                 <div>
 
 

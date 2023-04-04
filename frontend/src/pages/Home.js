@@ -6,7 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 function Home() {
         return (
-            <Fragment fluid>
+            <Fragment fluid><Header/>
                 <div fluid>
 
                     {/* <!-- Pre Loader --> */}

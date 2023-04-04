@@ -19,8 +19,7 @@ import Store from './pages/Store';
 import Expiredmedreport from './pages/Expiredmedreport';
 import Analysis from './pages/Analysis';
 import Profile from './pages/Profile';
-
-//shashika
+//admin
 import HomePage from "./pages/HomePage";
 import ProductListPage from "./pages/ProductListPage";
 import CartPage from "./pages/CartPage";
@@ -61,7 +60,7 @@ import AdminOrderDetailsPage from "./pages/admin/AdminOrderDetailsPage";
 function App() {
   return (
     <div>
-      <Header/>
+      
       <Router>
         <Routes>
           <Route path='/' element={<Home />}/>
@@ -77,6 +76,7 @@ function App() {
           <Route path='/blog' element={<Blog/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/user-profile' element={<UserProfilePage/>}/>
+          
           <Route path='/view-store' element={<Store/>}/>
           <Route path='/view-more2' element={<Expiredmedreport/>}/>
           <Route path='/analysis' element={<Analysis/>}/>

@@ -6,7 +6,7 @@ import Header from "./Header";
 const Upcoming = ()=> {
 
         return (
-            <Fragment>
+            <Fragment><Header/>
                 <div>
 {/*                     <!-- Start Coming Soon Area -->
  */}        <div className="coming-soon-area">

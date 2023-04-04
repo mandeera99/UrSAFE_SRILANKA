@@ -6,6 +6,7 @@ import Header from "./Header";
 function Condition () {
         return (
             <Fragment>
+                 <Header/>
                 <div>
 
                     {/*                     <!-- Inner Banner -->

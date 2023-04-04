@@ -1,10 +1,11 @@
 import React from "react";
 import { Fragment } from "react";
-
+import Header from './Header';
 
 function About () {
         return (
             <Fragment>
+                <Header/>
                 <div>
                     {/* <!-- Inner Banner --> */}
                     <div className="inner-banner inner-bg1">

@@ -6,6 +6,7 @@ import Header from "./Header";
 function Blog() {
         return (
             <Fragment>
+                <Header/>
                 <div>
 
                    {/*  <!-- Inner Banner --> */}
