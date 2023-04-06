@@ -6,8 +6,17 @@ import PieCharts from './PieCharts';
 import BarCharts from './BarCharts';
 import './Dashboard.css';
 import SkillBar from './SkillBar';
+import { useLogout } from '../../hooks/useLogout'
+import { useAuthContext } from '../../hooks/useAuthContext'
+
 
 function Dashboard() {
+    const { logout } = useLogout()
+    const { user } = useAuthContext()
+    const handleClick = () => {
+        logout()
+        window.location.href = '/'
+    }
     const[style,setStyle]=useState("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
     const changeStyle=()=>{
         if(style=="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion")
@@ -750,7 +759,7 @@ function Dashboard() {
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <button class="btn btn-primary" type="button" onClick={handleClick}>Logout</button>
             </div>
         </div>
     </div>

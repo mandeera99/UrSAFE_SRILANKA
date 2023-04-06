@@ -1,12 +1,17 @@
 import React from "react";
 import { Fragment } from "react";
-
-
+import { useLogout } from '../hooks/useLogout'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 function Header() {
+    const { logout } = useLogout()
+    const { user } = useAuthContext()
+    const handleClick = () => {
+        logout()
+    }
     return (
         <Fragment>
-           
+
             {/*  <!-- Top Header Start -->  */}
             <header className="top-header top-header-bg">
                 <div className="container">
@@ -115,10 +120,10 @@ function Header() {
                                                 </a>
                                             </li>
 
-                                           
+
                                             <li className="nav-item">
-                                                <a href="/signIn" className="nav-link">
-                                                    Sign In
+                                                <a href="/login" className="nav-link">
+                                                    Log In
                                                 </a>
                                             </li>
                                             <li className="nav-item">
@@ -136,7 +141,7 @@ function Header() {
                                                     Privacy Policy
                                                 </a>
                                             </li>
-                                          
+
                                             <li className="nav-item">
                                                 <a href="/upcoming" className="nav-link">
                                                     Up coming details
@@ -149,21 +154,21 @@ function Header() {
                                         <a href="/medicine" className="nav-link">
                                             Medicine
                                         </a>
-                                       
+
                                     </li>
 
                                     <li className="nav-item">
                                         <a href="/services" className="nav-link">
                                             Services
                                         </a>
-                                     
+
                                     </li>
 
                                     <li className="nav-item">
                                         <a href="/blog" class="nav-link">
                                             Blog
                                         </a>
-                                   
+
                                     </li>
 
 
@@ -174,14 +179,25 @@ function Header() {
                                         </a>
                                     </li>
                                 </ul>
-
+                               
                                 <div className="others-options d-flex align-items-center">
+                                {!user && (
                                     <div className="buttons">
-                                        <a href="/signIn" className="btn btn-dark">
-                                            <i className=""></i>sign in</a>
+                                        <a href="/login" className="btn btn-dark">
+                                            <i className=""></i>log in</a>
                                         <a href="/signUp" className="btn btn-dark ms-2">
                                             <i className=""></i>sign up</a>
+
                                     </div>
+                                )}
+                                    {user && (
+                                    <div className="buttons">
+                                        <span>{user.email}</span>
+                                        <button className="btn btn-dark" onClick={handleClick}>
+                                            logout
+                                        </button>
+                                    </div>
+                                    )}
 
                                     <div className="option-item">
                                         <div className="add-cart-btn">
@@ -223,10 +239,15 @@ function Header() {
                                         </div>
                                         <div className="option-item">
                                             <div className="buttons">
-                                                <a href="/signIn" className="btn btn-dark">
-                                                    <i className=""></i>sign in</a>
+                                                <a href="/login" className="btn btn-dark">
+                                                    <i className=""></i>log in</a>
                                                 <a href="/user/signUp" className="btn btn-dark ms-2">
                                                     <i className=""></i>sign up</a>
+                                            </div>
+                                            <div className="buttons">
+                                                <button className="btn btn-dark" onClick={handleClick}>
+                                                    logout
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

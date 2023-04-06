@@ -2,7 +2,7 @@ import Home from './pages/Home';
 import './App.css';
 import About from './pages/About';
 import { BrowserRouter as Router, Route,Routes } from 'react-router-dom'
-import SignIn from './pages/SignIn';
+import Login from './pages/Login';
 import SignUp from './pages/user/SignUp';
 import FAQ from './pages/FAQ';
 import Condition from './pages/Condition';
@@ -29,7 +29,7 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import Dashboard from "./pages/dashboard/Dashboard";
 import ForgotPassword from "./pages/dashboard/ForgotPassword";
 import Register from "./pages/dashboard/Register";
-import Login from "./pages/dashboard/Login";
+import AdminLogin from "./pages/dashboard/Login";
 import PawanUserAcc from "./pages/dashboard/PawanUserAcc";
 import PawanPharmacyAcc from "./pages/dashboard/PawanPharmacyAcc";
 import Charts from "./pages/dashboard/Charts";
@@ -57,6 +57,8 @@ import AdminOrdersPage from "./pages/admin/AdminOrdersPage";
 import AdminOrderDetailsPage from "./pages/admin/AdminOrderDetailsPage";
 
 
+
+
 function App() {
   return (
     <div>
@@ -65,7 +67,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />}/>
           <Route path='/about' element={<About />}/>
-          <Route path='/signIn' element={<SignIn />}/>
+          <Route path='/login' element={<Login />}/>
           <Route path='/signUp' element={<SignUp />}/>
           <Route path='/fAQ' element={<FAQ/>}/>
           <Route path='/condition' element={<Condition/>}/>
@@ -92,7 +94,7 @@ function App() {
 	<Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/dashboard/forgot-password" element={<ForgotPassword/>}/>
 	<Route path="/dashboard/register" element={<Register/>}/>
-        <Route path="/dashboard/login" element={<Login/>}/>
+        <Route path="/dashboard/login" element={<AdminLogin/>}/>
         <Route path="/dashboard/user" element={<PawanUserAcc/>}/>
         <Route path="/dashboard/pharmacy" element={<PawanPharmacyAcc/>}/>
 
