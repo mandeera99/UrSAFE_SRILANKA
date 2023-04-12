@@ -1,0 +1,160 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+
+body{
+    background: #e3edf7;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cskill{
+    width: 160px;
+    height: 160px;
+    /* background: cornflowerblue; */
+    position: relative;
+
+    
+}
+
+.cpbarrow-container {
+    display: flex;
+    flex-direction: row; /* or column, depending on the desired direction */
+  }
+
+.cskill1{
+    width: 160px;
+    height: 160px;
+    /* background: cornflowerblue; */
+    position: relative;
+}
+.cskill2{
+    width: 160px;
+    height: 160px;
+    /* background: cornflowerblue; */
+    position: relative;
+
+}
+
+.cpcol{
+    flex-basis: 31%;
+    background: #fff3f3;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    transition: 0.5s; 
+}
+
+
+.cpbarrow{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.csbarouter{
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+    padding: 20px;
+    box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15),
+                -6px -6px 10px -1px rgba(255,255,255,0.7)
+}
+
+.csbarinner{
+    height: 120px;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow:inset 4px 4px 6px -1px rgba(0,0,0,0.2),
+                inset -4px -4px 6px -1px rgba(255,255,255,0.7),
+                -0.5px -0.5px 0px  rgba(255,255,255,1),
+                0.5px 0.5px 0px  rgba(0,0,0,0.15),
+                0px 12px 10px -10px rgba(0,0,0,0.05);
+
+}
+
+#cpbarnumber{
+    font-weight: 600;
+    color: #555;
+
+}
+
+#cpbarnumber1{
+    font-weight: 600;
+    color: #555;
+
+}
+#cpbarnumber2{
+    font-weight: 600;
+    color: #555;
+
+}
+
+.cskill circle{
+    fill: none;
+    stroke: url(#GradientColor);
+    stroke-width: 20px;
+    stroke-dasharray: 472;
+    stroke-dashoffset: 472;
+    animation: anim 10s linear forwards;
+
+}
+
+.cskill1 circle{
+    fill: none;
+    stroke: url(#GradientColor);
+    stroke-width: 20px;
+    stroke-dasharray: 472;
+    stroke-dashoffset: 472;
+    animation: anim1 10s linear forwards;
+
+}
+.cskill2 circle{
+    fill: none;
+    stroke: url(#GradientColor);
+    stroke-width: 20px;
+    stroke-dasharray: 472;
+    stroke-dashoffset: 472;
+    animation: anim2 10s linear forwards;
+
+}
+
+svg{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
+                /* if you want to change how much graph run in here chnce this values and chnge
+                setinterval() function value */
+
+@keyframes anim {
+    100%{
+        stroke-dashoffset: 165;
+    }
+    
+}
+
+@keyframes anim1 {
+    100%{
+        stroke-dashoffset: 140;
+    }
+    
+}
+
+@keyframes anim2 {
+    100%{
+        stroke-dashoffset: 80;
+    }
+    
+}
