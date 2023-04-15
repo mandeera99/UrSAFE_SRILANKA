@@ -27,7 +27,7 @@ const Login = () => {
           if (data.userType === 'admin') {
             window.location.href = '/Dashboard'
           } else if(data.userType === 'pharmaciest') {
-            window.location.href = '/pharmaciest-home'
+            window.location.href = '/Pharmacyhome'
           }else {
             window.location.href = '/'
           }

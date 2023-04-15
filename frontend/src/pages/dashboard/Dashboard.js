@@ -17,6 +17,7 @@ function Dashboard() {
         logout()
         window.location.href = '/'
     }
+    
     const[style,setStyle]=useState("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
     const changeStyle=()=>{
         if(style=="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion")
@@ -39,7 +40,12 @@ function Dashboard() {
             setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
         }
     };
+    if (!user) {
+       
+      return null;
+      
 
+    }
   return (
     <div>
       
@@ -56,7 +62,7 @@ function Dashboard() {
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            <div class="sidebar-brand-text mx-3">{user.email} <sup>2</sup></div>
         </a>
 
         {/* <!-- Divider --> */}
