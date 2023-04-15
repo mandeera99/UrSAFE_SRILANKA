@@ -1,0 +1,115 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins' , sans-serif;
+    box-sizing: border-box;
+    
+}
+
+.container{
+    width: 100%;
+    height: 50%;
+    background: #f9fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skills h2{
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-top: 35px;
+    margin-bottom: 5px;
+    color: #0a0909;
+    font-size: 16px;
+}
+.progress-bar{
+    background:#847d7d;
+    width:300px;
+    height: 10px;
+    border-radius: 5px;
+
+}
+.progress-bar div{
+    height: 10px;
+    border-radius: 5px;
+    width:0%;
+}
+
+.progress-bar div span{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background: #222;
+    float: right;
+    margin-top: -15px;
+    margin-right: -20px;
+    font-size: 10px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.html{
+    background-color: #07115c;
+    animation: html 10s linear forwards;
+    
+}
+
+.css{
+    background-color: #cddc39;
+    animation: css 10s linear forwards;
+}
+.javaScript{
+    background-color: #00bcd4;
+    animation: javaScript 10s linear forwards;
+}
+.python{
+    background-color: #b50c5e;
+    animation: python 10s linear forwards;
+  
+}
+
+
+
+
+.html span{
+    border: 1px solid #07115c ;
+}
+.css span{
+    border: 1px solid #cddc39 ;
+}
+.javaScript span{
+    border: 1px solid #00bcd4 ;
+}
+.python span{
+    border: 1px solid #b50c5e ;
+}
+
+
+@keyframes html {
+    100%{
+        width:86%;
+    }
+    
+}
+@keyframes css {
+    100%{
+        width:22%;
+    }
+    
+}
+@keyframes javaScript {
+    100%{
+        width:55%;
+    }
+    
+}
+@keyframes python {
+    100%{
+        width:90%;
+    }
+    
+
+}
