@@ -39,7 +39,7 @@ const Login = () => {
       }
 
     return (
-        <Fragment>
+        <Fragment><Header/>
             <div>
                 <div className="inner-banner inner-bg2">
                     <div className="container">

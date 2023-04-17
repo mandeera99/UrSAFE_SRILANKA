@@ -3,7 +3,7 @@ import './App.css';
 import About from './pages/About';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
-import SignUp from './pages/user/SignUp';
+import SignUp from './pages/SignUp';
 import FAQ from './pages/FAQ';
 import Condition from './pages/Condition';
 import Privacy from './pages/Privacy';
@@ -15,6 +15,7 @@ import Cart from './pages/Cart';
 import UserProfilePage from './pages/user/UserProfilePage';
 import Header from './pages/Header';
 import Footer from './pages/Footer';
+import Pharmacy from './pages/Pharmacy';
 import Store from './pages/Store';
 import Expiredmedreport from './pages/Expiredmedreport';
 import Analysis from './pages/Analysis';
@@ -79,6 +80,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/medicines/:id" element={<Pharmacy/>}/>
           <Route path="/user-profile" element={<UserProfilePage />} />
 
           <Route path="/view-store" element={<Store />} />

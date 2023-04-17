@@ -1,16 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import { Fragment } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import SearchIcon from '@mui/icons-material/Search';
+import { Search } from '@mui/icons-material';
+
+
+
 
 function Home() {
-        return (
-            <Fragment fluid><Header/>
-                <div fluid>
+    const [searchTerm, setSearchTerm] = useState('');
+    const [pharmacies, setPharmacies] = useState([]);
 
-                    {/* <!-- Pre Loader --> */}
-                    {/*      <div className="preloader">
+    const handleInputChange = (event) => {
+        setSearchTerm(event.target.value);
+    }
+
+    const handleSearch = async () => {
+        const response = await fetch(`http://localhost:4000/api/medicines?q=${searchTerm}`);
+        const data = await response.json();
+        setPharmacies(data);
+    }
+    return (
+     
+        <Fragment fluid><Header/>
+            <div fluid>
+
+                {/* <!-- Pre Loader --> */}
+                {/*      <div className="preloader">
             <div className="d-table">
                 <div className="d-table-cell">
                     <div className="spinner"></div>
@@ -18,27 +36,62 @@ function Home() {
             </div>
         </div> */}
 
-                    {/*  <!-- End Pre Loader -->
+                {/*  <!-- End Pre Loader -->
                 
 
        
 
         <!-- Banner Area --> */}
-                    <div className="banner-area banner-bg">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-lg-7">
-                                    <div className="banner-content">
-                                        <span><h3>A BEST WAY TO SEARCH MEDICINE</h3></span>
-                                        <div className="input-group">
-                                            <input type="search" className="form-control rounded" placeholder="Enter your medicine" aria-label="Search" aria-describedby="search-addon" />
-                                            <button type="button" className="btn btn-outline-primary">Search <SearchIcon/></button>
-                                        </div>
-                                        <h1 className="text-black">UrSAFE SriLanka</h1>
+
+                <div className="banner-area banner-bg">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-7">
+                                <div className="banner-content">
+                                    <span><h3>A BEST WAY TO SEARCH MEDICINE</h3></span>
+                                    <div className="input-group">
+                                        <input type="search" className="form-control rounded" placeholder="Enter your medicine" aria-label="Search" aria-describedby="search-addon" value={searchTerm} onChange={handleInputChange} />
+                                        {/*    {pharmacies.length > 0 && (
+                                            <select>
+                                                {pharmacies.map((pharmacy) => (
+                                                    <option key={pharmacy.id} value={pharmacy.id}>{pharmacy.pharmacy_name} ({pharmacy.location})</option>
+                                                ))}
+                                            </select>
+                                        )} */}
+                                        <button type="button" className="btn btn-outline-primary" onClick={handleSearch} >Search <SearchIcon /></button>
+                                       
+                                       
                                     </div>
+                                    {pharmacies.length > 0 && (
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Pharmacy Name</th>
+                                                        <th>Location</th>
+                                                        <th>Details</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {pharmacies.map((pharmacy) => (
+                                                        <tr key={pharmacy.id}>
+                                                            <td>{pharmacy.pharmacy_name}</td>
+                                                            <td>{pharmacy.location}</td>
+                                                            <td>
+                                                                <Link to={`/medicines/${pharmacy._id}`}>
+                                                                    <button>View Details</button>
+                                                                </Link>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        )}
+                                        
+                                    <h1 className="text-black">UrSAFE SriLanka</h1>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
                         <div className="banner-img">
                             <img src="assets/img/home-one/home-one-img.png" alt="Images" />
