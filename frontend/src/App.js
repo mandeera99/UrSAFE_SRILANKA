@@ -27,6 +27,7 @@ import CartPage from './pages/CartPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 
 //dashboardComponents
+import AdminDashboard from './pages/dashboard/AdminDashboard';
 import Dashboard from './pages/dashboard/Dashboard';
 import ForgotPassword from './pages/dashboard/ForgotPassword';
 import Register from './pages/dashboard/Register';
@@ -41,7 +42,9 @@ import BarCharts from './pages/dashboard/BarCharts';
 import SkillBar from './pages/dashboard/SkillBar';
 import AdminChatRoomComponent from './pages/admin/AdminChatRoomComponent';
 import AdminAnalyticsPage from './pages/admin/AdminAnalyticsPage';
-
+import LineProgress from './pages/dashboard/LinerProgress'
+// import Circle from './pages/dashboard/Circle';
+import Review from './pages/dashboard/Review';
 //user components
 import UserCartDetailsPage from './pages/user/UserCartDetailsPage';
 import UserOrderPage from './pages/user/UserOrderPage';
@@ -94,7 +97,7 @@ function App() {
           <Route path="/product-details" element={<ProductDetailsPage />} />
           <Route path="/product-details/:id" element={<ProductDetailsPage />} />
           <Route path="*" element="Page not exist 404" />
-          <Route path="/dashboard" element={<Dashboard />} />
+          {/* <Route path="/dashboard" element={<Dashboard />} />
           <Route
             path="/dashboard/forgot-password"
             element={<ForgotPassword />}
@@ -115,6 +118,39 @@ function App() {
           <Route path="/dashboard/linechart" element={<LineCharts />} />
           <Route path="/dashboard/barchart" element={<BarCharts />} />
           <Route path="/dashboard/skillbar" element={<SkillBar />} />
+          <Route path="/dashboard/lineprogress" element={<LineProgress />} />
+          {/* <Route path="/dashboard/circle" element={<Circle />} /> */}
+          {/* <Route path="/dashboard/review" element={<Review />} />  */}
+
+
+          <Route path="/admindashboard" element={<AdminDashboard/>} />
+          <Route
+            path="/admindashboard/forgot-password"
+            element={<ForgotPassword />}
+          />
+          <Route path="/admindashboard/register" element={<Register />} />
+          <Route path="/admindashboard/login" element={<AdminLogin />} />
+          <Route path="/admindashboard/user" element={<PawanUserAcc />} />
+          <Route path="/admindashboard/pharmacy" element={<PawanPharmacyAcc />} />
+
+          <Route path="/admindashboard/charts" element={<Charts />} />
+          <Route path="/admindashboard/table" element={<Table />} />
+          <Route
+            path="/admindashboard/chat-room"
+            element={<AdminChatRoomComponent />}
+          />
+          <Route path="/admindashboard/graph" element={<AdminAnalyticsPage />} />
+          <Route path="/admindashboard/piechart" element={<PieCharts />} />
+          <Route path="/admindashboard/linechart" element={<LineCharts />} />
+          <Route path="/admindashboard/barchart" element={<BarCharts />} />
+          <Route path="/admindashboard/skillbar" element={<SkillBar />} />
+          <Route path="/admindashboard/lineprogress" element={<LineProgress />} />
+          {/* <Route path="/dashboard/circle" element={<Circle />} /> */}
+          <Route path="/admindashboard/review" element={<Review />} />
+
+
+          
+
 
           <Route path="/user" element={<UserProfilePage />} />
           <Route path="/user/my-orders" element={<UserOrderPage />} />
