@@ -7,13 +7,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import { WorkoutsContextProvider } from './context/WorkoutContext';
 import { AuthContextProvider } from './context/AuthContext';
-
+import { StoremedsContextProvider } from './context/StoremedsContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
       <WorkoutsContextProvider>
-        <App />
+        <StoremedsContextProvider>
+          <App />
+        </StoremedsContextProvider>
       </WorkoutsContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
