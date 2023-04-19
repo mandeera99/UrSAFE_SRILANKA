@@ -10,8 +10,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import PharmacyHead from "../../componenets/PharmacyHead";
-import NavBar from "../../componenets/NavBar";
+import PharmacyHead from "../../components/PharmacyHead";
+import NavBar from "../../components/NavBar";
 
 const PharmacistAnalyticsPage = () => {
   const data = [

@@ -1,7 +1,7 @@
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useState,useEffect } from "react";
-import PharmacyHead from "../componenets/PharmacyHead";
-import NavBar from "../componenets/NavBar";
+import PharmacyHead from "../components/PharmacyHead";
+import NavBar from "../components/NavBar";
 import Footer from "./Footer";
 import Aos from "aos";
 import "aos/dist/aos.css";

@@ -9,8 +9,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import expireimg from "../Images/123.png"
 import Image from "react-bootstrap/Image";
-import PharmacyHead from "../componenets/PharmacyHead";
-import NavBar from "../componenets/NavBar";
+import PharmacyHead from "../components/PharmacyHead";
+import NavBar from "../components/NavBar";
 import Footer from "./Footer";
 
 const Expiredmedreport = () =>{

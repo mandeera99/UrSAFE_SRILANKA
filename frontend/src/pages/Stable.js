@@ -1,48 +1,58 @@
-import React, { useState, Fragment } from "react";
-import { nanoid } from "nanoid";
+import React, { useEffect,useState, Fragment} from "react";
+
 import "../App.css";
-import data from "../mock-data.json";
-import ReadOnlyRow from "../componenets/ReadOnlyRow";
-import EditableRow from "../componenets/EditableRow";
+
+//import ReadOnlyRow from "../Components/ReadOnlyRow";
+import ReadOnlyRow from "../components/ReadOnlyRow"
+//import EditableRow from "../Components/EditableRow";
+import EditableRow from "../components/EditableRow"
+//import StoremedForm from "../Components/StoremedForm";
+import StoremedForm from "../components/StoremedForm";
 import Table from 'react-bootstrap/Table';
-import Button from "react-bootstrap/Button";
+
+import { useStoremedsContext } from '../hooks/useStoremedsContext'
 
 const Stable = () => {
-  const [contacts, setContacts] = useState(data);
-  const [addFormData, setAddFormData] = useState({
-        lot_no: "",
-        medicine_name: "",
-        brand: "",
-        quantity: "",
-        expiry_date: "",
-        supplier_name: "",
-  });
+
+const {storemeds, dispatch} = useStoremedsContext()
+// const [setStoremeds ] = useState(null)
+
+
+//display all connecting backened to front
+      useEffect(() => {
+        const fetchStoremeds = async () =>{
+          const response = await fetch('/api/storemeds')
+          const json = await response.json()
+    
+          if (response.ok){
+            dispatch({type:'SET_STOREMEDS', payload: json})
+          }
+        }
+        fetchStoremeds()
+      }, [dispatch])
+
+      //Add medicine connecting backend to frontend
+    
 
   const [editFormData, setEditFormData] = useState({
-        lot_no: "",
+        lot_no: Number,
         medicine_name: "",
         brand: "",
-        quantity: "",
-        expiry_date: "",
+        quantity: Number,
+        expiry_date: Date,
         supplier_name: "",
   });
 
-  const [editContactId, setEditContactId] = useState(null);
+  const [editStoremedId, setEditStoremedId] = useState(null);
 
-  const handleAddFormChange = (event) => {
-    event.preventDefault();
-
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newFormData = { ...addFormData };
-    newFormData[fieldName] = fieldValue;
-
-    setAddFormData(newFormData);
-  };
+  
 
   const handleEditFormChange = (event) => {
-    event.preventDefault();
+    // setEditFormData({
+    //   ...editFormData,
+    //   [event.target.name]:event.target.value
+    // });
+     event.preventDefault();
 
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
@@ -53,28 +63,14 @@ const Stable = () => {
     setEditFormData(newFormData);
   };
 
-  const handleAddFormSubmit = (event) => {
+  
+
+
+  const handleEditFormSubmit = async (event) => {
     event.preventDefault();
 
-    const newContact = {
-      id: nanoid(),
-      lot_no: addFormData.lot_no,
-      medicine_name: addFormData.medicine_name,
-      brand: addFormData.brand,
-      quantity: addFormData.quantity,
-      expiry_date: addFormData.expiry_date,
-      supplier_name: addFormData.supplier_name,
-    };
-
-    const newContacts = [...contacts, newContact];
-    setContacts(newContacts);
-  };
-
-  const handleEditFormSubmit = (event) => {
-    event.preventDefault();
-
-    const editedContact = {
-      id: editContactId,
+    const editedStoremed = {
+      _id: editStoremedId,
       lot_no: editFormData.lot_no,
       medicine_name: editFormData.medicine_name,
       brand: editFormData.brand,
@@ -83,100 +79,80 @@ const Stable = () => {
       supplier_name: editFormData.supplier_name,
     };
 
-    const newContacts = [...contacts];
+    // const newStoremeds = [...storemeds];
 
-    const index = contacts.findIndex((contact) => contact.id === editContactId);
+    // const index = storemeds.findIndex((storemed) => storemed.id === editStoremedId);
 
-    newContacts[index] = editedContact;
+    // newStoremeds[index] = editedStoremed;
 
-    setContacts(newContacts);
-    setEditContactId(null);
+    // setStoremeds(newStoremeds);
+    // setEditStoremedId(null);
+
+    const response = await fetch(`/api/storemeds/${editStoremedId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(editedStoremed),
+    });
+    const json = await response.json()
+    if (response.ok) {
+      // const updatedStoremed = await response.json();
+      
+      dispatch({type: 'UPDATE_STOREMED', payload:json})
+      // const newStoremeds = storemeds.map((storemed) =>
+      //   storemed._id === updatedStoremed._id ? updatedStoremed : storemed
+      // );
+      // setStoremeds(newStoremeds);
+      // setEditStoremedId(null);
+     
+    }
+
+    // if (response.ok){
+    //   dispatch({type: 'DELETE_STOREMED', payload:json})
+    // }
   };
 
-  const handleEditClick = (event, contact) => {
+  
+
+  const handleEditClick = (event, storemed) => {
     event.preventDefault();
-    setEditContactId(contact.id);
+    setEditStoremedId(storemed._id);
 
     const formValues = {
-        lot_no: contact.lot_no,
-        medicine_name: contact.medicine_name,
-        brand: contact.brand,
-        quantity: contact.quantity,
-        expiry_date: contact.expiry_date,
-        supplier_name: contact.supplier_name,
+        lot_no: storemed.lot_no,
+        medicine_name: storemed.medicine_name,
+        brand: storemed.brand,
+        quantity: storemed.quantity,
+        expiry_date: storemed.expiry_date,
+        supplier_name: storemed.supplier_name,
     };
 
     setEditFormData(formValues);
   };
 
   const handleCancelClick = () => {
-    setEditContactId(null);
+    setEditStoremedId(null);
   };
 
-  const handleDeleteClick = (contactId) => {
-    const newContacts = [...contacts];
+  // const handleDeleteClick = (storemedId) => {
+  //   const newStoremeds = [...storemeds];
 
-    const index = contacts.findIndex((contact) => contact.id === contactId);
+  //   const index = storemeds.findIndex((storemed) => storemed.id === storemedId);
 
-    newContacts.splice(index, 1);
+  //   newStoremeds.splice(index, 1);
 
-    setContacts(newContacts);
-  };
+  //   setStoremeds(newStoremeds);
+  // };
+
+
+
 
   return (
+    
     <div>
-        
-      <form onSubmit={handleAddFormSubmit}>
-        <input
-          type="text"
-          name="lot_no"
-          required="required"
-          placeholder="Enter lot no..."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="medicine_name"
-          required="required"
-          placeholder="Enter medicine name..."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="brand"
-          required="required"
-          placeholder="Enter brand name"
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="quantity"
-          required="required"
-          placeholder="Enter quantity"
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="expiry_date"
-          required="required"
-          placeholder="Enter expiry date"
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="Supplier_name"
-          required="required"
-          placeholder="Enter supplier name"
-          onChange={handleAddFormChange}
-        />
-        
-        
-        <Button type="submit" variant="primary">Add medicine</Button>{' '}
-            
-      </form>
-
-     
-
+      <StoremedForm />
+      {/*  action="/api/meds" method="POST" id="add_med" */}
       <form onSubmit={handleEditFormSubmit}>
         <Table striped bordered hover>
           <thead>
@@ -191,30 +167,54 @@ const Stable = () => {
             </tr>
           </thead>
           <tbody>
-            {contacts.map((contact) => (
+            {storemeds?.map((storemed) => (
+               
               <Fragment>
-                {editContactId === contact.id ? (
+                
+          
+                {editStoremedId === storemed?._id ? (
                   <EditableRow
                     editFormData={editFormData}
                     handleEditFormChange={handleEditFormChange}
                     handleCancelClick={handleCancelClick}
+                    key={storemed?._id}
+                    handleEditFormSubmit={handleEditFormSubmit}
                   />
                 ) : (
+                 
                   <ReadOnlyRow
-                    contact={contact}
+                    storemed={storemed}
                     handleEditClick={handleEditClick}
-                    handleDeleteClick={handleDeleteClick}
+                    // handleDeleteClick={handleDeleteClick}
+                    key={storemed?._id}
+                   
                   />
-                )}
-              </Fragment>
+                  
+                )
+               
+              }
+
+                {/* // <p key = {storemed._id}>{storemed.lot_no}</p> */}
+         
+            </Fragment>
+             
+            ))} 
+          {/* <div>
+            {storemeds && storemeds.map(storemed => (
+              <ReadOnlyRow storemed={storemed} key={storemed._id} />
             ))}
+          </div> */}
+
           </tbody>
+        
         </Table>
       </form>
+      
 
       
+      
     </div>
-  );
-};
+  )
+}
 
-export default Stable;
+export default Stable
