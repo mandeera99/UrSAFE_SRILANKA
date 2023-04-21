@@ -3,7 +3,7 @@ import "./Skillbar.css";
 
 function ProgressBar() {
   return (
-    <div className="container">
+    <div className="containerr">
       <div className="skills">
         <h2>HTML</h2>
         <div className="progress-bar">

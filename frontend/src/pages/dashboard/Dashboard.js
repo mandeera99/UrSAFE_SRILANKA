@@ -4,8 +4,11 @@ import AdminOrdersPage from '../admin/AdminOrdersPage';
 import LineCharts from './LineCharts';
 import PieCharts from './PieCharts';
 import BarCharts from './BarCharts';
+import LinerProgress from './LinerProgress';
+import Review from './Review';
 import './Dashboard.css';
 import SkillBar from './SkillBar';
+
 import { useLogout } from '../../hooks/useLogout'
 import { useAuthContext } from '../../hooks/useAuthContext'
 
@@ -17,7 +20,6 @@ function Dashboard() {
         logout()
         window.location.href = '/'
     }
-    
     const[style,setStyle]=useState("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
     const changeStyle=()=>{
         if(style=="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion")
@@ -40,12 +42,7 @@ function Dashboard() {
             setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
         }
     };
-    if (!user) {
-       
-      return null;
-      
 
-    }
   return (
     <div>
       
@@ -60,9 +57,9 @@ function Dashboard() {
         {/* <!-- Sidebar - Brand --> */}
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+               
             </div>
-            <div class="sidebar-brand-text mx-3">{user.email} <sup>2</sup></div>
+            <div class="sidebar-brand-text mx-3">Welcome Admin</div>
         </a>
 
         {/* <!-- Divider --> */}
@@ -87,14 +84,14 @@ function Dashboard() {
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Users</span>
+                <i class="fas fa-fw fa-users"></i>
+                <span>User Accounts</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     {/* <h6 class="collapse-header">Custom Components:</h6> */}
-                    <a class="collapse-item" href="/dashboard/pharmacy">Pharmacy</a>
-                    <a class="collapse-item" href="/dashboard/user">Users</a>
+                    <a class="collapse-item" href="/dashboard/pharmacy">Customers</a>
+                    <a class="collapse-item" href="/dashboard/user">Pharmacy</a>
                 </div>
             </div>
         </li>
@@ -127,11 +124,79 @@ function Dashboard() {
         </div> */}
 
         {/* <!-- Nav Item - Pages Collapse Menu --> */}
+
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/analytics">
+            <i class="bi bi-graph-up-arrow"></i>
+                <span>Overview</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/dashboard/charts">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Analytics</span></a>
+        </li>
+
+      
+
+
+
+       
+
+        {/* <!-- Nav Item - Charts --> */}
+        <li class="nav-item">
+            <a class="nav-link" href="/dashboard/charts">
+                {/* <i class="fas fa-fw fa-chart-area"></i> */}
+                <i class="fas fa-fw fa-chart-bar"></i>
+                <span>Charts</span></a>
+        </li>
+{/* 
+        <!-- Nav Item - Tables --> */}
+        <li class="nav-item">
+            <a class="nav-link" href="/dashboard/table">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Tables</span>
+            </a>
+            <div id="collapseTable" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    {/* <h6 class="collapse-header">Custom Components:</h6> */}
+                    <a class="collapse-item" href="/admin/orders">Order Details</a>
+                    <a class="collapse-item" href="/admin/products">Medicine List</a>
+                </div>
+            </div>
+
+
+
+        </li>
+
+
+         
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages4"
+                aria-expanded="true" aria-controls="collapsePages4">
+                <i class="fas fa-fw fa-list"></i>
+                <span>My Work</span>
+            </a>
+            <div id="collapsePages4" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    
+                    <a class="collapse-item" href="/dashboard/login">Todo List</a>
+                    <a class="collapse-item" href="/dashboard/register">Calender</a>
+                    
+                    <div class="collapse-divider"></div>
+                    {/* <h6 class="collapse-header">Other Pages:</h6>
+                    <a class="collapse-item" href="404.html">404 Page</a>
+                    <a class="collapse-item" href="blank.html">Blank Page</a> */}
+                </div>
+            </div>
+        </li>
+
+        
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                 aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Pages</span>
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Admin</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -147,19 +212,6 @@ function Dashboard() {
             </div>
         </li>
 
-        {/* <!-- Nav Item - Charts --> */}
-        <li class="nav-item">
-            <a class="nav-link" href="/dashboard/charts">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></a>
-        </li>
-{/* 
-        <!-- Nav Item - Tables --> */}
-        <li class="nav-item">
-            <a class="nav-link" href="/dashboard/table">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
-        </li>
 
         {/* <!-- Divider --> */}
         <hr class="sidebar-divider d-none d-md-block"/>
@@ -489,8 +541,9 @@ function Dashboard() {
 
                 <div class="row">
 
-                    {/* <!-- Area Chart --> */}
-                    <div class="col-xl-8 col-lg-7">
+                <center>
+                    
+                    <div class="col-xl-12 col-lg-8" >
                         <div class="card shadow mb-4">
                             {/* <!-- Card Header - Dropdown --> */}
                             <div
@@ -516,24 +569,24 @@ function Dashboard() {
                                 {/* <div class="chart-area">
                                     <canvas id="myAreaChart"><AdminAnalyticsPage/></canvas>
                                 </div> */}
-                                <center><BarCharts/></center>
+                                <div class="col-xl-10 col-lg-7"><center><BarCharts/></center></div>
                             </div>
                         </div>
-                    </div>
+                    </div></center>
 
-                    {/* <!-- Pie Chart --> */}
-                    <div class="col-xl-4 col-lg-5">
+                    <center>
+                    
+                    <div class="col-xl-12 col-lg-8" >
                         <div class="card shadow mb-4">
                             {/* <!-- Card Header - Dropdown --> */}
                             <div
                                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Most Searched Medicine</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
                                 <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                    <a class="dropdown-toggle" href="/dashboard/graph" role="button" id="dropdownMenuLink"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                     </a>
-                                    
                                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                         aria-labelledby="dropdownMenuLink">
                                         <div class="dropdown-header">Dropdown Header:</div>
@@ -546,182 +599,90 @@ function Dashboard() {
                             </div>
                             {/* <!-- Card Body --> */}
                             <div class="card-body">
-                                {/* <div class="chart-pie pt-4 pb-2">
-                                    <canvas id="myPieChart"></canvas>
-                                    <center><PieCharts/></center>
-                                </div>
-                                <div class="mt-4 text-center small">
-                                    <span class="mr-2">
-                                        <i class="fas fa-circle text-primary"></i> Direct
-                                    </span>
-                                    <span class="mr-2">
-                                        <i class="fas fa-circle text-success"></i> Social
-                                    </span>
-                                    <span class="mr-2">
-                                        <i class="fas fa-circle text-info"></i> Referral
-                                    </span>
+                                {/* <div class="chart-area">
+                                    <canvas id="myAreaChart"><AdminAnalyticsPage/></canvas>
                                 </div> */}
-                                <center><LineCharts/></center>
+                                <div class="col-xl-10 col-lg-7"><center><LineCharts/></center></div>
                             </div>
                         </div>
-                    </div>
+                    </div></center>
+
+                    <center>
+                    
+                    <div class="col-xl-12 col-lg-8" >
+                        <div class="card shadow mb-4">
+                            {/* <!-- Card Header - Dropdown --> */}
+                            <div
+                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Users</h6>
+                                <div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="/dashboard/graph" role="button" id="dropdownMenuLink"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                        aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-header">Dropdown Header:</div>
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <!-- Card Body --> */}
+                            <div class="card-body">
+                                {/* <div class="chart-area">
+                                    <canvas id="myAreaChart"><AdminAnalyticsPage/></canvas>
+                                </div> */}
+                                <div class="col-xl-10 col-lg-7"><center><Review/></center></div>
+                            </div>
+                        </div>
+                    </div></center>
+                   
                 </div>
 
                 
-                <div class="row">
-
-                    <AdminOrdersPage/>
-                </div>
+     
 
                 {/* <!-- Content Row --> */}
                 <div class="row">
 
-                    {/* <!-- Content Column --> */}
-                    <div class="col-lg-6 mb-4">
+                <div class="col-xl-6 lg-6">
 
                         {/* <!-- Project Card Example --> */}
-                        <div class="card shadow mb-4">
+                        <div class="card shadow ">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
                             </div>
-                            {/* <div class="card-body">
-                                <h4 class="small font-weight-bold">completely Created Accounts 
-                                <span
-                                        class="float-right">5000</span></h4>
-                                <div class="progress mb-4">
-                                    <div class="progress-bar bg-danger a2" role="progressbar" ></div>
-                                </div>
-                                <h4 class="small font-weight-bold">Searched pharmacy<span
-                                        class="float-right">2000</span></h4>
-                                <div class="progress mb-4">
-                                    <div class="progress-bar bg-warning a3" role="progressbar" ></div>
-                                </div>
-                                <h4 class="small font-weight-bold">Place Order<span
-                                        class="float-right">200</span></h4>
-                                <div class="progress mb-4">
-                                    <div class="progress-bar a7" role="progressbar" ></div>
-                                </div>
-                                <h4 class="small font-weight-bold">completed Orders<span
-                                        class="float-right">13</span></h4>
-                                <div class="progress mb-4">
-                                    <div class="progress-bar bg-info a4" role="progressbar" ></div>
-                                </div>
-                                <h4 class="small font-weight-bold">Daily Loggings <span
-                                        class="float-right">3000</span></h4>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success a5" role="progressbar" ></div>
-                                </div>
-                            </div> */}
-                            <center><SkillBar/></center>
+                    
+                            <center><LinerProgress/></center>
                         </div>
-
-                        {/* <!-- Color System --> */}
-                        <div class="row">
-                            {/* <div class="col-lg-6 mb-4">
-                                <div class="card bg-primary text-white shadow">
-                                    <div class="card-body">
-                                        Primary
-                                        <div class="text-white-50 small">#4e73df</div>
-                                    </div>
-                                </div>
-                            </div> */}
-                            {/* <div class="col-lg-6 mb-4">
-                                <div class="card bg-success text-white shadow">
-                                    <div class="card-body">
-                                        Success
-                                        <div class="text-white-50 small">#1cc88a</div>
-                                    </div>
-                                </div>
-                            </div> */}
-                            {/* <div class="col-lg-6 mb-4">
-                                <div class="card bg-info text-white shadow">
-                                    <div class="card-body">
-                                        Info
-                                        <div class="text-white-50 small">#36b9cc</div>
-                                    </div>
-                                </div>
-                            </div> */}
-                            {/* <div class="col-lg-6 mb-4">
-                                <div class="card bg-warning text-white shadow">
-                                    <div class="card-body">
-                                        Warning
-                                        <div class="text-white-50 small">#f6c23e</div>
-                                    </div>
-                                </div>
-                            </div> */}
-                            {/* <div class="col-lg-6 mb-4">
-                                <div class="card bg-danger text-white shadow">
-                                    <div class="card-body">
-                                        Danger
-                                        <div class="text-white-50 small">#e74a3b</div>
-                                    </div>
-                                </div>
-                            </div> */}
-                            {/* <div class="col-lg-6 mb-4">
-                                <div class="card bg-secondary text-white shadow">
-                                    <div class="card-body">
-                                        Secondary
-                                        <div class="text-white-50 small">#858796</div>
-                                    </div>
-                                </div>
-                            </div> */}
-                            {/* <div class="col-lg-6 mb-4">
-                                <div class="card bg-light text-black shadow">
-                                    <div class="card-body">
-                                        Light
-                                        <div class="text-black-50 small">#f8f9fc</div>
-                                    </div>
-                                </div>
-                            </div> */}
-                            {/* <div class="col-lg-6 mb-4">
-                                <div class="card bg-dark text-white shadow">
-                                    <div class="card-body">
-                                        Dark
-                                        <div class="text-white-50 small">#5a5c69</div>
-                                    </div>
-                                </div>
-                            </div> */}
-                        </div>
-
                     </div>
 
-                    <div class="col-lg-6 mb-4">
+                    <div class="col-xl-6 lg-6">
 
-                        {/* <!-- Illustrations --> */}
-                        <div class="card shadow mb-4">
+                        <div class="card shadow ">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Application Usability</h6>
                             </div>
-                            <div class="card-body">
-                                 {/* <div class="text-center">
-                                     <img class="img-fluid px-3 px-sm-4 mt-3 mb-4 a6" 
-                                        src="img/undraw_posting_photo.svg" alt="..."/>
-                                </div> */}
-                                {/* <p>Add some quality, svg illustrations to your project courtesy of <a
-                                        target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                                    constantly updated collection of beautiful svg images that you can use
-                                    completely free and without attribution!</p>
-                                <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                                    unDraw &rarr;</a>  */}
-                                    <center><PieCharts/></center>
-                            </div>
+                            
+                            <center><PieCharts/></center>
                         </div>
-
-                        {/* <!-- Approach --> */}
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                            </div>
-                            <div class="card-body">
-                                {/* <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                                    CSS bloat and poor page performance. Custom CSS classes are used to create
-                                    custom components and custom utility classes.</p>
-                                <p class="mb-0">Before working with this theme, you should become familiar with the
-                                    Bootstrap framework, especially the utility classes.</p> */}
-                            </div>
-                        </div>
-
                     </div>
+
+
+
+
+
+
+
+                
+
+
+
+
+                   
                 </div>
 
             </div>
@@ -731,13 +692,7 @@ function Dashboard() {
         {/* <!-- End of Main Content --> */}
 
         {/* <!-- Footer --> */}
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2021</span>
-                </div>
-            </div>
-        </footer>
+        
         {/* <!-- End of Footer --> */}
 
     </div>

@@ -7,6 +7,16 @@ import { Link } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner';
 
 function SignUp() {
+  const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const { signup, error, isLoading } = useSignup()
+
+    const whenSubmit = async (e) => {
+        e.preventDefault()
+
+        await signup(email, password)
+    }
+
     const [validated, setValidated] = useState(false);
 
     const onChange = ()=>{
@@ -160,7 +170,7 @@ function SignUp() {
             </Row>
 
             <div className="col-lg-12 col-md-12 text-center">
-            <button type="submit" className="default-btn">
+            <button type="submit" className="default-btn" onClick={whenSubmit}>
               <Spinner
                 as="span"
                 animation="border"
