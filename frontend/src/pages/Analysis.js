@@ -10,7 +10,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import NavBar from "../componenets/NavBar";
+import NavBar from "../components/NavBar";
 
 const Analysis = () => {
   const data = [

@@ -14,8 +14,8 @@ import SearchIcon from '@mui/icons-material/Search';
 
 
 import Stable from "./Stable";
-import NavBar from "../componenets/NavBar";
-import PharmacyHead from "../componenets/PharmacyHead";
+import NavBar from "../components/NavBar";
+import PharmacyHead from "../components/PharmacyHead";
 import Footer from "./Footer";
 
 const Store = () =>{

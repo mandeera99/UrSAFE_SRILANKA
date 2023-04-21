@@ -1,8 +1,8 @@
 import { Row, Col, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import AdminLinksComponent from '../../componenets/pharmacist/PharmacistLinksComponent';
-import PharmacyHead from '../../componenets/PharmacyHead';
-import NavBar from '../../componenets/NavBar';
+import PharmacyHead from '../../components/PharmacyHead';
+import NavBar from '../../components/NavBar';
 
 const PharmacistOrdersPage = () => {
   return (

@@ -1,9 +1,9 @@
 import { Row, Col, Table, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import NavBar from "../../componenets/NavBar";
+import NavBar from "../../components/NavBar";
 import AdminLinksComponent from "../../componenets/pharmacist/PharmacistLinksComponent";
 import ProductCarouselComponent from "../../componenets/PharmacistProductCarouselComponent";
-import PharmacyHead from "../../componenets/PharmacyHead";
+import PharmacyHead from "../../components/PharmacyHead";
 import { useAuthContext } from '../../hooks/useAuthContext'
 
 const deleteHandler = () => {

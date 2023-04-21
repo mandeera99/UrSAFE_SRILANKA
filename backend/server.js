@@ -4,6 +4,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const medicine = require('./routes/medicines')
 const userRoutes = require('./routes/user')
+const storemedRoutes = require('./routes/storemeds')
 const Medicine = require('./models/medicinemodel');
 const cors = require('cors');
 // express app
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 // routes
 
 app.use('/api/user', userRoutes)
+app.use('/api/storemeds',storemedRoutes)
 
 //search medicine
 const medicineRoutes = require('./routes/medicines');
