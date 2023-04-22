@@ -1,9 +1,11 @@
-import React from "react";
-import { Fragment } from "react";
+import { useState, useEffect, Fragment } from "react";
+//import { Fragment } from "react";
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
+import { useParams } from 'react-router-dom';
 
 function Header() {
+
     const { logout } = useLogout()
     const { user } = useAuthContext()
     const handleClick = () => {
@@ -179,24 +181,33 @@ function Header() {
                                         </a>
                                     </li>
                                 </ul>
-                               
-                                <div className="others-options d-flex align-items-center">
-                                {!user && (
-                                    <div className="buttons">
-                                        <a href="/login" className="btn btn-dark">
-                                            <i className=""></i>log in</a>
-                                        <a href="/signUp" className="btn btn-dark ms-2">
-                                            <i className=""></i>sign up</a>
 
-                                    </div>
-                                )}
+                                <div className="others-options d-flex align-items-center">
+                                    {!user && (
+                                        <div className="buttons">
+                                            <a href="/login" className="btn btn-dark">
+                                                <i className=""></i>log in</a>
+                                            <a href="/signUp" className="btn btn-dark ms-2">
+                                                <i className=""></i>sign up</a>
+
+                                        </div>
+                                    )}
+
+
                                     {user && (
-                                    <div className="buttons">
-                                        <span>{user.email}</span>
-                                        <button className="btn btn-dark" onClick={handleClick}>
-                                            logout
-                                        </button>
-                                    </div>
+                                        <div className="buttons">
+                                            {/* <span>{user.email}</span> */}
+                                            <div className="option-item">
+                                                <div className="add-cart-btn">
+                                                    <a href={`/profileofuser/${user.email}`} className="cart-btn-icon">
+                                                        <i class="fas fa-user"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                           <button className="btn btn-dark" onClick={handleClick}>
+                                                logout
+                                            </button>
+                                        </div>
                                     )}
 
                                     <div className="option-item">
@@ -237,19 +248,30 @@ function Header() {
                                                 </a>
                                             </div>
                                         </div>
-                                        <div className="option-item">
-                                            <div className="buttons">
-                                                <a href="/login" className="btn btn-dark">
-                                                    <i className=""></i>log in</a>
-                                                <a href="/user/signUp" className="btn btn-dark ms-2">
-                                                    <i className=""></i>sign up</a>
-                                            </div>
-                                            <div className="buttons">
-                                                <button className="btn btn-dark" onClick={handleClick}>
-                                                    logout
-                                                </button>
-                                            </div>
+                                        {!user && (
+                                        <div className="buttons">
+                                            <a href="/login" className="btn btn-dark">
+                                                <i className=""></i>log in</a>
+                                            <a href="/signUp" className="btn btn-dark ms-2">
+                                                <i className=""></i>sign up</a>
+
                                         </div>
+                                    )}
+                                        {user && (
+                                        <div className="buttons">
+                                            {/* <span>{user.email}</span> */}
+                                            <div className="option-item">
+                                                <div className="add-cart-btn">
+                                                    <a href={`/profileofuser/${user.email}`} className="cart-btn-icon">
+                                                        <i class="fas fa-user"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                           <button className="btn btn-dark" onClick={handleClick}>
+                                                logout
+                                            </button>
+                                        </div>
+                                    )}
                                     </div>
                                 </div>
                             </div>
@@ -263,6 +285,7 @@ function Header() {
             {/*    <!-- End Navbar Area -->*/}
         </Fragment>
     )
+
 }
 
 export default Header;

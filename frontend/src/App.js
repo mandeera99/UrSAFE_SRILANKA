@@ -20,6 +20,7 @@ import Store from './pages/Store';
 import Expiredmedreport from './pages/Expiredmedreport';
 import Analysis from './pages/Analysis';
 import Profile from './pages/Profile';
+import Profileofuser from './pages/Profileofuser';
 //admin
 import HomePage from './pages/HomePage';
 import ProductListPage from './pages/ProductListPage';
@@ -82,6 +83,9 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/medicines/:id" element={<Pharmacy/>}/>
           <Route path="/user-profile" element={<UserProfilePage />} />
+          <Route path="/profileofuser/:email" element={<Profileofuser />} />
+
+
 
           <Route path="/view-store" element={<Store />} />
           <Route path="/view-more2" element={<Expiredmedreport />} />

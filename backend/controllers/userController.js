@@ -17,7 +17,7 @@ const loginUser = async (req, res) => {
 
    
     // Check user type and send appropriate response
-    console.log(user.email)
+    console.log(user)
     console.log(user.userType)
 
     if (user.userType === 'Administrator') {
@@ -50,5 +50,29 @@ const signupUser = async (req, res) => {
     res.status(400).json({ error: error.message })
   }
 }
+
+// // Function to get user details
+// const getUserDetails = async (req, res) => {
+//   try {
+//     // Get the user ID from the request object (assuming it was set by middleware)
+//     const userId = req.userId;
+//     if (!userId) {
+//       return res.status(401).json({ error: 'Unauthorized' });
+//     }
+
+//     // Find the user by ID in the database
+//     const user = await User.findById(userId);
+
+//     if (!user) {
+//       return res.status(404).json({ error: 'User not found' });
+//     }
+
+//     // Return the user details
+//     res.json(user);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ error: 'Server error' });
+//   }
+// };
 
 module.exports = { signupUser, loginUser }
