@@ -18,14 +18,14 @@ const loginUser = async (req, res) => {
    
     // Check user type and send appropriate response
     console.log(user.email)
-    console.log(user.type)
+    console.log(user.userType)
 
-    if (user.type === 'admin') {
-      res.json({ email, token, userType: 'admin' });
-    } else if (user.type === 'pharmaciest') {
-      res.json({ email, token, userType: 'pharmaciest' });
-    } else if (user.type === 'regular') {
-      res.json({ email, token, userType: 'regular' });
+    if (user.userType === 'Administrator') {
+      res.json({ email, token, userType: 'Administrator' });
+    } else if (user.userType === 'Pharmacy') {
+      res.json({ email, token, userType: 'Pharmacy' });
+    } else if (user.userType === 'Customer') {
+      res.json({ email, token, userType: 'Customer' });
     } else {
       res.status(400).json({ error: 'User type not found' });
     }
@@ -37,10 +37,10 @@ const loginUser = async (req, res) => {
 
 // signup a user
 const signupUser = async (req, res) => {
-  const { email, password } = req.body
+  const { email,password,userType,name,address,phoneNumber,pharmacyName,zipCode,state,city } = req.body
 
   try {
-    const user = await User.signup(email, password)
+    const user = await User.signup(email,password,userType,name,address,phoneNumber,pharmacyName,zipCode,state,city)
 
     // create a token
     const token = createToken(user._id)

@@ -24,9 +24,9 @@ const Login = () => {
           const { data } = await axios.post('/api/user/login', { email, password })
           localStorage.setItem('token', data.token)
     
-          if (data.userType === 'admin') {
+          if (data.userType === 'Administrator') {
             window.location.href = '/Dashboard'
-          } else if(data.userType === 'pharmaciest') {
+          } else if(data.userType === 'Pharmacy') {
             window.location.href = '/Pharmacyhome'
           }else {
             window.location.href = '/'

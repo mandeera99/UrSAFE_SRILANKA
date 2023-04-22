@@ -14,19 +14,50 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  type: {
+  userType: {
     type: String,
-    enum: ['regular', 'pharmaciest', 'admin'],
-    default: 'regular'
+    enum: ['Customer', 'Pharmacy', 'Administrator'],
+    default: 'Customer'
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  address: {
+    type: String,
+    required: false
+  },
+  phoneNumber: {
+    type: String,
+    required: false
+  },
+  pharmacyName: {
+    type: String,
+    required: false
+  },
+  zipCode: {
+    type: String,
+    required: false
+  },
+  state: {
+    type: String,
+    required: false
+  },
+  city: {
+    type: String,
+    required: false
   }
 })
 
 // static signup method
-userSchema.statics.signup = async function (email, password) {
+userSchema.statics.signup = async function (email,password,userType,name,address,phoneNumber,pharmacyName,zipCode,state,city) {
 
   // validation
+  console.log('Email:', email);
+  console.log('adress:', address);
+  console.log('type:', userType);
   if (!email || !password) {
-    throw Error('All fields must be filled')
+    throw Error('email and password fields must be filled')
   }
   if (!validator.isEmail(email)) {
     throw Error('Email not valid')
@@ -44,8 +75,18 @@ userSchema.statics.signup = async function (email, password) {
   const salt = await bcrypt.genSalt(10)
   const hash = await bcrypt.hash(password, salt)
 
-  const user = await this.create({ email, password: hash })
-
+  const user = await this.create({ 
+    email,
+    password: hash,
+    userType: userType,
+    name,
+    address,
+    phoneNumber,
+    pharmacyName,
+    zipCode,
+    state,
+    city
+  })
   return user
 }
 
