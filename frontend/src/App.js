@@ -21,6 +21,7 @@ import Expiredmedreport from './pages/Expiredmedreport';
 import Analysis from './pages/Analysis';
 import Profile from './pages/Profile';
 import Profileofuser from './pages/Profileofuser';
+import Location from './pages/Location';
 //admin
 import HomePage from './pages/HomePage';
 import ProductListPage from './pages/ProductListPage';
@@ -84,7 +85,7 @@ function App() {
           <Route path="/medicines/:id" element={<Pharmacy/>}/>
           <Route path="/user-profile" element={<UserProfilePage />} />
           <Route path="/profileofuser/:email" element={<Profileofuser />} />
-
+          <Route path="/location" element={<Location/>} />
 
 
           <Route path="/view-store" element={<Store />} />
