@@ -1,17 +1,18 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+
 
 const Schema = mongoose.Schema
 
 const storemedSchema = new Schema({
     lot_no: {
         type: Number,
-        required: true, 
+        required: true,
         unique: true
     },
     medicine_name: {
         type: String,
         required: true
-        
+
     },
     brand: {
         type: String,
@@ -28,9 +29,14 @@ const storemedSchema = new Schema({
     },
     supplier_name: {
         type: String,
-        required:true
+        required: true
     },
-},{timestamps: true})
+    price: {
+        type: Number,
+        required: true
+
+    }
+}, { timestamps: true })
 
 module.exports = mongoose.model('storemed', storemedSchema);
 

@@ -23,7 +23,7 @@ const loginUser = async (req, res) => {
     if (user.userType === 'Administrator') {
       res.json({ email, token, userType: 'Administrator' });
     } else if (user.userType === 'Pharmacy') {
-      res.json({ email, token, userType: 'Pharmacy' });
+      res.json({ email, token, pharmacyName:user.pharmacyName, userType: 'Pharmacy', });
     } else if (user.userType === 'Customer') {
       res.json({ email, token, userType: 'Customer' });
     } else {

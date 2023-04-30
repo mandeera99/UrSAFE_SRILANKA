@@ -1,58 +1,49 @@
-import React, { useEffect,useState, Fragment} from "react";
-
+import React, { useEffect, useState, Fragment } from "react";
 import "../App.css";
-
-//import ReadOnlyRow from "../Components/ReadOnlyRow";
 import ReadOnlyRow from "../components/ReadOnlyRow"
-//import EditableRow from "../Components/EditableRow";
 import EditableRow from "../components/EditableRow"
-//import StoremedForm from "../Components/StoremedForm";
 import StoremedForm from "../components/StoremedForm";
 import Table from 'react-bootstrap/Table';
-
 import { useStoremedsContext } from '../hooks/useStoremedsContext'
 
 const Stable = () => {
 
-const {storemeds, dispatch} = useStoremedsContext()
-// const [setStoremeds ] = useState(null)
+  const { storemeds, dispatch } = useStoremedsContext()
 
 
-//display all connecting backened to front
-      useEffect(() => {
-        const fetchStoremeds = async () =>{
-          const response = await fetch('/api/storemeds')
-          const json = await response.json()
-    
-          if (response.ok){
-            dispatch({type:'SET_STOREMEDS', payload: json})
-          }
-        }
-        fetchStoremeds()
-      }, [dispatch])
 
-      //Add medicine connecting backend to frontend
-    
+  //display all connecting backened to front
+  useEffect(() => {
+    const fetchStoremeds = async () => {
+      const response = await fetch('/api/storemeds')
+      const json = await response.json()
+
+      if (response.ok) {
+        dispatch({ type: 'SET_STOREMEDS', payload: json })
+      }
+    }
+    fetchStoremeds()
+  }, [dispatch])
+
+  //Add medicine connecting backend to frontend
+
 
   const [editFormData, setEditFormData] = useState({
-        lot_no: Number,
-        medicine_name: "",
-        brand: "",
-        quantity: Number,
-        expiry_date: Date,
-        supplier_name: "",
+    lot_no: Number,
+    medicine_name: "",
+    brand: "",
+    quantity: Number,
+    expiry_date: Date,
+    supplier_name: "",
+    price: Number,
   });
 
   const [editStoremedId, setEditStoremedId] = useState(null);
 
-  
+
 
   const handleEditFormChange = (event) => {
-    // setEditFormData({
-    //   ...editFormData,
-    //   [event.target.name]:event.target.value
-    // });
-     event.preventDefault();
+    event.preventDefault();
 
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
@@ -63,7 +54,7 @@ const {storemeds, dispatch} = useStoremedsContext()
     setEditFormData(newFormData);
   };
 
-  
+
 
 
   const handleEditFormSubmit = async (event) => {
@@ -77,16 +68,8 @@ const {storemeds, dispatch} = useStoremedsContext()
       quantity: editFormData.quantity,
       expiry_date: editFormData.expiry_date,
       supplier_name: editFormData.supplier_name,
+      price: editFormData.price,
     };
-
-    // const newStoremeds = [...storemeds];
-
-    // const index = storemeds.findIndex((storemed) => storemed.id === editStoremedId);
-
-    // newStoremeds[index] = editedStoremed;
-
-    // setStoremeds(newStoremeds);
-    // setEditStoremedId(null);
 
     const response = await fetch(`/api/storemeds/${editStoremedId}`, {
       method: 'PUT',
@@ -97,35 +80,26 @@ const {storemeds, dispatch} = useStoremedsContext()
     });
     const json = await response.json()
     if (response.ok) {
-      // const updatedStoremed = await response.json();
-      
-      dispatch({type: 'UPDATE_STOREMED', payload:json})
-      // const newStoremeds = storemeds.map((storemed) =>
-      //   storemed._id === updatedStoremed._id ? updatedStoremed : storemed
-      // );
-      // setStoremeds(newStoremeds);
-      // setEditStoremedId(null);
-     
-    }
 
-    // if (response.ok){
-    //   dispatch({type: 'DELETE_STOREMED', payload:json})
-    // }
+
+      dispatch({ type: 'UPDATE_STOREMED', payload: json })
+    }
   };
 
-  
+
 
   const handleEditClick = (event, storemed) => {
     event.preventDefault();
     setEditStoremedId(storemed._id);
 
     const formValues = {
-        lot_no: storemed.lot_no,
-        medicine_name: storemed.medicine_name,
-        brand: storemed.brand,
-        quantity: storemed.quantity,
-        expiry_date: storemed.expiry_date,
-        supplier_name: storemed.supplier_name,
+      lot_no: storemed.lot_no,
+      medicine_name: storemed.medicine_name,
+      brand: storemed.brand,
+      quantity: storemed.quantity,
+      expiry_date: storemed.expiry_date,
+      supplier_name: storemed.supplier_name,
+      price: storemed.price,
     };
 
     setEditFormData(formValues);
@@ -135,43 +109,31 @@ const {storemeds, dispatch} = useStoremedsContext()
     setEditStoremedId(null);
   };
 
-  // const handleDeleteClick = (storemedId) => {
-  //   const newStoremeds = [...storemeds];
-
-  //   const index = storemeds.findIndex((storemed) => storemed.id === storemedId);
-
-  //   newStoremeds.splice(index, 1);
-
-  //   setStoremeds(newStoremeds);
-  // };
-
-
-
-
   return (
-    
+
     <div>
       <StoremedForm />
-      {/*  action="/api/meds" method="POST" id="add_med" */}
+
       <form onSubmit={handleEditFormSubmit}>
         <Table striped bordered hover>
           <thead>
             <tr>
-            <th>Lot No</th>
-                <th>Medicine name</th>
-                <th>Brand</th>
-                <th>Quantity</th>
-                <th>Expiry Date</th>
-                <th>Supplier Name</th>
-                <th>Edit</th>
+              <th>Lot No</th>
+              <th>Medicine name</th>
+              <th>Brand</th>
+              <th>Quantity</th>
+              <th>Expiry Date</th>
+              <th>Supplier Name</th>
+              <th>Price per tablet(Rs.)</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {storemeds?.map((storemed) => (
-               
+
               <Fragment>
-                
-          
+
+
                 {editStoremedId === storemed?._id ? (
                   <EditableRow
                     editFormData={editFormData}
@@ -181,38 +143,22 @@ const {storemeds, dispatch} = useStoremedsContext()
                     handleEditFormSubmit={handleEditFormSubmit}
                   />
                 ) : (
-                 
+
                   <ReadOnlyRow
                     storemed={storemed}
                     handleEditClick={handleEditClick}
-                    // handleDeleteClick={handleDeleteClick}
                     key={storemed?._id}
-                   
+
                   />
-                  
+
                 )
-               
-              }
 
-                {/* // <p key = {storemed._id}>{storemed.lot_no}</p> */}
-         
-            </Fragment>
-             
-            ))} 
-          {/* <div>
-            {storemeds && storemeds.map(storemed => (
-              <ReadOnlyRow storemed={storemed} key={storemed._id} />
+                }
+              </Fragment>
             ))}
-          </div> */}
-
           </tbody>
-        
         </Table>
       </form>
-      
-
-      
-      
     </div>
   )
 }
