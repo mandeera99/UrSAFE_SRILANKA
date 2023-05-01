@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import NavBar from "../components/NavBar";
+import PharmacyHead from "../components/PharmacyHead";
 
 const Analysis = () => {
   const data = [
@@ -89,6 +90,7 @@ const Analysis = () => {
   ];
   return (
     <div>
+    <PharmacyHead />
     <NavBar/>
     <Row className="m-5">
     

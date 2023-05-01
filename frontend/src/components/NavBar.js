@@ -30,6 +30,8 @@ function NavBar() {
   }
   //  let publicUrl = process.env.PUBLIC_URL+'/'
   return (
+    
+    
     <Navbar bg="myNavColor" expand="lg">
       <Container>
         <Navbar.Brand>
@@ -40,7 +42,7 @@ function NavBar() {
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto my-4 my-lg-2" style={{ maxHeight: "250px" }}>
 
-            <Nav.Link href="Pharmacyhome" style={{ color: "black" }}>
+            <Nav.Link href="/Pharmacyhome" style={{ color: "black" }}>
               <Link1>Home<Span className="Ho"></Span></Link1>
             </Nav.Link>
 
@@ -76,7 +78,7 @@ function NavBar() {
               </NavDropdown.Item> */}
             {/* </NavDropdown> */}
 
-            <Nav.Link style={{ color: "black" }} href={"view-store"}>
+            <Nav.Link style={{ color: "black" }} href={`/view-store`}>
               <Link1>Store <span className="Ho"></span></Link1>
             </Nav.Link>
 
@@ -93,13 +95,13 @@ function NavBar() {
 
           <p>&ensp;&ensp;</p>
 
-          <Nav.Link href={"Orders"}>
+          <Nav.Link href="/Orders">
             <NotificationsIcon />
           </Nav.Link>
 
           <p>&ensp;&ensp;</p>
 
-          <Nav.Link href={"profile"}>
+          <Nav.Link href={`/profile/${user.email}`}>
             <AccountCircleIcon />
           </Nav.Link>
          
@@ -124,6 +126,7 @@ function NavBar() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    
   );
 }
 export default NavBar;
