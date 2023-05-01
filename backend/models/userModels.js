@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const validator = require('validator')
+const socketIO = require('socket.io')
 
 const Schema = mongoose.Schema
 
@@ -46,8 +47,38 @@ const userSchema = new Schema({
   city: {
     type: String,
     required: false
+  },
+  message:{
+    type:String,
+    required:true,
+    default: function () {
+      return `New ${this.userType}  named ${this.name} has registered in this email ${this.email}`;
+      
+    }
   }
-})
+
+});
+
+// Set the message field based on the userType field value
+userSchema.pre('save', function(next) {
+  if (this.isNew) {
+    switch(this.userType) {
+      case 'Customer':
+        this.message = 'User customer registered';
+        break;
+      case 'Pharmacy':
+        this.message = 'User pharmacy registered';
+        break;
+      case 'Administrator':
+        this.message = 'User administrator registered';
+        break;
+      default:
+        this.message = '';
+    }
+  }
+  next();
+});
+
 
 // static signup method
 userSchema.statics.signup = async function (email,password,userType,name,address,phoneNumber,pharmacyName,zipCode,state,city) {
@@ -85,8 +116,12 @@ userSchema.statics.signup = async function (email,password,userType,name,address
     pharmacyName,
     zipCode,
     state,
-    city
+    city,
+    message
   })
+
+  
+
   return user
 }
 

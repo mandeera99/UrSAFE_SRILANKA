@@ -48,7 +48,11 @@ function Charts() {
                             </div>
                             <div class="card-body">
                                 <div >
-                                    <center><ThreewayLineChart/></center>
+                                    {/* <center><ThreewayLineChart/></center> */}
+
+                                    <center><div style={{ width: '400px', height: '400px', margin: '0 auto' }}>
+                                    <ThreewayLineChart/>
+                                </div></center>
                                     
                                     
                                 </div>
@@ -71,7 +75,11 @@ function Charts() {
                             <div class="card-body" style={{ padding: "0  250px" }}>
                                 <div >
                                     
-                                    <center><OrdersBar/></center>
+                                    {/* <center><OrdersBar/></center> */}
+
+                                    <center><div style={{ width: '400px', height: '400px', margin: '0 auto' }}>
+                                    <OrdersBar/>
+                                </div></center>
                                 </div>
                                 <hr/>
                                
@@ -89,7 +97,11 @@ function Charts() {
                             <div class="card-body">
                                 <div >
                                     
-                                    <center><MostSearchinLine/></center>
+                                    {/* <center><MostSearchinLine/></center> */}
+
+                                    <center><div style={{ width: '400px', height: '400px', margin: '0 auto' }}>
+                                    <MostSearchinLine/>
+                                </div></center>
                                 </div>
                                 <hr/>
                                 
@@ -111,7 +123,10 @@ function Charts() {
                     <div class="card-body" >
                      <div >
             
-                     <center><SalesPieChart/></center>
+                     {/* <center><SalesPieChart/></center> */}
+                     <center><div style={{ width: '350px', height: '350px', margin: '0 auto' }}>
+                     <SalesPieChart/>
+                         </div></center>
                     </div>
                     <hr/>
         
@@ -134,8 +149,11 @@ function Charts() {
                             </div>
                             <div class="card-body" style={{ padding: "0  250px" }}>
                                 <div >
+                                
                                     
-                                    <center><AnnualSalesChart/></center>
+                                    <center><div style={{ width: '500px', height: '500px', margin: '0 auto' }}>
+                                <AnnualSalesChart/>
+                                </div></center>
                                 </div>
                                 <hr/>
                                 

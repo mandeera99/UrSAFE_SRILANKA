@@ -59,6 +59,9 @@ import PharmacyDetails from "./pages/dashboard/Charts/PharmacyDetails";
 import CustomerDetailsTable from "./pages/dashboard/Charts/CustomerDetailsTable"
 import OrdersBar from "./pages/dashboard/Charts/OrdersBar";
 import AnnualSalesChart from "./pages/dashboard/Charts/AnnualSalesChart";
+import Alerts from "./pages/dashboard/Alerts";
+import Report from './pages/dashboard/Report';
+
 //user components
 import UserCartDetailsPage from './pages/user/UserCartDetailsPage';
 import UserOrderPage from './pages/user/UserOrderPage';
@@ -179,9 +182,11 @@ function App() {
           <Route path="/dashboard/customerTable" element={<CustomerDetailsTable  />}/>
           <Route path="/dashboard/ordersBar" element={<OrdersBar  />}/>
           <Route path="/dashboard/annualSalesChart" element={<AnnualSalesChart/>}/>
+          <Route path="/dashboard/alerts" element={<Alerts/>}/>
+          <Route path="/dashboard/report" element={<Report/>}/>
 
           
-
+          
           {/* kavinda Routes*/}
           <Route path="/Pharmacyhome" element={<PharmacistUsersPage />} />
           <Route

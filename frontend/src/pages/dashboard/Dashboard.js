@@ -12,7 +12,8 @@ import axios from 'axios';
 import DynamicPieChart from './Charts/DynamicPieChart';
 import MostSearchinLine from './Charts/MostSearchinLine';
 import UserAmountLine from './Charts/UserAmountLine';
-
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import Report from './Report';
 
 
 
@@ -24,6 +25,7 @@ import OrderDetailsBarchart from './Charts/OrderDetailsBarchart';
 
 
 function Dashboard() {
+    
     const { logout } = useLogout()
     const { user } = useAuthContext()
     const handleClick = () => {
@@ -58,9 +60,10 @@ function Dashboard() {
     const[customerCount,setCustomercount] = useState(0);
     const[searchmeddCount,setSearchMedCount] = useState(0);
     const[orderCount,setOrderCount] = useState(0);
+    const[emailsofusers,setEmailsofusers] = useState([]);
 
 
-   
+ 
 
     useEffect(()=>{
         const fetchCount=async()=>{
@@ -118,6 +121,59 @@ function Dashboard() {
   },[]);
 
 
+  useEffect(()=>{
+    const fetchCount=async()=>{
+      const userRes=await axios.get(
+        "http://localhost:4000/getusersemail"
+      );
+      setEmailsofusers(userRes.data.data);
+
+    };
+    fetchCount();
+  },[]);
+
+
+
+  const [messages, setMessages] = useState([]);
+ const [displayedMessages, setDisplayedMessages] = useState([]);
+
+
+  
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const msgRes = await axios.get('http://localhost:4000/getmsgs');
+      
+      const messagesArray = msgRes.data.data.map((msg) => ({
+        id: msg._id,
+        message: msg.message,
+        userType: msg.userType,
+      }));
+      const newMessages = messagesArray.filter((msg) => {
+        return !displayedMessages.includes(msg.message);
+      });
+      setMessages(prevMessages => [...prevMessages, ...newMessages]);
+     setDisplayedMessages(prevDisplayedMessages => [...prevDisplayedMessages, ...newMessages.map(msg => msg.message)]);
+    };
+      
+    fetchMessages();
+  }, []);
+
+  const handleRefresh = () => {
+    setMessages([]);
+    setDisplayedMessages([]);
+  };
+
+
+  const handleDownloadPDF = async () => {
+    try {
+      const response = await axios.get('/send-pdf-email');
+      // response.data contains the data returned from the server
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
 
   return (
@@ -372,7 +428,7 @@ function Dashboard() {
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell fa-fw"></i>
                             {/* <!-- Counter - Alerts --> */}
-                            <span class="badge badge-danger badge-counter">3+</span>
+                            <span class="badge badge-danger badge-counter">1+</span>
                         </a>
                         {/* <!-- Dropdown - Alerts --> */}
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -380,13 +436,16 @@ function Dashboard() {
                             <h6 class="dropdown-header">
                                 Alerts Center
                             </h6>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="/dashboard/alerts">
                                 <div class="mr-3">
                                     <div class="icon-circle bg-primary">
                                         <i class="fas fa-file-alt text-white"></i>
                                     </div>
                                 </div>
                                 <div>
+
+    
+
                                     <div class="small text-gray-500">December 12, 2019</div>
                                     <span class="font-weight-bold">A new monthly report is ready to download!</span>
                                 </div>
@@ -394,12 +453,34 @@ function Dashboard() {
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="mr-3">
                                     <div class="icon-circle bg-success">
-                                        <i class="fas fa-donate text-white"></i>
+                                    <i class="fas fa-user text-white fa-inverse"></i>
+                    
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="small text-gray-500">December 7, 2019</div>
-                                    $290.29 has been deposited into your account!
+                                    <div class="small text-gray-500">New User Added</div>
+                                    <div>
+      <button 
+        style={{
+          backgroundColor: '#4CAF50', 
+          border: 'none', 
+          color: 'white', 
+          padding: '10px 20px', 
+          textAlign: 'center', 
+          textDecoration: 'none', 
+          display: 'inline-block', 
+          fontSize: '16px', 
+          margin: '10px', 
+          cursor: 'pointer',
+        }}
+        onClick={handleRefresh}
+      >
+        Refresh
+      </button>
+      {messages.map((msg, index) => (
+        <p key={index}>{msg.message}</p>
+      ))}
+    </div>
                                 </div>
                             </a>
                             <a class="dropdown-item d-flex align-items-center" href="#">
@@ -408,12 +489,12 @@ function Dashboard() {
                                         <i class="fas fa-exclamation-triangle text-white"></i>
                                     </div>
                                 </div>
-                                <div>
+                                {/* <div>
                                     <div class="small text-gray-500">December 2, 2019</div>
                                     Spending Alert: We've noticed unusually high spending for your account.
-                                </div>
+                                </div>  */}
                             </a>
-                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            <a class="dropdown-item text-center small text-gray-500" href="/dashboard/alerts">Show All Alerts</a>
                         </div>
                     </li>
 
@@ -527,8 +608,13 @@ function Dashboard() {
                 {/* <!-- Page Heading --> */}
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    
+                    
+                    <a href="/dashboard/report" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+<button onClick={handleDownloadPDF}>
+<a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-email fa-sm text-white-50"></i> Email Report</a></button>
                 </div>
 
                 {/* <!-- Content Row --> */}
