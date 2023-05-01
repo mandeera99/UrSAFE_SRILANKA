@@ -1,11 +1,19 @@
 require('dotenv').config()
 
+
 const express = require('express')
+const pdf = require('html-pdf')
+const nodemailer = require('nodemailer')
+
 const mongoose = require('mongoose')
+const User = require('./models/userModels');
+
+const app = express()
+
+
 const medicine = require('./routes/medicines')
 const userRoutes = require('./routes/user')
 const storemedRoutes = require('./routes/storemeds')
-const User = require('./models/userModels')
 
 
 const Searchmed = require('./models/searchMedimodel');
@@ -15,9 +23,14 @@ const Users = require('./Users');
 const Oderprogresses =require('./models/oderpregres');
 const Orders = require('./models/ordermodel');
 const bodyParser = require('body-parser');
+
 const cors = require('cors');
+
+
+
 // express app
-const app = express()
+
+
 
 // middleware
 app.use(cors());
@@ -32,6 +45,16 @@ app.use((req, res, next) => {
 
 app.use('/api/user', userRoutes)
 app.use('/api/storemeds',storemedRoutes)
+
+
+
+
+
+
+
+
+
+
 
 //search medicine
 const medicineRoutes = require('./routes/medicines');
@@ -89,6 +112,7 @@ mongoose.connect(process.env.MONGO_URI)
     console.log(error)
   })
   
+
 
 //get usercount
 app.get("/getusercount",async(req,res)=>{
@@ -410,3 +434,191 @@ app.get('/getorderamountbyyear', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+//get message of user
+// app.get("/getmsg", async (req, res) => {
+//   try {
+//     const users = await User.find({}, 'message');
+//     res.send({ status: "ok", data: users });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// })
+
+// app.get('/getmsg', async (req, res) => {
+//   try {
+//     const users = await User.find({}, { _id: 0, userType: 1, message: 1 });
+//     const messages = users.map(user => {
+//       let message;
+//       switch (user.userType) {
+//         case 'Customer':
+//           message = 'new customer registered';
+//           break;
+//         case 'Pharmacy':
+//           message = 'new pharmacy registered';
+//           break;
+//         case 'Administrator':
+//           message = 'new administrator registered';
+//           break;
+//         default:
+//           message = 'new registered';
+//           break;
+//       }
+//       return {
+//         userType: user.userType,
+//         message: message
+//       };
+//     });
+//     res.send({ status: 'ok', data: messages });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
+// app.get('/getmsglatest', async (req, res) => {
+//   try {
+//     const latestUser = await User.findOne({}, {}, { sort: { '_id' : -1 } });
+//     const message = `New ${latestUser.userType} who named ${latestUser.name} with email ${latestUser.email}  has registered.`;
+//     res.send({ status: 'ok', data: { userType: latestUser.userType, message: message } });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
+// app.get('/getmsglatest', async (req, res) => {
+//   try {
+//     const latestUser = await User.findOne({}, {}, { sort: { '_id' : -1 } });
+//     const currentDate = new Date();
+//     const message = `on ${currentDate.toLocaleDateString()} at ${currentDate.toLocaleTimeString()} \n New ${latestUser.userType} who named ${latestUser.name} with email ${latestUser.email} has registered .`;
+//     res.send({ status: 'ok', data: { userType: latestUser.userType, message: message } });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
+// app.get('/getmsgs', async (req, res) => {
+//   try {
+//     const users = await User.find({}, {}, { sort: { '_id' : -1 } });
+//     const messages = users.map(user => {
+//       const currentDate = new Date();
+//       const message = `on ${currentDate.toLocaleDateString()} at ${currentDate.toLocaleTimeString()} - New ${user.userType} who named ${user.name} with email ${user.email} has registered.`;
+//       return {
+//         userType: user.userType,
+//         message: message
+//       };
+//     });
+//     res.send({ status: 'ok', data: messages });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
+
+// app.get('/getmsgs', async (req, res) => {
+//   try {
+//     const users = await User.find({}, {}, { sort: { '_id' : -1 } });
+//     const messages = users.map(user => {
+//       const registrationTime = user._id.getTimestamp();
+//       const message = `on ${registrationTime.toLocaleDateString()} at ${registrationTime.toLocaleTimeString()} - New ${user.userType} who named ${user.name} with email ${user.email} has registered.`;
+//       return {
+//         userType: user.userType,
+//         message: message
+//       };
+//     });
+//     res.send({ status: 'ok', data: messages });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
+app.get('/getmsgs', async (req, res) => {
+  try {
+   
+
+    const users = await User.find({}, {}, { sort: { '_id' : -1 }, limit: 1  });
+    const messages = users.map(user => {
+      const registrationTime = user._id.getTimestamp();
+      let message = '';
+      if (user.userType === 'Administrator ') {
+        message = `on ${registrationTime.toLocaleDateString()} at ${registrationTime.toLocaleTimeString()} - New ${user.userType} who named ${user.name} with email ${user.email} has registered.`;
+      } else if (user.userType === 'Customer  ') {
+        message = `on ${registrationTime.toLocaleDateString()} at ${registrationTime.toLocaleTimeString()} - New ${user.userType} who named ${user.name} with email ${user.email} has registered.`;
+      }else {
+        message = `on ${registrationTime.toLocaleDateString()} at ${registrationTime.toLocaleTimeString()} - New ${user.userType} named ${user.pharmacyName} with email ${user.email} has registered.`;
+      }
+      return {
+        userType: user.userType,
+        message: message
+      };
+    });
+    res.send({ status: 'ok', data: messages });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
+
+
+//get email of user
+app.get("/getusersemail", async (req, res) => {
+  try {
+    const users = await User.find({ $or: [{ userType: "Pharmacy" }, { userType: "Administrator" }] }, 'email');
+    res.send({ status: "ok", data: users });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
+
+//email system
+
+app.get('/send-pdf-email', async (req, res) => {
+  try {
+    const users = await User.find({ userType: { $in: ['Pharmacy', 'Administrator'] } }, 'email');
+
+    const html = '<h1>Your PDF content goes here</h1>';
+
+    pdf.create(html).toBuffer(async (err, buffer) => {
+      if (err) {
+        console.error(err);
+        return res.send({ status: 'error', message: 'Failed to create PDF' });
+      }
+
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'your_email@gmail.com',
+          pass: 'your_email_password'
+        }
+      });
+
+      const mailOptions = {
+        from: 'your_email@gmail.com',
+        to: users.map(user => user.email).join(', '),
+        subject: 'PDF Report',
+        attachments: [{
+          filename: 'report.pdf',
+          content: buffer
+        }]
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error(error);
+          return res.send({ status: 'error', message: 'Failed to send email' });
+        }
+
+        console.log('Email sent:', info.response);
+        res.send({ status: 'ok', message: 'Email sent successfully' });
+      });
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ status: 'error', message: 'Server error' });
+  }
+});
+
+
+
