@@ -104,7 +104,7 @@ function App() {
           <Route path="/view-store" element={<Store />} />
           <Route path="/view-more2" element={<Expiredmedreport />} />
           <Route path="/analysis" element={<Analysis />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:email" element={<Profile />} />
 
           <Route path="/adminhome" element={<HomePage />} />
           <Route path="/product-list" element={<ProductListPage />} />

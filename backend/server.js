@@ -7,6 +7,7 @@ const userRoutes = require('./routes/user')
 const storemedRoutes = require('./routes/storemeds')
 const Medicine = require('./models/medicinemodel');
 const User = require('./models/userModels');
+const exmedRoutes = require('./routes/exmeds')
 
 const cors = require('cors');
 // express app
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 
 app.use('/api/user', userRoutes)
 app.use('/api/storemeds',storemedRoutes)
+app.use('/api/exmeds',exmedRoutes)
 
 //search medicine
 const medicineRoutes = require('./routes/medicines');

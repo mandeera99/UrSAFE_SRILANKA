@@ -27,16 +27,9 @@ const ReadOnlyRow = ({ storemed, handleEditClick}) => {
       <td>{storemed?.quantity}</td>
       <td>{storemed?.expiry_date}</td>
       <td>{storemed?.supplier_name}</td>
+      <td>{storemed?.price}</td>
       <td>
-        {/* <button
-          type="button"
-          onClick={(event) => handleEditClick(event, contact)}
-        >
-          Edit
-        </button>
-        <button type="button" onClick={() => handleDeleteClick(contact.id)}>
-          Delete
-        </button> */}
+        
         <IconButton aria-label="Edit" className='Edit'>
         <ModeEditIcon type="button"
           onClick={(event) => handleEditClick(event, storemed)}/>

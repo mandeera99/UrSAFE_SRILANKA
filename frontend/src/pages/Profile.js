@@ -1,184 +1,94 @@
-import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
-import { useState,useEffect } from "react";
-import PharmacyHead from "../components/PharmacyHead";
-import NavBar from "../components/NavBar";
-import Footer from "./Footer";
-import Aos from "aos";
-import "aos/dist/aos.css";
+import React from "react";
+import { useEffect, useState, Fragment } from "react";
+import { useParams } from "react-router-dom";
+import "../css/profile.css";
+import storeimg from "../Images/storeimg.jpg";
+import Button from 'react-bootstrap/Button';
 
-const Profile = () => {
-    useEffect(() => {
-        Aos.init({ duration: 300});
-      });
-  const [validated, setValidated] = useState(false);
 
-  const onChange = () => {
-    const password = document.querySelector("input[name=password]");
-    const confirm = document.querySelector("input[name=confirmPassword]");
-    if (confirm.value === password.value) {
-      confirm.setCustomValidity("");
-    } else {
-      confirm.setCustomValidity("Passwords do not match");
-    }
-  };
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+function Profile() {
+  const { email } = useParams();
+  const [user, setUser] = useState(null);
+  // const {users, dispatch} = useUsersContext()
 
-    setValidated(true);
-  };
+  useEffect(() => {
+
+    // fetch the details of the customer
+    fetch(`/api/profileofuser/${email}`)
+      .then((response) => response.json())
+      .then((data) => setUser(data));
+
+
+  }, [email]);
+
+
+
+
   return (
-    <div data-aos="zoom-in-up">
-    <PharmacyHead/>
-    <NavBar/>
-    <div>
-      <Row className="mt-3 justify-content-md-center">
-        <Col md={6}>
-          <h3>Change your profile</h3>
-          <div>&ensp;&ensp;</div>
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicLastName">
-              <Form.Label>Pharmacy Name</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                defaultValue="SCL Pharmacy"
-                name="pharmacyname"
-              />
-              <Form.Control.Feedback type="invalid">
-                Please enter your Pharmacy name
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="validationCustom01">
-              <Form.Label>Your name</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                defaultValue="John"
-                name="name"
-              />
-              <Form.Control.Feedback type="invalid">
-                Please enter a name
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicLastName">
-              <Form.Label>Your last name</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                defaultValue="Doe"
-                name="lastName"
-              />
-              <Form.Control.Feedback type="invalid">
-                Please enter your last name
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                disabled
-                value="john@doe.com   if you want to change email, remove account and create new one with new email address"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPhone">
-              <Form.Label>Phone number</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your phone number"
-                defaultValue=""
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicAddress">
-              <Form.Label>Address</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your street name and house number"
-                defaultValue=""
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCountry">
-              <Form.Label>Country</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your country"
-                defaultValue=""
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicZip">
-              <Form.Label>Zip Code</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your Zip code"
-                defaultValue=""
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCity">
-              <Form.Label>City</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your city"
-                defaultValue=""
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicState">
-              <Form.Label>State</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your state"
-                defaultValue=""
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                name="password"
-                required
-                type="password"
-                placeholder="Password"
-                minLength={6}
-                onChange={onChange}
-              />
-              <Form.Control.Feedback type="invalid">
-                Please anter a valid password
-              </Form.Control.Feedback>
-              <Form.Text className="text-muted">
-                Password should have at least 6 characters
-              </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPasswordRepeat">
-              <Form.Label>Repeat Password</Form.Label>
-              <Form.Control
-                name="confirmPassword"
-                required
-                type="password"
-                placeholder="Repeat Password"
-                minLength={6}
-                onChange={onChange}
-              />
-              <Form.Control.Feedback type="invalid">
-                Both passwords should match
-              </Form.Control.Feedback>
-            </Form.Group>
+    <Fragment>
+      <div>
+        {user ? (
+          <div>
 
-            <Button variant="primary" type="submit">Update</Button>
-            <Alert show={true} variant="danger">
-              User with that email already exists!
-            </Alert>
-            <Alert show={true} variant="info">
-              User updated
-            </Alert>
-          </Form>
-        </Col>
-      </Row>
+            <div className="container">
+
+              <b>  <h2 className="text-center" style={{ color: 'black' }}>{user.pharmacyName}'s Profile</h2></b>
+            </div>
+
+
+            <div className="container rounded bg-white mt-5 mb-5">
+              <div className="row">
+                <div className="col-md-3 border-right">
+                  <div className="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" height="150px" src={storeimg} /><span class="font-weight-bold">{user.pharmacyName}</span><span class="text-black-50">{user.email}</span><span> </span></div>
+                </div>
+                <div className="col-md-5 border-right">
+                  <div className="p-3 py-5">
+                    <div className="d-flex justify-content-between align-items-center mb-3">
+                      <h4 className="text-right">Profile Settings</h4>
+                    </div>
+                    <div className="row mt-1">
+                      <div className="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder={user.pharmacyName} value={user.pharmacyName} /></div>
+                    </div>
+                    <div className="row mt-2">
+                      <div className="col-md-6"><label className="labels">Name</label><input type="text" class="form-control" placeholder={user.name} value={user.name} /></div>
+
+                    </div>
+                    <div className="row mt-3">
+                      <div className="col-md-12"><label className="labels">Email</label><input type="text" class="form-control" placeholder={user.email} value={user.email} /></div>
+                      <div className="col-md-12"><label className="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value={user.phoneNumber} /></div>
+                      <div className="col-md-12"><label className="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value={user.address} /></div>
+                      <div className="col-md-12"><label className="labels">Address Line 2</label><input type="text" class="form-control" placeholder="enter address line 2" value={user.address} /></div>
+                      <div className="col-md-12"><label className="labels">Province</label><input type="text" class="form-control" placeholder={user.state} value={user.state} /></div>
+                      <div className="col-md-12"><label className="labels">City</label><input type="text" class="form-control" placeholder={user.city} value={user.city} /></div>
+
+                    </div>
+
+                    <div>
+                      <p>&ensp;&ensp;</p>
+                      <Button variant="primary" >Edit</Button>{' '}
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        ) : (
+          <p>Loading...</p>
+        )}
+
+
       </div>
-      
-      </div>
+    </Fragment >
+
+
+
   );
-};
 
+}
 export default Profile;
-
