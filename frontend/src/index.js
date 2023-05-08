@@ -8,13 +8,17 @@ import 'bootstrap';
 import { WorkoutsContextProvider } from './context/WorkoutContext';
 import { AuthContextProvider } from './context/AuthContext';
 import { StoremedsContextProvider } from './context/StoremedsContext';
+import { ChakraProvider, theme } from '@chakra-ui/react'
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
       <WorkoutsContextProvider>
         <StoremedsContextProvider>
-          <App />
+         {/* <ChakraProvider theme={theme}> */}
+            <App />
+          {/* </ChakraProvider> */}
         </StoremedsContextProvider>
       </WorkoutsContextProvider>
     </AuthContextProvider>

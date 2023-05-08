@@ -21,6 +21,9 @@ import Expiredmedreport from './pages/Expiredmedreport';
 import Analysis from './pages/Analysis';
 import Profile from './pages/Profile';
 import Profileofuser from './pages/Profileofuser';
+import Location from './pages/Location';
+import { ChatEngine } from 'react-chat-engine';
+
 //admin
 import HomePage from './pages/HomePage';
 import ProductListPage from './pages/ProductListPage';
@@ -103,13 +106,24 @@ function App() {
           <Route path="/medicines/:id" element={<Pharmacy/>}/>
           <Route path="/user-profile" element={<UserProfilePage />} />
           <Route path="/profileofuser/:email" element={<Profileofuser />} />
-
-
+          <Route path="/location" element={<Location/>} />
+          <Route path="/Dashboard/adminchat" element={<ChatEngine 
+                                            height='100vh'
+                                            projectID='50859311-2fa3-4a32-bd97-b6d0c9fc3476'
+                                            userName='nomashi'
+                                            userSecret='nomashi123@' 
+                                          />} />
+       <Route path="/chat" element={<ChatEngine 
+                                            height='100vh'
+                                            projectID='50859311-2fa3-4a32-bd97-b6d0c9fc3476'
+                                            userName='alice'
+                                            userSecret='Qwert123@' 
+                                          />} />
 
           <Route path="/view-store" element={<Store />} />
           <Route path="/view-more2" element={<Expiredmedreport />} />
           <Route path="/analysis" element={<Analysis />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:email" element={<Profile />} />
 
           <Route path="/adminhome" element={<HomePage />} />
           <Route path="/product-list" element={<ProductListPage />} />

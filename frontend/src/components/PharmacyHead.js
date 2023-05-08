@@ -3,28 +3,28 @@ import { Fragment } from "react";
 
 
 
-function PharmacyHead () {
+function PharmacyHead() {
     return (
         <Fragment>
-           
+
             {/*  <!-- Top Header Start -->  */}
-            <header class="top-header top-header-bgp">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-8 col-md-8">
-                            <div class="header-left">
-                                <div class="header-left-card">
+            <header className="top-header top-header-bgp">
+                <div className="container">
+                    <div className="row align-items-center">
+                        <div className="col-lg-8 col-md-8">
+                            <div className="header-left">
+                                <div className="header-left-card">
                                     <ul>
                                         <li>
-                                            <div class="head-icon">
-                                                <i class='bx bx-mail-send'></i>
+                                            <div className="head-icon">
+                                                <i className='bx bx-mail-send'></i>
                                             </div>
                                             <a href="mailto:nomashikarunadasa@gmail.com">hello@UrSAFE.com</a>
                                         </li>
 
                                         <li>
-                                            <div class="head-icon">
-                                                <i class='bx bx-time-five'></i>
+                                            <div className="head-icon">
+                                                <i className='bx bx-time-five'></i>
                                             </div>
                                             <a href="#">Mon - Sun: 24/7</a>
                                         </li>
@@ -33,33 +33,33 @@ function PharmacyHead () {
                             </div>
                         </div>
 
-                        <div class="col-lg-4 col-md-4">
-                            <div class="header-right">
-                                <div class="top-social-link">
+                        <div className="col-lg-4 col-md-4">
+                            <div className="header-right">
+                                <div className="top-social-link">
                                     <ul>
                                         <li>
                                             <a href="#" target="_blank">
-                                                <i class='bx bxl-facebook'></i>
+                                                <i className='bx bxl-facebook'></i>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#" target="_blank">
-                                                <i class='bx bxl-twitter'></i>
+                                                <i className='bx bxl-twitter'></i>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#" target="_blank">
-                                                <i class='bx bxl-youtube'></i>
+                                                <i className='bx bxl-youtube'></i>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#" target="_blank">
-                                                <i class='bx bxl-instagram'></i>
+                                                <i className='bx bxl-instagram'></i>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#" target="_blank">
-                                                <i class='bx bxl-google-plus'></i>
+                                                <i className='bx bxl-google-plus'></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -69,9 +69,9 @@ function PharmacyHead () {
                     </div>
                 </div>
             </header>
-            </Fragment>
-                    
-                    )
-                }
-                
-                export default PharmacyHead;
+        </Fragment>
+
+    )
+}
+
+export default PharmacyHead;

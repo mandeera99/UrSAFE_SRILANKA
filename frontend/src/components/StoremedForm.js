@@ -12,11 +12,12 @@ const [brand, setBrand] = useState('')
 const [quantity, setQuantity] = useState('')
 const [expiry_date, setExpiry_date] = useState('')
 const [supplier_name, setSupplier_name] = useState('')
+const [price, setPrice] = useState('')
 
 const handleSubmit = async (e) => {
     e.preventDefault()
     
-    const storemed = {lot_no,medicine_name,brand,quantity,expiry_date,supplier_name}
+    const storemed = {lot_no,medicine_name,brand,quantity,expiry_date,supplier_name, price}
 
     const response = await fetch('/api/storemeds',{
       method: 'POST',
@@ -34,6 +35,7 @@ const handleSubmit = async (e) => {
          setQuantity('')
          setExpiry_date('')
          setSupplier_name('')
+         setPrice('')
         //setStoremeds(json)
         dispatch({type: 'CREATE_STOREMED', payload: json})
 
@@ -47,23 +49,20 @@ const handleSubmit = async (e) => {
       <form onSubmit={handleSubmit}>
         <input
           type="number"
-          // name="lot_no"
           value={lot_no}
           required="required"
-          placeholder="Enter lot no..."
+          placeholder="Enter lot no"
           onChange={(e) => setLot_no(e.target.value)}
         />
         <input
           type="text"
-          // name="medicine_name"
           value={medicine_name}
           required="required"
-          placeholder="Enter medicine name..."
+          placeholder="Enter medicine name"
           onChange={(e) => setMedicine_name(e.target.value)}
         />
         <input
           type="text"
-          // name="brand"
           value={brand}
           required="required"
           placeholder="Enter brand name"
@@ -71,7 +70,6 @@ const handleSubmit = async (e) => {
         />
         <input
           type="number"
-          // name="quantity"
           value={quantity}
           required="required"
           placeholder="Enter quantity"
@@ -79,7 +77,6 @@ const handleSubmit = async (e) => {
         />
         <input
           type="date"
-          // name="expiry_date"
           value={expiry_date}
           required="required"
           placeholder="Enter expiry date"
@@ -87,11 +84,17 @@ const handleSubmit = async (e) => {
         />
         <input
           type="text"
-          // name="supplier_name"
           value={supplier_name}
           required="required"
           placeholder="Enter supplier name"
           onChange={(e) => setSupplier_name(e.target.value)}
+        />
+        <input
+          type="number"
+          value={price}
+          required="required"
+          placeholder="Enter the price"
+          onChange={(e) => setPrice(e.target.value)}
         />
         
         

@@ -20,19 +20,20 @@ function Pharmacy() {
 
 
   const showLocation = () => {
-    setShowMap(true);
-    // create a new Leaflet map object
-    const map = L.map("map", {
-      center: [7.8731, 80.7718],
-      zoom: 13
-    });
-    // add a tile layer to display the map
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "Map data &copy; OpenStreetMap contributors",
-      maxZoom: 18
-    }).addTo(map);
-    // add a marker to the map
-    L.marker([7.8731, 80.7718]).addTo(map);
+
+    // setShowMap(true);
+    // // create a new Leaflet map object
+    // const map = L.map("map", {
+    //   center: [7.8731, 80.7718],
+    //   zoom: 13
+    // });
+    // // add a tile layer to display the map
+    // L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    //   attribution: "Map data &copy; OpenStreetMap contributors",
+    //   maxZoom: 18
+    // }).addTo(map);
+    // // add a marker to the map
+    // L.marker([7.8731, 80.7718]).addTo(map);
   };
 
 
@@ -82,8 +83,10 @@ function Pharmacy() {
                       <p>A simple discription about our pharmacy:{_id.pharmacy_des}
                       </p><p>
                         <h6><b>you searched for medicine : <span>{_id.medi_name}</span> it is available in the :<span>{_id.pharmacy_name}</span> pharmacy :<span>{_id.qty}</span> quantities</b></h6></p>
-                      <div><button class="btn btn-primary btn-lg me-2">Add to Cart</button><button class="btn btn-primary btn-lg" onClick={showLocation}>
-                        <i class="bi bi-geo-fill"></i> Location
+                      <div><button class="btn btn-primary btn-lg me-2">Add to Cart</button><button class="btn" >
+                        {/* <i class="bi bi-geo-fill" href="/location"></i> Location */}
+                        <a href="/location" className="btn btn-primary btn-lg">
+                                                <i className=""></i>Location</a>
                         {showMap && (
                           <div id="map" style={{ height: "500px" }}></div>
                         )}

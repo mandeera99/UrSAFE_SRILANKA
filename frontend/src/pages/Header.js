@@ -176,8 +176,8 @@ function Header() {
 
 
                                     <li className="nav-item">
-                                        <a href="contact.html" className="nav-link">
-                                            Contact
+                                        <a href="/chat" className="nav-link">
+                                            Chat
                                         </a>
                                     </li>
                                 </ul>

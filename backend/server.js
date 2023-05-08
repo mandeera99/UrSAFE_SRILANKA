@@ -23,6 +23,8 @@ const Users = require('./Users');
 const Oderprogresses =require('./models/oderpregres');
 const Orders = require('./models/ordermodel');
 const bodyParser = require('body-parser');
+const User = require('./models/userModels');
+const exmedRoutes = require('./routes/exmeds')
 
 const cors = require('cors');
 
@@ -45,6 +47,7 @@ app.use((req, res, next) => {
 
 app.use('/api/user', userRoutes)
 app.use('/api/storemeds',storemedRoutes)
+app.use('/api/exmeds',exmedRoutes)
 
 
 
