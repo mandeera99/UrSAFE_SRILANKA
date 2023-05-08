@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import AdminAnalyticsPage from '../admin/AdminAnalyticsPage';
 import AdminOrdersPage from '../admin/AdminOrdersPage';
 import LineCharts from './LineCharts';
@@ -8,12 +8,24 @@ import LinerProgress from './LinerProgress';
 import Review from './Review';
 import './Dashboard.css';
 import SkillBar from './SkillBar';
+import axios from 'axios';
+import DynamicPieChart from './Charts/DynamicPieChart';
+import MostSearchinLine from './Charts/MostSearchinLine';
+import UserAmountLine from './Charts/UserAmountLine';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import Report from './Report';
+
+
 
 import { useLogout } from '../../hooks/useLogout'
 import { useAuthContext } from '../../hooks/useAuthContext'
+import MostsearchedMedicine from './Charts/MostsearchedMedicine';
+import OrderDetailsBarchart from './Charts/OrderDetailsBarchart';
+
 
 
 function Dashboard() {
+    
     const { logout } = useLogout()
     const { user } = useAuthContext()
     const handleClick = () => {
@@ -42,8 +54,132 @@ function Dashboard() {
             setStyle("navbar-nav bg-gradient-primary sidebar sidebar-dark accordion");
         }
     };
+    
+    const[phamacyCount,setparmacycount] = useState(0);
+    const[adminCount,setAdmincount] = useState(0);
+    const[customerCount,setCustomercount] = useState(0);
+    const[searchmeddCount,setSearchMedCount] = useState(0);
+    const[orderCount,setOrderCount] = useState(0);
+    const[emailsofusers,setEmailsofusers] = useState([]);
+
+
+ 
+
+    useEffect(()=>{
+        const fetchCount=async()=>{
+          const userRes=await axios.get(
+            "http://localhost:4000/getordercount"
+          );
+          setOrderCount(userRes.data.data);
+    
+        };
+        fetchCount();
+      },[]);
+
+  useEffect(()=>{
+    const fetchCount=async()=>{
+      const userRes=await axios.get(
+        "http://localhost:4000/getPharmacycountVal"
+      );
+      setparmacycount(userRes.data.data);
+
+    };
+    fetchCount();
+  },[]);
+
+  useEffect(()=>{
+    const fetchCount=async()=>{
+      const userRes=await axios.get(
+        "http://localhost:4000/getAdmincountVal"
+      );
+      setAdmincount(userRes.data.data);
+
+    };
+    fetchCount();
+  },[]);
+
+  useEffect(()=>{
+    const fetchCount=async()=>{
+      const userRes=await axios.get(
+        "http://localhost:4000/getCustomercountVal"
+      );
+      setCustomercount(userRes.data.data);
+
+    };
+    fetchCount();
+  },[]);
+
+  useEffect(()=>{
+    const fetchCount=async()=>{
+      const userRes=await axios.get(
+        "http://localhost:4000/getSearchcountVal"
+      );
+      setSearchMedCount(userRes.data.data);
+
+    };
+    fetchCount();
+  },[]);
+
+
+  useEffect(()=>{
+    const fetchCount=async()=>{
+      const userRes=await axios.get(
+        "http://localhost:4000/getusersemail"
+      );
+      setEmailsofusers(userRes.data.data);
+
+    };
+    fetchCount();
+  },[]);
+
+
+
+  const [messages, setMessages] = useState([]);
+ const [displayedMessages, setDisplayedMessages] = useState([]);
+
+
+  
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const msgRes = await axios.get('http://localhost:4000/getmsgs');
+      
+      const messagesArray = msgRes.data.data.map((msg) => ({
+        id: msg._id,
+        message: msg.message,
+        userType: msg.userType,
+      }));
+      const newMessages = messagesArray.filter((msg) => {
+        return !displayedMessages.includes(msg.message);
+      });
+      setMessages(prevMessages => [...prevMessages, ...newMessages]);
+     setDisplayedMessages(prevDisplayedMessages => [...prevDisplayedMessages, ...newMessages.map(msg => msg.message)]);
+    };
+      
+    fetchMessages();
+  }, []);
+
+  const handleRefresh = () => {
+    setMessages([]);
+    setDisplayedMessages([]);
+  };
+
+
+  const handleDownloadPDF = async () => {
+    try {
+      const response = await axios.get('/send-pdf-email');
+      // response.data contains the data returned from the server
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 
   return (
+
+   
+    
     <div>
       
 <body id="page-top">
@@ -292,7 +428,7 @@ function Dashboard() {
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell fa-fw"></i>
                             {/* <!-- Counter - Alerts --> */}
-                            <span class="badge badge-danger badge-counter">3+</span>
+                            <span class="badge badge-danger badge-counter">1+</span>
                         </a>
                         {/* <!-- Dropdown - Alerts --> */}
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -300,13 +436,16 @@ function Dashboard() {
                             <h6 class="dropdown-header">
                                 Alerts Center
                             </h6>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="/dashboard/alerts">
                                 <div class="mr-3">
                                     <div class="icon-circle bg-primary">
                                         <i class="fas fa-file-alt text-white"></i>
                                     </div>
                                 </div>
                                 <div>
+
+    
+
                                     <div class="small text-gray-500">December 12, 2019</div>
                                     <span class="font-weight-bold">A new monthly report is ready to download!</span>
                                 </div>
@@ -314,12 +453,34 @@ function Dashboard() {
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="mr-3">
                                     <div class="icon-circle bg-success">
-                                        <i class="fas fa-donate text-white"></i>
+                                    <i class="fas fa-user text-white fa-inverse"></i>
+                    
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="small text-gray-500">December 7, 2019</div>
-                                    $290.29 has been deposited into your account!
+                                    <div class="small text-gray-500">New User Added</div>
+                                    <div>
+      <button 
+        style={{
+          backgroundColor: '#4CAF50', 
+          border: 'none', 
+          color: 'white', 
+          padding: '10px 20px', 
+          textAlign: 'center', 
+          textDecoration: 'none', 
+          display: 'inline-block', 
+          fontSize: '16px', 
+          margin: '10px', 
+          cursor: 'pointer',
+        }}
+        onClick={handleRefresh}
+      >
+        Refresh
+      </button>
+      {messages.map((msg, index) => (
+        <p key={index}>{msg.message}</p>
+      ))}
+    </div>
                                 </div>
                             </a>
                             <a class="dropdown-item d-flex align-items-center" href="#">
@@ -328,12 +489,12 @@ function Dashboard() {
                                         <i class="fas fa-exclamation-triangle text-white"></i>
                                     </div>
                                 </div>
-                                <div>
+                                {/* <div>
                                     <div class="small text-gray-500">December 2, 2019</div>
                                     Spending Alert: We've noticed unusually high spending for your account.
-                                </div>
+                                </div>  */}
                             </a>
-                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            <a class="dropdown-item text-center small text-gray-500" href="/dashboard/alerts">Show All Alerts</a>
                         </div>
                     </li>
 
@@ -447,8 +608,13 @@ function Dashboard() {
                 {/* <!-- Page Heading --> */}
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    
+                    
+                    <a href="/dashboard/report" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+<button onClick={handleDownloadPDF}>
+<a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-email fa-sm text-white-50"></i> Email Report</a></button>
                 </div>
 
                 {/* <!-- Content Row --> */}
@@ -461,11 +627,11 @@ function Dashboard() {
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            Earnings (Monthly)</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                            PHARMACY ACCOUNTS </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{phamacyCount}</div>
                                     </div>
                                     <div class="col-auto">
-                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    <i class="fas fa-prescription-bottle-alt fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>
@@ -479,11 +645,11 @@ function Dashboard() {
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                            Earnings (Annual)</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                            CUSTOMERS ACCOUNT </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{customerCount}</div>
                                     </div>
                                     <div class="col-auto">
-                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                    <i class="fas fa-user fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>
@@ -496,20 +662,20 @@ function Dashboard() {
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Search Amount
                                         </div>
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                        {/* <div class="row no-gutters align-items-center"> */}
+                                            {/* <div class="col-auto"> */}
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{searchmeddCount}</div>
                                             </div>
-                                            <div class="col">
+                                            {/* <div class="col">
                                                 <div class="progress progress-sm mr-2">
                                                     <div class="progress-bar bg-info a1" role="progressbar"
                                                         ></div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                            </div> */}
+                                        {/* </div> */}
+                                    {/* </div> */}
                                     <div class="col-auto">
                                         <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
                                     </div>
@@ -525,8 +691,8 @@ function Dashboard() {
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            Pending Requests</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                            Placed Orders</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{orderCount}</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -548,7 +714,7 @@ function Dashboard() {
                             {/* <!-- Card Header - Dropdown --> */}
                             <div
                                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Most Searched Medicines</h6>
                                 <div class="dropdown no-arrow">
                                     <a class="dropdown-toggle" href="/dashboard/graph" role="button" id="dropdownMenuLink"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -569,7 +735,8 @@ function Dashboard() {
                                 {/* <div class="chart-area">
                                     <canvas id="myAreaChart"><AdminAnalyticsPage/></canvas>
                                 </div> */}
-                                <div class="col-xl-10 col-lg-7"><center><BarCharts/></center></div>
+                                <div class="col-xl-10 col-lg-7"><center><MostsearchedMedicine/></center></div>
+                                {/* MostsearchedMedicine */}
                             </div>
                         </div>
                     </div></center>
@@ -581,7 +748,7 @@ function Dashboard() {
                             {/* <!-- Card Header - Dropdown --> */}
                             <div
                                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Users With Our System</h6>
                                 <div class="dropdown no-arrow">
                                     <a class="dropdown-toggle" href="/dashboard/graph" role="button" id="dropdownMenuLink"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -602,7 +769,40 @@ function Dashboard() {
                                 {/* <div class="chart-area">
                                     <canvas id="myAreaChart"><AdminAnalyticsPage/></canvas>
                                 </div> */}
-                                <div class="col-xl-10 col-lg-7"><center><LineCharts/></center></div>
+                                <div class="col-xl-10 col-lg-7"><center><UserAmountLine/></center></div>
+                            </div>
+                        </div>
+                    </div></center>
+
+                    <center>
+                    
+                    <div class="col-xl-12 col-lg-8" >
+                        <div class="card shadow mb-4">
+                            {/* <!-- Card Header - Dropdown --> */}
+                            <div
+                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Medicine Orders Overview</h6>
+                                <div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="/dashboard/graph" role="button" id="dropdownMenuLink"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                        aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-header">Dropdown Header:</div>
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <!-- Card Body --> */}
+                            <div class="card-body">
+                                {/* <div class="chart-area">
+                                    <canvas id="myAreaChart"><AdminAnalyticsPage/></canvas>
+                                </div> */}
+                                <div class="col-xl-10 col-lg-7"><center><OrderDetailsBarchart/></center></div>
                             </div>
                         </div>
                     </div></center>
@@ -667,7 +867,7 @@ function Dashboard() {
                                 <h6 class="m-0 font-weight-bold text-primary">Application Usability</h6>
                             </div>
                             
-                            <center><PieCharts/></center>
+                            <center><DynamicPieChart/></center>
                         </div>
                     </div>
 

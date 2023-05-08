@@ -1,10 +1,14 @@
 import React from 'react'
-
+import ThreewayLineChart from './Charts/ThreewayLineChart';
+import OrdersBar from './Charts/OrdersBar';
+import MostSearchinLine from './Charts/MostSearchinLine';
+import SalesPieChart from './Charts/SalesPieChart';
+import AnnualSalesChart from './Charts/AnnualSalesChart';
 
 function Charts() {
   return (
     <div>
-<body id="page-top">
+<div id="page-top">
 
 {/* <!-- Page Wrapper --> */}
 <div id="wrapper">
@@ -33,30 +37,24 @@ function Charts() {
                 {/* <!-- Content Row --> */}
                 <div class="row">
 
-                    <div class="col-xl-8 col-lg-7">
+                    <div class="col-12">
 
                         {/* <!-- Area Chart --> */}
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Income progress</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-area">
-                                    <canvas id="myAreaChart"></canvas>
-                                </div>
-                                <hr/>
-                                
-                            </div>
-                        </div>
-
+                     
                         {/* <!-- Bar Chart --> */}
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Most Searched Medicine Over Year</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Annual Orders Progress Chart</h6>
                             </div>
                             <div class="card-body">
-                                <div class="chart-bar">
-                                    <canvas id="myBarChart"></canvas>
+                                <div >
+                                    {/* <center><ThreewayLineChart/></center> */}
+
+                                    <center><div style={{ width: '400px', height: '400px', margin: '0 auto' }}>
+                                    <ThreewayLineChart/>
+                                </div></center>
+                                    
+                                    
                                 </div>
                                 <hr/>
                                
@@ -64,23 +62,120 @@ function Charts() {
                         </div>
 
                     </div>
+                    
 
                     {/* <!-- Donut Chart --> */}
-                    <div class="col-xl-4 col-lg-5">
+                    <div class="col-12">
                         <div class="card shadow mb-4">
                             {/* <!-- Card Header - Dropdown --> */}
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">completed Orders over the Year</h6>
+                                <h6 class="m-0 font-weight-bold text-primary"> Month Orders Status Chart </h6>
                             </div>
                             {/* <!-- Card Body --> */}
-                            <div class="card-body">
-                                <div class="chart-pie pt-4">
-                                    <canvas id="myPieChart"></canvas>
+                            <div class="card-body" style={{ padding: "0  250px" }}>
+                                <div >
+                                    
+                                    {/* <center><OrdersBar/></center> */}
+
+                                    <center><div style={{ width: '400px', height: '400px', margin: '0 auto' }}>
+                                    <OrdersBar/>
+                                </div></center>
                                 </div>
                                 <hr/>
                                
                             </div>
                         </div>
+                    </div>
+
+                    <div class="col-6">
+
+                        {/* <!-- Area Chart --> */}
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Most Searched Medicines Chart</h6>
+                            </div>
+                            <div class="card-body">
+                                <div >
+                                    
+                                    {/* <center><MostSearchinLine/></center> */}
+
+                                    <center><div style={{ width: '400px', height: '400px', margin: '0 auto' }}>
+                                    <MostSearchinLine/>
+                                </div></center>
+                                </div>
+                                <hr/>
+                                
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                    
+
+                
+                    <div class="col-6">
+
+                    {/* <!-- Area Chart --> */}
+                    <div class="card shadow mb-4">
+                     <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Sales Pie Chart</h6>
+                    </div>
+                    <div class="card-body" >
+                     <div >
+            
+                     {/* <center><SalesPieChart/></center> */}
+                     <center><div style={{ width: '350px', height: '350px', margin: '0 auto' }}>
+                     <SalesPieChart/>
+                         </div></center>
+                    </div>
+                    <hr/>
+        
+                     </div>
+                    </div>
+
+                    
+
+
+</div>
+
+
+
+                    <div class="col-12">
+
+                        {/* <!-- Area Chart --> */}
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Annual Sales Count Chart</h6>
+                            </div>
+                            <div class="card-body" style={{ padding: "0  250px" }}>
+                                <div >
+                                
+                                    
+                                    <center><div style={{ width: '500px', height: '500px', margin: '0 auto' }}>
+                                <AnnualSalesChart/>
+                                </div></center>
+                                </div>
+                                <hr/>
+                                
+                            </div>
+                        </div>
+
+                        {/* <!-- Bar Chart --> */}
+                        {/* <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Income progress</h6>
+                            </div>
+                            <div class="card-body">
+                                <div>
+                                    
+                                    
+                                </div>
+                                <hr/>
+                                
+                            </div>
+                        </div> */}
+
+
                     </div>
                 </div>
 
@@ -133,8 +228,9 @@ function Charts() {
 
 
 
-</body>
+
     </div>
+</div>
   )
 }
 

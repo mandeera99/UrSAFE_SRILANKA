@@ -45,7 +45,25 @@ import BarCharts from './pages/dashboard/BarCharts';
 import SkillBar from './pages/dashboard/SkillBar';
 import AdminChatRoomComponent from './pages/admin/AdminChatRoomComponent';
 import AdminAnalyticsPage from './pages/admin/AdminAnalyticsPage';
-
+import AdminTable from "./pages/dashboard/Charts/adminTable";
+import DynamicPieChart from "./pages/dashboard/Charts/DynamicPieChart";
+import DynamicBarChart from "./pages/dashboard/Charts/DynamicBarChart";
+import UserAmountLine from "./pages/dashboard/Charts/UserAmountLine";
+import MostsearchedMedicine from "./pages/dashboard/Charts/MostsearchedMedicine";
+import MostSearchinLine from "./pages/dashboard/Charts/MostSearchinLine";
+import MediUserBarchart from "./pages/dashboard/Charts/MediUserBarchart";
+import SalesPieChart from "./pages/dashboard/Charts/SalesPieChart";
+import OrderDetailsBarchart from "./pages/dashboard/Charts/OrderDetailsBarchart";
+import ThreewayLineChart from "./pages/dashboard/Charts/ThreewayLineChart";
+import TwowayBarChart from "./pages/dashboard/Charts/TwowayBarChart";
+import UserGainBarChart from "./pages/dashboard/Charts/UserGainBarChart";
+import UserLostBarChart from "./pages/dashboard/Charts/UserLostBarChart";
+import PharmacyDetails from "./pages/dashboard/Charts/PharmacyDetails";
+import CustomerDetailsTable from "./pages/dashboard/Charts/CustomerDetailsTable"
+import OrdersBar from "./pages/dashboard/Charts/OrdersBar";
+import AnnualSalesChart from "./pages/dashboard/Charts/AnnualSalesChart";
+import Alerts from "./pages/dashboard/Alerts";
+import Report from './pages/dashboard/Report';
 //user components
 import UserCartDetailsPage from './pages/user/UserCartDetailsPage';
 import UserOrderPage from './pages/user/UserOrderPage';
@@ -160,6 +178,28 @@ function App() {
             path="/admin/order-details"
             element={<AdminOrderDetailsPage />}
           />
+
+<Route path="/dashboard/admintable" element={<AdminTable  />}/>
+          <Route path="/dashboard/dypiechart" element={< DynamicPieChart/>}/>
+          <Route path="/dashboard/dybarchart" element={< DynamicBarChart/>}/>
+          <Route path="/dashboard/userAmount" element={<UserAmountLine  />}/>
+          <Route path="/dashboard/mostsearchedMedicine" element={< MostsearchedMedicine/>}/>
+          <Route path="/dashboard/mostSearchinLine" element={< MostSearchinLine/>}/>
+          <Route path="/dashboard/mediuserbarchart" element={< MediUserBarchart/>}/>
+          <Route path="/dashboard/salepiechart" element={<SalesPieChart />}/>
+          <Route path="/dashboard/orderdetailbarchart" element={< OrderDetailsBarchart/>}/>
+          <Route path="/dashboard/threewaylinechart" element={<ThreewayLineChart />}/>
+          <Route path="/dashboard/twowaybarchart" element={<TwowayBarChart  />}/>
+          <Route path="/dashboard/barchartgain" element={<UserGainBarChart  />}/>
+          <Route path="/dashboard/barchartlost" element={<UserLostBarChart  />}/>
+          <Route path="/dashboard/PharmacyTable" element={<PharmacyDetails  />}/>
+          <Route path="/dashboard/customerTable" element={<CustomerDetailsTable  />}/>
+          <Route path="/dashboard/ordersBar" element={<OrdersBar  />}/>
+          <Route path="/dashboard/annualSalesChart" element={<AnnualSalesChart/>}/>
+          <Route path="/dashboard/alerts" element={<Alerts/>}/>
+          <Route path="/dashboard/report" element={<Report/>}/>
+
+
 
           {/* kavinda Routes*/}
           <Route path="/Pharmacyhome" element={<PharmacistUsersPage />} />

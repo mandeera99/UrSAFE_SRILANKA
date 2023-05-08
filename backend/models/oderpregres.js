@@ -16,4 +16,4 @@ const OderprogressSchema = new mongoose.Schema({
   // Add more fields as necessary
 });
 
-module.exports = mongoose.model('oderprogresses', MedicineSchema);
+module.exports = mongoose.model('oderprogresses', OderprogressSchema);
