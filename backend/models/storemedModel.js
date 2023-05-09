@@ -7,7 +7,7 @@ const storemedSchema = new Schema({
     lot_no: {
         type: Number,
         required: true,
-        unique: true
+        // unique: true
     },
     medicine_name: {
         type: String,
@@ -35,6 +35,11 @@ const storemedSchema = new Schema({
         type: Number,
         required: true
 
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        // required: true
     }
 }, { timestamps: true })
 

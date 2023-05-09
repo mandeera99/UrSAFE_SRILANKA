@@ -5,9 +5,9 @@ import EditableRow from "../components/EditableRow"
 import StoremedForm from "../components/StoremedForm";
 import Table from 'react-bootstrap/Table';
 import { useStoremedsContext } from '../hooks/useStoremedsContext'
-
+import { useAuthContext } from '../hooks/useAuthContext'
 const Stable = () => {
-
+  const {user} = useAuthContext();
   const { storemeds, dispatch } = useStoremedsContext()
 
 
@@ -15,7 +15,7 @@ const Stable = () => {
   //display all connecting backened to front
   useEffect(() => {
     const fetchStoremeds = async () => {
-      const response = await fetch('/api/storemeds')
+      const response = await fetch(`/api/storemeds/${user?.id}`)
       const json = await response.json()
 
       if (response.ok) {
@@ -23,7 +23,7 @@ const Stable = () => {
       }
     }
     fetchStoremeds()
-  }, [dispatch])
+  }, [dispatch,user])
 
   //Add medicine connecting backend to frontend
 

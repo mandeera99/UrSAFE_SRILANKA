@@ -12,15 +12,18 @@ import NavBar from "../components/NavBar";
 import Footer from "./Footer";
 import axios from 'axios'
 import { useStoremedsContext } from "../hooks/useStoremedsContext";
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const Expiredmedreport = ({storemed}) => {
+    const {user} = useAuthContext();
+    const {dispatch} = useStoremedsContext()
 
     const [storemeds, setStoremeds] = useState([]);
 
     useEffect(() => {
       
        const fetchExpiremeds = async () => {
-        const response = await fetch('http://localhost:4000/api/exmeds/expiring/')
+        const response = await fetch(`http://localhost:4000/api/exmeds/expiring/${user.id}`)
         const json = await response.json()
 
         if (response.ok){
@@ -28,13 +31,13 @@ const Expiredmedreport = ({storemed}) => {
         }
     }
  fetchExpiremeds()
-}, []);
+}, [user,storemeds]);
     useEffect(() => {
         Aos.init({ duration: 300 });
     }, {});
 
 
-    const {dispatch} = useStoremedsContext()
+  
     const handleDeleteClick = async (id) =>{
       const response = await fetch(`/api/storemeds/${id}`, {
         method: 'DELETE'

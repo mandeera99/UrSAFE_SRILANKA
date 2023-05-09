@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useStoremedsContext } from "../hooks/useStoremedsContext";
 import Button from "react-bootstrap/Button";
-
+import { useAuthContext } from '../hooks/useAuthContext'
+import { useParams } from "react-router-dom";
 
 const StoremedForm = () => {
 const { dispatch } = useStoremedsContext()
+const {user} = useAuthContext();
+  // console.log(user)
 
 const [lot_no, setLot_no] = useState('')
 const [medicine_name, setMedicine_name] = useState('')
@@ -17,7 +20,7 @@ const [price, setPrice] = useState('')
 const handleSubmit = async (e) => {
     e.preventDefault()
     
-    const storemed = {lot_no,medicine_name,brand,quantity,expiry_date,supplier_name, price}
+    const storemed = {lot_no,medicine_name,brand,quantity,expiry_date,supplier_name, price, user:user.id}
 
     const response = await fetch('/api/storemeds',{
       method: 'POST',
@@ -27,7 +30,7 @@ const handleSubmit = async (e) => {
       }
       })
       const json = await response.json()
-      if(response.ok){
+      if (response.ok) {
 
          setLot_no('')
          setMedicine_name('')
