@@ -26,12 +26,12 @@
 .progress-bar{
     background:#847d7d;
     width:300px;
-    height: 10px;
+    height: 20px;
     border-radius: 5px;
 
 }
 .progress-bar div{
-    height: 10px;
+    height: 20px;
     border-radius: 5px;
     width:0%;
 }
@@ -42,7 +42,7 @@
     border-radius: 50%;
     background: #222;
     float: right;
-    margin-top: -15px;
+    margin-top: -10px;
     margin-right: -20px;
     font-size: 10px;
     color: #fff;
@@ -52,21 +52,21 @@
 }
 
 .html{
-    background-color: #07115c;
-    animation: html 10s linear forwards;
+    background-color: #f8e71c  ;
+    animation: html 2s linear forwards;
     
 }
 
 .css{
-    background-color: #cddc39;
-    animation: css 10s linear forwards;
+    background-color: #4CAF50;
+    animation: css 5s linear forwards;
 }
 .javaScript{
-    background-color: #00bcd4;
-    animation: javaScript 10s linear forwards;
+    background-color: #2196F3 ;
+    animation: javaScript 7s linear forwards;
 }
 .python{
-    background-color: #b50c5e;
+    background-color:#8B008B ;
     animation: python 10s linear forwards;
   
 }
@@ -75,16 +75,16 @@
 
 
 .html span{
-    border: 1px solid #07115c ;
+    border: 1px solid #FFDAB9 ;
 }
 .css span{
-    border: 1px solid #cddc39 ;
+    border: 1px solid #C8E6C9 ;
 }
 .javaScript span{
-    border: 1px solid #00bcd4 ;
+    border: 1px solid #BBDEFB ;
 }
 .python span{
-    border: 1px solid #b50c5e ;
+    border: 1px solid #E6E6FA ;
 }
 
 
