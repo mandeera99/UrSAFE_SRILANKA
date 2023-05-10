@@ -10,10 +10,10 @@ const {
 const router = express.Router();
 
 //GET all medicines
-router.get('/', getStoremeds)
+router.get('/:userId', getStoremeds)
 
-//GET a single medicine
-router.post('/getStoremed', getStoremed)
+//GET a search medicine
+router.post('/getStoremed/:userId', getStoremed)
 
 //POST a new medicine
 router.post('/', createStoremed)

@@ -1,4 +1,5 @@
 const User = require('../models/userModels')
+const Storemed = require('../models/storemedModel')
 const jwt = require('jsonwebtoken')
 
 const createToken = (_id) => {
@@ -23,7 +24,7 @@ const loginUser = async (req, res) => {
     if (user.userType === 'Administrator') {
       res.json({ email, token, userType: 'Administrator' });
     } else if (user.userType === 'Pharmacy') {
-      res.json({ email, token, pharmacyName:user.pharmacyName, userType: 'Pharmacy', });
+      res.json({ email, token, pharmacyName:user.pharmacyName, userType: 'Pharmacy', id: user._id });
     } else if (user.userType === 'Customer') {
       res.json({ email, token, userType: 'Customer' });
     } else {
@@ -41,6 +42,16 @@ const signupUser = async (req, res) => {
 
   try {
     const user = await User.signup(email,password,userType,name,address,phoneNumber,pharmacyName,zipCode,state,city)
+
+    // Create storemed object
+    const storemeds = await Storemed.create({
+      user: user._id,
+      medicines: []
+    });
+
+    // Assign storemed object to user
+    user.storemeds = storemeds._id;
+    await user.save();
 
     // create a token
     const token = createToken(user._id)

@@ -14,7 +14,7 @@ export const storemedsReducer = (state, action) => {
       }
     case 'DELETE_STOREMED':
       return {
-        storemeds: state.storemeds.filter((s) =>s._id !== action.payload._id)
+        storemeds: state?.storemeds?.filter((s) =>s._id !== action.payload._id)
       }
     case 'UPDATE_STOREMED':
       return  {
@@ -22,8 +22,7 @@ export const storemedsReducer = (state, action) => {
       s._id === action.payload._id ? action.payload : s
       )
       }
-        // storemeds: storemeds.map((s) => s._id === action.payload._id ? action.payload : s
-        // );
+        
       
       
      
@@ -37,7 +36,7 @@ export const StoremedsContextProvider = ({ children }) => {
     storemeds: null
   })
   
-  // dispatch({type: 'SET_STOREMEDS', payload: [{}, {}]})
+ 
 
   return (
     <StoremedsContext.Provider value={{...state, dispatch }}>

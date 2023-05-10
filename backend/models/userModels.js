@@ -46,6 +46,10 @@ const userSchema = new Schema({
   city: {
     type: String,
     required: false
+  },
+  storemeds: {
+    type: Schema.Types.ObjectId,
+    ref: 'storemed'
   }
 })
 
@@ -85,7 +89,8 @@ userSchema.statics.signup = async function (email,password,userType,name,address
     pharmacyName,
     zipCode,
     state,
-    city
+    city,
+    storemeds
   })
   return user
 }

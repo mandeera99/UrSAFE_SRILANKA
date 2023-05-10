@@ -46,38 +46,6 @@ function NavBar() {
               <Link1>Home<Span className="Ho"></Span></Link1>
             </Nav.Link>
 
-            {/* <Nav.Link style={{ color: "black" }} href="about">
-                <Link1>About<Span className="Ho"></Span></Link1>
-                </Nav.Link>
-             
-                <NavDropdown color="black" title="PAGES" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Page1</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                Page2
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3"></NavDropdown.Item>
-              <NavDropdown.Divider /> */}
-            {/* <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item> */}
-            {/* </NavDropdown> */}
-
-            {/* <Nav.Link style={{ color: "black" }} href="/pages">
-                <Link1>Pages<Span className="Ho"></Span></Link1>
-                </Nav.Link> */}
-
-            {/* <NavDropdown title="SERVICES" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Service1</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                Service2
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3"></NavDropdown.Item>
-              <NavDropdown.Divider /> */}
-            {/* <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item> */}
-            {/* </NavDropdown> */}
-
             <Nav.Link style={{ color: "black" }} href={`/view-store`}>
               <Link1>Store <span className="Ho"></span></Link1>
             </Nav.Link>

@@ -1,9 +1,8 @@
 import { useState,useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import storeimg from "../Images/storeimg.jpg";
 import "../css/store.css";
-
-//import Image from "react-bootstrap/Image";
 
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -16,13 +15,12 @@ import Table from "react-bootstrap/Table"
 import Stable from "./Stable";
 import NavBar from "../components/NavBar";
 import PharmacyHead from "../components/PharmacyHead";
-import Footer from "./Footer";
+//import Footer from "./Footer";
 import { useAuthContext } from '../hooks/useAuthContext'
 
 const Store = () => {
 
     const { user } = useAuthContext();
-    // const [user, setUser] = useState(null);
 
     const [searchTerm, setSearchTerm] = useState('');
     const [meds, setMeds] = useState([]);
@@ -34,11 +32,11 @@ const Store = () => {
     };
 
     const handleSearch = async (e) => {
-        // searchFormeds
+        
         e.preventDefault();
         const medicine_name = searchTerm;
         const formData = { medicine_name };
-        const response = await fetch("http://localhost:4000/api/storemeds/getStoremed", {
+        const response = await fetch(`http://localhost:4000/api/storemeds/getStoremed/${user.id}`, {
             method: "POST",
             body: JSON.stringify(formData),
             headers: {
@@ -47,7 +45,7 @@ const Store = () => {
         });
         const data = await response.json();
         setFilteredData(data);
-        console.log(filteredData);
+        // console.log(filteredData);
 
 
 
@@ -105,7 +103,7 @@ const Store = () => {
                                     <th>Quantity</th>
                                     <th>Expiry Date</th>
                                     <th>Supplier Name</th>
-                                    {/* <th>Edit</th> */}
+                                    
                                 </tr>
                             </thead>
 
