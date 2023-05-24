@@ -26,6 +26,8 @@ function Home() {
         try {
             const response = await axios.get('/api/searchHistory/getsearch-history', { params: { email } });
             setSearchHistory(response.data);
+            console.log('Response Data:', response.data);
+
         } catch (error) {
             console.error('Error fetching search history:', error);
         }

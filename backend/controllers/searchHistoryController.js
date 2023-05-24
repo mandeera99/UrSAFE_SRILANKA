@@ -21,7 +21,7 @@ exports.saveSearchHistory = async (req, res) => {
 }
 
   exports.getSearchHistory = async (req, res) => {
-    const { email } = req.body;
+    const { email } = req.query;
   
     try {
       // Fetch search history for the specified email
