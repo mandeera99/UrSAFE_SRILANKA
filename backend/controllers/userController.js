@@ -36,32 +36,33 @@ const loginUser = async (req, res) => {
   }
 }
 
-// signup a user
 const signupUser = async (req, res) => {
-  const { email,password,userType,name,address,phoneNumber,pharmacyName,zipCode,state,city } = req.body
+  const { email, password, userType, name, address, phoneNumber, pharmacyName, zipCode, state, city } = req.body;
 
   try {
-    const user = await User.signup(email,password,userType,name,address,phoneNumber,pharmacyName,zipCode,state,city)
-
-    // // Create storemed object
-    // const storemeds = await Storemed.create({
-    //   user: user._id,
-    //   medicines: []
-    // });
-
-    // // Assign storemed object to user
-    // user.storemeds = storemeds._id;
-    // await user.save();
-
+    const user = await User.signup(email, password, userType, name, address, phoneNumber, pharmacyName, zipCode, state, city);
 
     // create a token
-    const token = createToken(user._id)
+    const token = createToken(user._id);
 
-    res.status(200).json({ email, token })
+    // Check user type and send appropriate response
+    console.log(user);
+    console.log(userType);
+
+    if (userType === 'Administrator') {
+      res.json({ email, token, userType: 'Administrator' });
+    } else if (userType === 'Pharmacy') {
+      res.json({ email, token, pharmacyName: user.pharmacyName, userType: 'Pharmacy', id: user._id });
+    } else if (userType === 'Customer') {
+      res.json({ email, token, userType: 'Customer' });
+    } else {
+      res.status(400).json({ error: 'User type not found' });
+    }
   } catch (error) {
-    res.status(400).json({ error: error.message })
+    res.status(400).json({ error: error.message });
   }
 }
+
 
 // // Function to get user details
 // const getUserDetails = async (req, res) => {

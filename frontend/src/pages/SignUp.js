@@ -7,7 +7,7 @@ import axios from 'axios'
 const userTypes = [
     { value: 'Customer', label: 'Customer' },
     { value: 'Pharmacy', label: 'Pharmacy' },
-    { value: 'Administrator', label: 'Administrator' },
+    // { value: 'Administrator', label: 'Administrator' },
 ];
 
 const SignUp = () => {
@@ -31,27 +31,33 @@ const SignUp = () => {
             alert('Passwords do not match. Please try again.'); 
             return;
         }
+   
+      
         await signup(email, password, userType.value, name, address, phoneNumber, pharmacyName, zipCode, state, city);
         try {
-
-
-            const { data } = await axios.post('/api/user/signup', { email, password })
-            localStorage.setItem('token', data.token)
-      
-            if (data.userType === 'Administrator') {
-              window.location.href = '/Dashboard'
-            } else if(data.userType === 'Pharmacy') {
-              window.location.href = '/Pharmacyhome'
-            }else {
-              window.location.href = '/'
-            }
-      
-      
+            console.log('User Type:', userType.value); 
+           
+          window.alert("Account creation successful");
+          switch (userType.value) {
+            case 'Administrator':
+              window.location.href = '/Dashboard';
+              break;
+            case 'Pharmacy':
+              window.location.href = '/Pharmacyhome';
+              break;
+            default:
+              window.location.href = '/';
+              break;
+          }
 
 
         } catch (error) {
-            console.error(error)
-        }
+            console.error('Error:', error);
+            if (error.response) {
+              console.log('Response Data:', error.response.data);
+              console.log('Response Status:', error.response.status);
+            }
+          }
     };
     const handleUserTypeChange = (selectedOption) => {
         setUserType(selectedOption);
@@ -225,7 +231,7 @@ const SignUp = () => {
 
                                                             </div>
                                                         )}
-                                                        {userType?.value === 'Administrator' && (
+                                                        {/* {userType?.value === 'Administrator' && (
                                                             <div>
 
                                                                 <div class="col-12">
@@ -238,7 +244,7 @@ const SignUp = () => {
 
 
                                                             </div>
-                                                        )}
+                                                        )} */}
                                                     </div>
                                                 </div>
 
