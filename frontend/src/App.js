@@ -84,7 +84,7 @@ import PharmacistUsersPage from './pages/Pharmacist/PharmacistUsersPage';
 import PharmacistOrdersPage from './pages/Pharmacist/PharmacistOrdersPage';
 import PharmacistOrderDetailsPage from './pages/Pharmacist/PharmacistOrderDetailsPage';
 import PharmacistAnalyticsPage from './pages/Pharmacist/PharmacistAnalyticsPage';
-
+import UpdateProfile from './pages/updateProfile'
 function App() {
   return (
     <div>
@@ -212,6 +212,8 @@ function App() {
             path="/Pharmacist/order-details"
             element={<PharmacistOrderDetailsPage />}
           />
+
+          <Route path="/updateProfile" element={<updateProfile />}/>
         </Routes>
       </Router>
       <Footer />

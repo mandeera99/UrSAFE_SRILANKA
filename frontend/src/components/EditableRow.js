@@ -9,14 +9,11 @@ const EditableRow = ({
   handleEditFormChange,
   handleCancelClick,
   handleEditFormSubmit,
-  rowData,
-  onUpdate
+
 }) => {
   
   
-   const handleSaveClick = () => {
-  
-   };
+   
 
   
   return (

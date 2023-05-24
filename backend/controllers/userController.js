@@ -43,7 +43,7 @@ const signupUser = async (req, res) => {
   try {
     const user = await User.signup(email,password,userType,name,address,phoneNumber,pharmacyName,zipCode,state,city)
 
-    
+
 
     // create a token
     const token = createToken(user._id)

@@ -18,6 +18,7 @@ import PharmacyHead from "../components/PharmacyHead";
 //import Footer from "./Footer";
 import { useAuthContext } from '../hooks/useAuthContext'
 
+
 const Store = () => {
 
     const { user } = useAuthContext();
@@ -129,6 +130,8 @@ const Store = () => {
                 </div>
                 <div >
                     <Stable />
+                    
+
                 </div>
 
             </Container>

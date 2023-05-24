@@ -8,8 +8,8 @@ const PharmacistLinksComponent = () => {
         <LinkContainer to="/admin/orders">
           <Nav.Link>Orders</Nav.Link>
         </LinkContainer>
-        <LinkContainer to="/admin/products">
-          <Nav.Link>Products</Nav.Link>
+        <LinkContainer to="/view-more2">
+          <Nav.Link>Expiry Checker</Nav.Link>
         </LinkContainer>
         <LinkContainer to="/admin/users">
           <Nav.Link>Users</Nav.Link>

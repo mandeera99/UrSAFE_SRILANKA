@@ -47,10 +47,7 @@ const userSchema = new Schema({
     type: String,
     required: false
   },
-  // storemeds: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'storemed'
-  // }
+ 
 })
 
 // static signup method
