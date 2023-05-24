@@ -8,7 +8,7 @@ const storemedRoutes = require('./routes/storemeds')
 const Medicine = require('./models/medicinemodel');
 const User = require('./models/userModels');
 const exmedRoutes = require('./routes/exmeds')
-
+const searchHistoryRoute = require('./routes/searchHistory');
 
 const pdf = require('html-pdf')
 const nodemailer = require('nodemailer')
@@ -35,6 +35,8 @@ app.use((req, res, next) => {
 app.use('/api/user', userRoutes)
 app.use('/api/storemeds',storemedRoutes)
 app.use('/api/exmeds',exmedRoutes)
+// Add the search history route
+app.use('/api/searchHistory', searchHistoryRoute);
 
 //search medicine
 const medicineRoutes = require('./routes/medicines');
@@ -92,17 +94,19 @@ mongoose.connect(process.env.MONGO_URI)
     console.log(error)
   })
 
-//get usercount
-app.get("/getusercount",async(req,res)=>{
-  try{
+// //get usercount
+const userRoute = require('./routes/adminroute');
+app.use('/', userRoute);
+// app.get("/getusercount",async(req,res)=>{
+//   try{
 
-    const userCount=await User.find().count();
-    res.send({status:"ok",data:userCount});
-  }catch(error){
+//     const userCount=await User.find().count();
+//     res.send({status:"ok",data:userCount});
+//   }catch(error){
 
-    console.log(error);
-  }
-})
+//     console.log(error);
+//   }
+// })
 
 //get medicinecount
 app.get("/getmedicinecount",async(req,res)=>{

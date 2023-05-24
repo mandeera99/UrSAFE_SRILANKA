@@ -177,7 +177,7 @@ const SignUp = () => {
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <input class="form-control" type="text" onChange={(e) => setState(e.target.value)}
-                                                                            value={state} name="state" placeholder="state" />
+                                                                            value={state} name="province" placeholder="province" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
@@ -204,16 +204,16 @@ const SignUp = () => {
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="col-12">
+                                                                {/* <div class="col-12">
                                                                     <div class="form-group">
                                                                         <input class="form-control" type="text" onChange={(e) => setZipCode(e.target.value)}
                                                                             value={zipCode} name="zipCode" placeholder="zipCode" />
                                                                     </div>
-                                                                </div>
+                                                                </div> */}
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <input class="form-control" type="text" onChange={(e) => setState(e.target.value)}
-                                                                            value={state} name="state" placeholder="state" />
+                                                                            value={state} name="province" placeholder="province" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">

@@ -85,11 +85,9 @@ function Pharmacy() {
                         <h6><b>you searched for medicine : <span>{_id.medi_name}</span> it is available in the :<span>{_id.pharmacy_name}</span> pharmacy :<span>{_id.qty}</span> quantities</b></h6></p>
                       <div><button class="btn btn-primary btn-lg me-2">Add to Cart</button><button class="btn" >
                         {/* <i class="bi bi-geo-fill" href="/location"></i> Location */}
-                        <a href="/location" className="btn btn-primary btn-lg">
+                        <a className="btn btn-primary btn-lg" href={`https://www.google.com/maps/search/${_id.pharmacy_name} ${_id.location}`}target="_blank" rel="noreferrer">
                                                 <i className=""></i>Location</a>
-                        {showMap && (
-                          <div id="map" style={{ height: "500px" }}></div>
-                        )}
+
                       </button>
                       </div>
 

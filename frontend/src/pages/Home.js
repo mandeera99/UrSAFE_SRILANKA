@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from 'react-router-dom';
 import { Fragment } from "react";
 import Footer from "./Footer";
@@ -8,26 +8,88 @@ import { Search } from '@mui/icons-material';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
+import axios from 'axios';
+import '../App.css';
+import { AuthContext } from '../context/AuthContext';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+const data = [
+    { name: 'New Lanka', price: 12 },
+    { name: 'Isuru', price: 12.9 }
+];
 
-
-
+// import MostsearchedMedicine from './dashboard/Charts/MostsearchedMedicine';
 function Home() {
+
+    const [searchHistory, setSearchHistory] = useState([]);
+
+      const handleViewSearchHistory = async () => {
+        try {
+          const response = await axios.get('/api/searchHistory/getsearch-history', { params: { email } });
+          setSearchHistory(response.data);
+        } catch (error) {
+          console.error('Error fetching search history:', error);
+        }
+      };
+    // const handleViewSearchHistory = async () => {
+    //     try {
+    //       const response = await axios.get('/api/searchHistory/getsearch-history');
+    //       setSearchHistory(response.data);
+    //     } catch (error) {
+    //       console.error('Error fetching search history:', error);
+    //     }
+    //   };
+      
+ 
+  console.log()
+
     const [searchTerm, setSearchTerm] = useState('');
     const [pharmacies, setPharmacies] = useState([]);
     const [tabIndex, setTabIndex] = useState(0);
-   
+    const { user } = useContext(AuthContext);
+  const { email } = user || {};
+  //const email = user && user.email ? user.email : 'no user';
+
+ 
+
+    const [medicines, setMedicines] = useState([]);
+
+    // Extracting price and pharmacy name from the API response
+    const formattedData = data.map((pharmacy) => ({
+        name: pharmacy.pharmacy_name,
+        price: pharmacy.price
+    }));
+    // const handleSearch2 = async () => {
+    //     const response = await fetch(`http://localhost:4000/api/medicines?q=${searchTerm}`);
+    //     const data = await response.json();
+    //     // Extracting price and pharmacy name from the API response
+    //     const formattedData = data.map((pharmacy) => ({
+    //         name: pharmacy.pharmacy_name,
+    //         price: pharmacy.price
+    //     }));
+    //     setPharmacies(formattedData);
+    // }
+    // console.log(email);
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
     }
+    const saveSearchHistory = async () => {
+        try {
+            await axios.post('/api/searchHistory/search-history', { email, searchTerm });
+            console.log('Search history saved successfully!');
+        } catch (error) {
+            console.error('Error saving search history:', error);
+        }
+    };
 
     const handleSearch = async () => {
         const response = await fetch(`http://localhost:4000/api/medicines?q=${searchTerm}`);
         const data = await response.json();
+
         setPharmacies(data);
     }
     // useEffect(() => {
     //     const ctx = document.getElementById('myChart').getContext('2d');
-    
+
     //     const chartData = {
     //       labels: pharmacies.map((pharmacy) => pharmacy.pharmacy_name),
     //       datasets: [
@@ -40,7 +102,7 @@ function Home() {
     //         },
     //       ],
     //     };
-    
+
     //     new Chart(ctx, {
     //       type: 'bar',
     //       data: chartData,
@@ -66,7 +128,7 @@ function Home() {
 
         <Fragment fluid><Header />
             <div fluid>
-
+                {/* <MostsearchedMedicine/> */}
                 {/* <!-- Pre Loader --> */}
                 {/*      <div className="preloader">
             <div className="d-table">
@@ -88,6 +150,22 @@ function Home() {
                         <div className="row">
                             <div className="col-lg-7">
                                 <div className="banner-content">
+                                <div className="search-history-button-container">
+                                      {email && (
+        <button className="btn btn-outline-primary" onClick={handleViewSearchHistory}>View Search History</button>
+      ) }</div>
+       <div>
+      
+      {searchHistory.length > 0 && (
+        
+        <ul>
+            <h2>Search History</h2>
+          {searchHistory.map((item) => (
+            <li key={item._id}>{item.searchTerm}</li>
+          ))}
+        </ul>
+      ) }
+    </div>
                                     <span><h3>THE BEST WAY TO SEARCH MEDICINE</h3></span>
                                     <div className="input-group">
                                         <input type="search" className="form-control rounded" placeholder="Enter your medicine" aria-label="Search" aria-describedby="search-addon" value={searchTerm} onChange={handleInputChange} />
@@ -98,7 +176,11 @@ function Home() {
                                                 ))}
                                             </select>
                                         )} */}
-                                        <button type="button" className="btn btn-outline-primary" onClick={handleSearch} >Search <SearchIcon /></button>
+                                        <button type="button" className="btn btn-outline-primary" onClick={() => {
+                                            handleSearch();
+                                            saveSearchHistory();
+                                            
+                                        }}  >Search <SearchIcon /></button>
 
 
                                     </div>
@@ -159,68 +241,82 @@ function Home() {
                                         </table>
                                     )} */}
 
-        {pharmacies.length > 0 && (
-            <Tabs selectedIndex={tabIndex} onSelect={index => setTabIndex(index)}>
-            <TabList>
-              <Tab>Table</Tab>
-              <Tab>Graph</Tab>
-            </TabList>
-      
-            <TabPanel>
-          <table border="1">
-            <thead>
-              <tr>
-                <th>Pharmacy Name</th>
-                <th>City</th>
-                <th>Price</th>
-                <th>Details</th>
-                <th>Location</th>
-              </tr>
-            </thead>
-            <tbody>
-              {pharmacies.map((pharmacy) => (
-                <tr key={pharmacy.id}>
-                  <td>{pharmacy.pharmacy_name}</td>
-                  <td>{pharmacy.city}</td>
-                  <td>${pharmacy.price}</td>
-                  <td>
-                    <div className="buttons">
-                      <button className="view-btn">
-                        <Link to={`/medicines/${pharmacy._id}`}>View Details</Link>
-                      </button>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="buttons">
-                      <button className="location-btn">
-                        <a href={`https://www.google.com/maps/search/${pharmacy.location}`} target="_blank" rel="noreferrer">Location</a>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        
-      </TabPanel>
 
-      <TabPanel>
-      <div>
-        <div className="card shadow mb-4">
-          <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Pharmacy names according to prices</h6>
-          </div>
-          <div className="card-body">
-            <div className="chart-bar">
-              <canvas id="myBarChart"></canvas>
-            </div>
-            <hr /></div></div></div>
 
-                    
-        <h2>Graph</h2>
-      </TabPanel>
-    </Tabs>
-)}
+
+                                    {pharmacies.length > 0 && (
+                                        <Tabs selectedIndex={tabIndex} onSelect={index => setTabIndex(index)}>
+                                            <TabList>
+                                                <Tab>Table</Tab>
+                                                <Tab>Graph</Tab>
+                                            </TabList>
+
+                                            <TabPanel>
+                                                <table border="1px solid black">
+                                                    <thead>
+                                                        <tr>
+                                                            <th className="cell-with-border">Pharmacy Name</th>
+                                                            <th className="cell-with-border">City</th>
+                                                            <th className="cell-with-border">Price</th>
+                                                            <th className="cell-with-border">Details</th>
+                                                            <th className="cell-with-border">Location</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {pharmacies.map((pharmacy) => (
+                                                            <tr key={pharmacy.id}>
+                                                                <td className="cell-with-border">{pharmacy.pharmacy_name}</td>
+                                                                <td className="cell-with-border">{pharmacy.city}</td>
+                                                                <td className="cell-with-border">{pharmacy.price}</td>
+                                                                <td className="cell-with-border">
+                                                                    <div className="buttons">
+                                                                        <button className="view-btn">
+                                                                            <Link to={`/medicines/${pharmacy._id}`}>View Details</Link>
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
+                                                                <td className="cell-with-border">
+                                                                    <div className="buttons">
+                                                                        <button className="location-btn">
+                                                                            <a href={`https://www.google.com/maps/search/${pharmacy.pharmacy_name} ${pharmacy.location}`} target="_blank" rel="noreferrer">Location</a>
+
+                                                                            {/* <a href={`https://www.google.com/maps/search/${pharmacy.location}`} target="_blank" rel="noreferrer">Location</a> */}
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
+
+                                            </TabPanel>
+
+                                            <TabPanel>
+                                                <div>
+                                                    <div className="card shadow mb-4">
+                                                        <div className="card-header py-3">
+                                                            <h6 className="m-0 font-weight-bold text-primary">Pharmacy names according to prices</h6>
+                                                        </div>
+                                                        <div className="card-body">
+                                                            <div className="chart-bar">
+                                                                <BarChart width={500} height={300} data={data}>
+                                                                    <CartesianGrid strokeDasharray="3 3" />
+                                                                    <XAxis dataKey="name" />
+                                                                    <YAxis />
+                                                                    <Tooltip />
+                                                                    <Legend />
+                                                                    <Bar dataKey="price" fill="#8884d8" />
+                                                                </BarChart>
+                                                                <canvas id="myBarChart"></canvas>
+
+                                                            </div>
+                                                            <hr /></div></div></div>
+
+
+                                                <h2>Graph</h2>
+                                            </TabPanel>
+                                        </Tabs>
+                                    )}
                                     <h1 className="text-black">UrSAFE SriLanka</h1>
                                 </div>
                             </div>

@@ -16,6 +16,7 @@ const Login = () => {
 
         await login(email, password)
     } */
+    //console.log(email);
     const handleSubmit = async (e) => {
         e.preventDefault()
         await login(email, password)
