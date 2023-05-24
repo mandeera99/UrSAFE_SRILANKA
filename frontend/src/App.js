@@ -108,13 +108,13 @@ function App() {
           <Route path="/location" element={<Location/>} />
           <Route path="/Dashboard/adminchat" element={<ChatEngine 
                                             height='100vh'
-                                            projectID='50859311-2fa3-4a32-bd97-b6d0c9fc3476'
+                                            projectID='7f2e3b60-a8b9-4d84-b4e8-2add86ea6b05'
                                             userName='nomashi'
                                             userSecret='nomashi123@' 
                                           />} />
        <Route path="/chat" element={<ChatEngine 
                                             height='100vh'
-                                            projectID='50859311-2fa3-4a32-bd97-b6d0c9fc3476'
+                                            projectID='7f2e3b60-a8b9-4d84-b4e8-2add86ea6b05'
                                             userName='alice'
                                             userSecret='Qwert123@' 
                                           />} />

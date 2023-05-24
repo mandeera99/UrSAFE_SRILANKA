@@ -132,7 +132,7 @@ function AdminChatPage() {
     useEffect(() => {
         axios.get('https://api.chatengine.io/chats/', {
             headers: {
-                "Project-ID": "50859311-2fa3-4a32-bd97-b6d0c9fc3476",
+                "Project-ID": "7f2e3b60-a8b9-4d84-b4e8-2add86ea6b05",
                 "User-Name": "nomashi",
                 "User-Secret": "nomashi123@"
             }
@@ -151,7 +151,7 @@ function AdminChatPage() {
         try {
             const response = await axios.post('https://api.chatengine.io/chats/', {}, {
                 headers: {
-                    "Project-ID": "50859311-2fa3-4a32-bd97-b6d0c9fc3476",
+                    "Project-ID": "7f2e3b60-a8b9-4d84-b4e8-2add86ea6b05",
                     "User-Name": "nomashi",
                     "User-Secret": "nomashi123@"
                 }
@@ -163,7 +163,7 @@ function AdminChatPage() {
             };
             await axios.post(`https://api.chatengine.io/chats/${chatID}/people/`, data, {
                 headers: {
-                    "Project-ID": "50859311-2fa3-4a32-bd97-b6d0c9fc3476",
+                    "Project-ID": "7f2e3b60-a8b9-4d84-b4e8-2add86ea6b05",
                     "User-Name": "nomashi",
                     "User-Secret": "nomashi123@"
                 }
@@ -183,7 +183,7 @@ function AdminChatPage() {
     const handleSend = (event) => {
         event.preventDefault();
         sendMessage(chatData[0].id, { text: message }, {
-            "Project-ID": "50859311-2fa3-4a32-bd97-b6d0c9fc3476",
+            "Project-ID": "7f2e3b60-a8b9-4d84-b4e8-2add86ea6b05",
             "User-Name": "nomashi",
             "User-Secret": "nomashi123@"
         }, () => {
@@ -203,7 +203,7 @@ function AdminChatPage() {
           ) : (
             <ChatEngine
               height="100vh"
-              projectID="50859311-2fa3-4a32-bd97-b6d0c9fc3476"
+              projectID="7f2e3b60-a8b9-4d84-b4e8-2add86ea6b05"
               userName="nomashi" // Change to your admin username
               userSecret="nomashi123@" // Change to your admin user secret
               onConnect={() => {
