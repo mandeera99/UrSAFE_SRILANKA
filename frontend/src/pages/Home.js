@@ -22,14 +22,14 @@ function Home() {
 
     const [searchHistory, setSearchHistory] = useState([]);
 
-      const handleViewSearchHistory = async () => {
+    const handleViewSearchHistory = async () => {
         try {
-          const response = await axios.get('/api/searchHistory/getsearch-history', { params: { email } });
-          setSearchHistory(response.data);
+            const response = await axios.get('/api/searchHistory/getsearch-history', { params: { email } });
+            setSearchHistory(response.data);
         } catch (error) {
-          console.error('Error fetching search history:', error);
+            console.error('Error fetching search history:', error);
         }
-      };
+    };
     // const handleViewSearchHistory = async () => {
     //     try {
     //       const response = await axios.get('/api/searchHistory/getsearch-history');
@@ -38,18 +38,18 @@ function Home() {
     //       console.error('Error fetching search history:', error);
     //     }
     //   };
-      
- 
-  console.log()
+
+
+    console.log()
 
     const [searchTerm, setSearchTerm] = useState('');
     const [pharmacies, setPharmacies] = useState([]);
     const [tabIndex, setTabIndex] = useState(0);
     const { user } = useContext(AuthContext);
-  const { email } = user || {};
-  //const email = user && user.email ? user.email : 'no user';
+    const { email } = user || {};
+    //const email = user && user.email ? user.email : 'no user';
 
- 
+
 
     const [medicines, setMedicines] = useState([]);
 
@@ -84,9 +84,13 @@ function Home() {
     const handleSearch = async () => {
         const response = await fetch(`http://localhost:4000/api/medicines?q=${searchTerm}`);
         const data = await response.json();
-
+        console.log(data);
         setPharmacies(data);
+        console.log(pharmacies);
     }
+    useEffect(() => {
+        console.log(pharmacies); // Log the updated pharmacies state
+    }, [pharmacies]);
     // useEffect(() => {
     //     const ctx = document.getElementById('myChart').getContext('2d');
 
@@ -150,22 +154,22 @@ function Home() {
                         <div className="row">
                             <div className="col-lg-7">
                                 <div className="banner-content">
-                                <div className="search-history-button-container">
-                                      {email && (
-        <button className="btn btn-outline-primary" onClick={handleViewSearchHistory}>View Search History</button>
-      ) }</div>
-       <div>
-      
-      {searchHistory.length > 0 && (
-        
-        <ul>
-            <h2>Search History</h2>
-          {searchHistory.map((item) => (
-            <li key={item._id}>{item.searchTerm}</li>
-          ))}
-        </ul>
-      ) }
-    </div>
+                                    <div className="search-history-button-container">
+                                        {email && (
+                                            <button className="btn btn-outline-primary" onClick={handleViewSearchHistory}>View Search History</button>
+                                        )}</div>
+                                    <div>
+
+                                        {searchHistory.length > 0 && (
+
+                                            <ul>
+                                                <h2>Search History</h2>
+                                                {searchHistory.map((item) => (
+                                                    <li key={item._id}>{item.searchTerm}</li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </div>
                                     <span><h3>THE BEST WAY TO SEARCH MEDICINE</h3></span>
                                     <div className="input-group">
                                         <input type="search" className="form-control rounded" placeholder="Enter your medicine" aria-label="Search" aria-describedby="search-addon" value={searchTerm} onChange={handleInputChange} />
@@ -179,7 +183,7 @@ function Home() {
                                         <button type="button" className="btn btn-outline-primary" onClick={() => {
                                             handleSearch();
                                             saveSearchHistory();
-                                            
+
                                         }}  >Search <SearchIcon /></button>
 
 
@@ -241,9 +245,6 @@ function Home() {
                                         </table>
                                     )} */}
 
-
-
-
                                     {pharmacies.length > 0 && (
                                         <Tabs selectedIndex={tabIndex} onSelect={index => setTabIndex(index)}>
                                             <TabList>
@@ -263,31 +264,56 @@ function Home() {
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        {pharmacies.map((pharmacy) => (
-                                                            <tr key={pharmacy.id}>
-                                                                <td className="cell-with-border">{pharmacy.pharmacy_name}</td>
-                                                                <td className="cell-with-border">{pharmacy.city}</td>
-                                                                <td className="cell-with-border">{pharmacy.price}</td>
-                                                                <td className="cell-with-border">
-                                                                    <div className="buttons">
-                                                                        <button className="view-btn">
-                                                                            <Link to={`/medicines/${pharmacy._id}`}>View Details</Link>
-                                                                        </button>
-                                                                    </div>
-                                                                </td>
-                                                                <td className="cell-with-border">
-                                                                    <div className="buttons">
-                                                                        <button className="location-btn">
-                                                                            <a href={`https://www.google.com/maps/search/${pharmacy.pharmacy_name} ${pharmacy.location}`} target="_blank" rel="noreferrer">Location</a>
-
-                                                                            {/* <a href={`https://www.google.com/maps/search/${pharmacy.location}`} target="_blank" rel="noreferrer">Location</a> */}
-                                                                        </button>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        ))}
+                                                        {searchTerm !== '' ? (
+                                                            pharmacies
+                                                                .filter((pharmacy) => pharmacy.medi_name.includes(searchTerm))
+                                                                .map((pharmacy) => (
+                                                                    <tr key={pharmacy.id}>
+                                                                        <td className="cell-with-border">{pharmacy.pharmacy_name}</td>
+                                                                        <td className="cell-with-border">{pharmacy.city}</td>
+                                                                        <td className="cell-with-border">{pharmacy.price}</td>
+                                                                        <td className="cell-with-border">
+                                                                            <div className="buttons">
+                                                                                <button className="view-btn">
+                                                                                    <Link to={`/medicines/${pharmacy._id}`}>View Details</Link>
+                                                                                </button>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td className="cell-with-border">
+                                                                            <div className="buttons">
+                                                                                <button className="location-btn">
+                                                                                    <a href={`https://www.google.com/maps/search/${pharmacy.pharmacy_name} ${pharmacy.location}`} target="_blank" rel="noreferrer">Location</a>
+                                                                                </button>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                ))
+                                                        ) : (
+                                                            pharmacies.map((pharmacy) => (
+                                                                <tr key={pharmacy.id}>
+                                                                    <td className="cell-with-border">{pharmacy.pharmacy_name}</td>
+                                                                    <td className="cell-with-border">{pharmacy.city}</td>
+                                                                    <td className="cell-with-border">{pharmacy.price}</td>
+                                                                    <td className="cell-with-border">
+                                                                        <div className="buttons">
+                                                                            <button className="view-btn">
+                                                                                <Link to={`/medicines/${pharmacy._id}`}>View Details</Link>
+                                                                            </button>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td className="cell-with-border">
+                                                                        <div className="buttons">
+                                                                            <button className="location-btn">
+                                                                                <a href={`https://www.google.com/maps/search/${pharmacy.pharmacy_name} ${pharmacy.location}`} target="_blank" rel="noreferrer">Location</a>
+                                                                            </button>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            ))
+                                                        )}
                                                     </tbody>
                                                 </table>
+
 
                                             </TabPanel>
 
