@@ -3,8 +3,10 @@ import { LinkContainer } from "react-router-bootstrap";
 import NavBar from "../../components/NavBar";
 import AdminLinksComponent from "../../componenets/pharmacist/PharmacistLinksComponent";
 import ProductCarouselComponent from "../../componenets/PharmacistProductCarouselComponent";
+import ExpireMedfilter from "../expireMedfilter";
 import PharmacyHead from "../../components/PharmacyHead";
-import { useAuthContext } from '../../hooks/useAuthContext'
+import { useAuthContext } from '../../hooks/useAuthContext';
+
 
 const deleteHandler = () => {
   if (window.confirm("Are you sure?")) alert("User deleted!");
@@ -13,16 +15,18 @@ const deleteHandler = () => {
 const PharmacistUsersPage = () => {
   const { user } = useAuthContext()
   if (!user) {
-    
+
     return null;
-    
+
   }
   return (
     <div>
       <PharmacyHead />
       <NavBar fixed="top" />
-     
+
       <ProductCarouselComponent />
+
+
 
       <Row className="m-5">
         <Col md={2}>
@@ -68,8 +72,17 @@ const PharmacistUsersPage = () => {
               )}
             </tbody>
           </Table>
+          <div>
+            <p>&ensp;&ensp;</p>
+          </div>
+          <ExpireMedfilter />
         </Col>
       </Row>
+
+
+
+
+
 
     </div>
 

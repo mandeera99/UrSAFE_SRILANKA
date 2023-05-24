@@ -1,5 +1,5 @@
 const User = require('../models/userModels')
-const Storemed = require('../models/storemedModel')
+//const Storemed = require('../models/storemedModel')
 const jwt = require('jsonwebtoken')
 
 const createToken = (_id) => {
@@ -52,6 +52,7 @@ const signupUser = async (req, res) => {
     // // Assign storemed object to user
     // user.storemeds = storemeds._id;
     // await user.save();
+
 
     // create a token
     const token = createToken(user._id)

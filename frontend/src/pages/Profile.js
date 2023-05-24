@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import "../css/profile.css";
 import storeimg from "../Images/storeimg.jpg";
 import Button from 'react-bootstrap/Button';
+import updateProfile from "./updateProfile";
+import { Link } from 'react-router-dom';
 
 
 
@@ -66,8 +68,10 @@ function Profile() {
 
                     <div>
                       <p>&ensp;&ensp;</p>
-                      <Button variant="primary" >Edit</Button>{' '}
+                      <Link to="/updateProfile">
 
+                      <Button variant="primary" >Edit</Button>{' '}
+                      </Link>
                     </div>
                   </div>
                 </div>
