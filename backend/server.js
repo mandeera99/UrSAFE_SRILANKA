@@ -12,12 +12,14 @@ const exmedRoutes = require('./routes/exmeds')
 
 const pdf = require('html-pdf')
 const nodemailer = require('nodemailer')
+const path = require('path')
 const Searchmed = require('./models/searchMedimodel');
 const Storemeds =require('./models/storemedModel') ;
 const Oderprogresses =require('./models/oderpregres');
 const Orders = require('./models/ordermodel');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
 // express app
 const app = express()
 
@@ -92,6 +94,31 @@ mongoose.connect(process.env.MONGO_URI)
     console.log(error)
   })
 
+//cjegtnuijrvwggdj
+//email create
+let mailTransporter = nodemailer.createTransport({
+  service:'gmail',
+  auth:{
+    user:"ursafesrilankateam9@gmail.com",
+    pass:"cjegtnuijrvwggdj"
+  }
+})
+
+let details ={
+  from:"ursafesrilankateam9@gmail.com",
+  to:"shashi97dilhani@gmail.com",
+  subject:"testing nodemailer",
+  text:"here is monthly report"
+}
+
+mailTransporter.sendMail(details,(err)=>{
+  if(err){
+    console.log("it has an error",err)
+  }else{
+    console.log("email has send")
+  }
+})
+
 //get usercount
 app.get("/getusercount",async(req,res)=>{
   try{
@@ -144,6 +171,64 @@ app.get("/getAllUser",async(req,res)=>{
   }
 
 })
+
+//get all emails
+
+
+// app.get("/getAllPharmacyEmail", async (req, res) => {
+//   try {
+//     const allUsers = await User.find({ userType: "Pharmacy" });
+//     const emailArray = allUsers.map(user => user.email); // Extract email addresses from user objects
+//     res.send({ status: "ok", data: emailArray });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send({ status: "error", message: "Internal server error" });
+//   }
+// });
+
+
+
+app.get("/sendEmailToAllPharmacy", async (req, res) => {
+  try {
+    const allUsers = await User.find({ userType: "Pharmacy" });
+    const emailArray = allUsers.map(user => user.email); // Extract email addresses from user objects
+
+    const mailTransporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: "ursafesrilankateam9@gmail.com",
+        pass: "cjegtnuijrvwggdj"
+      }
+    });
+
+    const emailPromises = emailArray.map(email => {
+      const mailOptions = {
+        from: "ursafesrilankateam9@gmail.com",
+        to: email,
+        subject: "Testing nodemailer",
+        text: "Here is a monthly report...grab it",
+       
+      };
+
+      return mailTransporter.sendMail(mailOptions);
+    });
+
+    Promise.all(emailPromises)
+      .then(() => {
+        console.log("Emails have been sent");
+        res.send({ status: "ok", message: "Emails have been sent" });
+      })
+      .catch(error => {
+        console.log("Error sending emails", error);
+        res.status(500).send({ status: "error", message: "Error sending emails" });
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ status: "error", message: "Internal server error" });
+  }
+});
+
+
 
 
 //get all pharmcy details
