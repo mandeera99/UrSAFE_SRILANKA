@@ -10,3 +10,5 @@ const pdfview = () => (
 );
 
 render(<pdfview  />, document.getElementById('root'));
+
+export default pdfview;
