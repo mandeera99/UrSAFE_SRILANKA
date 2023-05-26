@@ -25,42 +25,7 @@ const SignUp = () => {
     const [pharmacyName, setPharmacyName] = useState('');
     const { signup, error, isLoading } = useSignup()
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     if (password !== confirmPassword) {
-    //         alert('Passwords do not match. Please try again.'); 
-    //         return;
-    //     }
-
-
-    //     await signup(email, password, userType.value, name, address, phoneNumber, pharmacyName, zipCode, state, city);
-    //     try {
-    //         console.log('User Type:', userType.value); 
-    //        await axios.post('/api/user/signup', { email, password, userType:userType.value, name, address, phoneNumber, pharmacyName, zipCode, state, city })
-    //         //localStorage.setItem('token', data.token)
-    //       window.alert("Account creation successful");
-    //       switch (userType.value) {
-    //         case 'Administrator':
-    //           window.location.href = '/Dashboard';
-    //           break;
-    //         case 'Pharmacy':
-    //           window.location.href = '/Pharmacyhome';
-    //           break;
-    //         default:
-    //           window.location.href = '/';
-    //           break;
-    //       }
-
-
-    //     } catch (error) {
-    //         console.error('Error:', error);
-    //         if (error.response) {
-    //           console.log('Response Data:', error.response.data);
-    //           console.log('Response Status:', error.response.status);
-    //         }
-    //       }
-    // };
-
+   
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
@@ -100,49 +65,7 @@ const SignUp = () => {
         }
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     if (password !== confirmPassword) {
-    //       alert('Passwords do not match. Please try again.'); 
-    //       return;
-    //     }
-
-    //     try {
-    //       console.log('User Type:', userType.value);
-    //       const response = await axios.post('/api/user/signup', {
-    //         email,
-    //         password,
-    //         userType: userType.value,
-    //         name,
-    //         address,
-    //         phoneNumber,
-    //         pharmacyName,
-    //         zipCode,
-    //         state,
-    //         city,
-    //       });
-
-    //       //localStorage.setItem('token', response.data.token);
-    //       window.alert("Account creation successful");
-    //       switch (userType.value) {
-    //         case 'Administrator':
-    //           window.location.href = '/Dashboard';
-    //           break;
-    //         case 'Pharmacy':
-    //           window.location.href = '/Pharmacyhome';
-    //           break;
-    //         default:
-    //           window.location.href = '/';
-    //           break;
-    //       }
-    //     } catch (error) {
-    //       console.error('Error:', error);
-    //       if (error.response) {
-    //         console.log('Response Data:', error.response.data);
-    //         console.log('Response Status:', error.response.status);
-    //       }
-    //     }
-    //   };
+    
 
     const handleUserTypeChange = (selectedOption) => {
         setUserType(selectedOption);

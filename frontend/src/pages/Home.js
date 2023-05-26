@@ -12,13 +12,14 @@ import axios from 'axios';
 import '../App.css';
 import { AuthContext } from '../context/AuthContext';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-const data = [
-    { name: 'New Lanka', price: 12 },
-    { name: 'Isuru', price: 12.9 }
-];
+// const graphData = [
+//     { name: 'New Lanka', price: 12 },
+//     { name: 'Isuru', price: 12.9 }
+// ];
 
 // import MostsearchedMedicine from './dashboard/Charts/MostsearchedMedicine';
 function Home() {
+    const [graphData, setGraphData] = useState([]);
 
     const [searchHistory, setSearchHistory] = useState([]);
 
@@ -41,7 +42,6 @@ function Home() {
     //     }
     //   };
 
-
     console.log()
 
     const [searchTerm, setSearchTerm] = useState('');
@@ -56,10 +56,7 @@ function Home() {
     const [medicines, setMedicines] = useState([]);
 
     // Extracting price and pharmacy name from the API response
-    const formattedData = data.map((pharmacy) => ({
-        name: pharmacy.pharmacy_name,
-        price: pharmacy.price
-    }));
+
     // const handleSearch2 = async () => {
     //     const response = await fetch(`http://localhost:4000/api/medicines?q=${searchTerm}`);
     //     const data = await response.json();
@@ -83,53 +80,41 @@ function Home() {
         }
     };
 
-    const handleSearch = async () => {
-        const response = await fetch(`http://localhost:4000/api/medicines?q=${searchTerm}`);
-        const data = await response.json();
-        console.log(data);
-        setPharmacies(data);
-        console.log(pharmacies);
-    }
-    useEffect(() => {
-        console.log(pharmacies); // Log the updated pharmacies state
-    }, [pharmacies]);
+    // const handleSearch = async () => {
+    //     const response = await fetch(`http://localhost:4000/api/medicines?q=${searchTerm}`);
+    //     const data = await response.json();
+    //     console.log(data);
+    //     setPharmacies(data);
+    //     console.log(pharmacies);
+    // }
     // useEffect(() => {
-    //     const ctx = document.getElementById('myChart').getContext('2d');
+    //     console.log(pharmacies); // Log the updated pharmacies state
+    // }, [pharmacies]);
+    const handleSearch = async () => {
+        try {
+            const response = await fetch(`http://localhost:4000/api/medicines?q=${searchTerm}`);
+            const data = await response.json();
+            console.log(data);
+            setPharmacies(data);
+            console.log(pharmacies);
 
-    //     const chartData = {
-    //       labels: pharmacies.map((pharmacy) => pharmacy.pharmacy_name),
-    //       datasets: [
-    //         {
-    //           label: 'Prices',
-    //           data: pharmacies.map((pharmacy) => pharmacy.price),
-    //           backgroundColor: 'rgba(255, 99, 132, 0.2)',
-    //           borderColor: 'rgba(255, 99, 132, 1)',
-    //           borderWidth: 1,
-    //         },
-    //       ],
-    //     };
+            // Generate the data array for the graph using the fetched pharmacies data
+            const filteredData = pharmacies
+                .filter((pharmacy) => pharmacy.medi_name.includes(searchTerm))
+                .map((pharmacy) => ({
+                    name: pharmacy.pharmacy_name,
+                    price: parseFloat(pharmacy.price.replace('Rs', '')), // Remove 'Rs' symbol and convert to float
+                }));
+                console.log('Graph Data:', graphData);                setGraphData(filteredData);
+        } catch (error) {
+            console.error('Error searching medicines:', error);
+        }
+    };
+    // const dataa = pharmacies.map((pharmacy) => ({
+    //     name: pharmacy.pharmacy_name,
+    //     price: pharmacy.price,
+    //   }));
 
-    //     new Chart(ctx, {
-    //       type: 'bar',
-    //       data: chartData,
-    //       options: {
-    //         scales: {
-    //           y: {
-    //             title: {
-    //               display: true,
-    //               text: 'Pharmacy Name',
-    //             },
-    //           },
-    //           x: {
-    //             title: {
-    //               display: true,
-    //               text: 'Price',
-    //             },
-    //           },
-    //         },
-    //       },
-    //     });
-    //   }, [pharmacies]);
     return (
 
         <Fragment fluid><Header />
@@ -247,7 +232,7 @@ function Home() {
                                         </table>
                                     )} */}
 
-                                    {pharmacies.length > 0 && (
+                                    {/* {pharmacies.length > 0 && (
                                         <Tabs selectedIndex={tabIndex} onSelect={index => setTabIndex(index)}>
                                             <TabList>
                                                 <Tab>Table</Tab>
@@ -314,7 +299,60 @@ function Home() {
                                                             ))
                                                         )}
                                                     </tbody>
+                                                </table> */}
+                                    {pharmacies.length > 0 && (
+                                        <Tabs selectedIndex={tabIndex} onSelect={index => setTabIndex(index)}>
+                                            <TabList>
+                                                <Tab>Table</Tab>
+                                                <Tab>Graph</Tab>
+                                            </TabList>
+
+                                            <TabPanel>
+                                                <table border="1px solid black">
+                                                    <thead>
+                                                        <tr>
+                                                            <th className="cell-with-border">Pharmacy Name</th>
+                                                            <th className="cell-with-border">City</th>
+                                                            <th className="cell-with-border">Price</th>
+                                                            <th className="cell-with-border">Details</th>
+                                                            <th className="cell-with-border">Location</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {searchTerm !== '' ? (
+                                                            pharmacies
+                                                                .filter((pharmacy) => pharmacy.medi_name.includes(searchTerm))
+                                                                .map((pharmacy) => (
+                                                                    <tr key={pharmacy.id}>
+                                                                        <td className="cell-with-border">{pharmacy.pharmacy_name}</td>
+                                                                        <td className="cell-with-border">{pharmacy.city}</td>
+                                                                        <td className="cell-with-border">{pharmacy.price}</td>
+                                                                        <td className="cell-with-border">
+                                                                            <div className="buttons">
+                                                                                <button className="view-btn">
+                                                                                    <Link to={`/medicines/${pharmacy._id}`}>View Details</Link>
+                                                                                </button>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td className="cell-with-border">
+                                                                            <div className="buttons">
+                                                                                <button className="location-btn">
+                                                                                    <a href={`https://www.google.com/maps/search/${pharmacy.pharmacy_name} ${pharmacy.location}`} target="_blank" rel="noreferrer">Location</a>
+                                                                                </button>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                ))
+                                                        ) : (
+                                                            // Add a condition to check if the search term is empty
+                                                            <tr>
+                                                                <td colSpan="5" className="cell-with-border">Please enter a medicine name to search.</td>
+                                                            </tr>
+                                                        )}
+                                                    </tbody>
                                                 </table>
+
+
 
 
                                             </TabPanel>
@@ -327,7 +365,7 @@ function Home() {
                                                         </div>
                                                         <div className="card-body">
                                                             <div className="chart-bar">
-                                                                <BarChart width={500} height={300} data={data}>
+                                                                <BarChart width={500} height={300} data={searchTerm !== '' ? graphData : []}>
                                                                     <CartesianGrid strokeDasharray="3 3" />
                                                                     <XAxis dataKey="name" />
                                                                     <YAxis />
