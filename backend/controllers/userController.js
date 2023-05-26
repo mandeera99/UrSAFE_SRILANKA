@@ -49,15 +49,7 @@ const signupUser = async (req, res) => {
     console.log(user);
     console.log(userType);
 
-    if (userType === 'Administrator') {
-      res.json({ email, token, userType: 'Administrator' });
-    } else if (userType === 'Pharmacy') {
-      res.json({ email, token, pharmacyName: user.pharmacyName, userType: 'Pharmacy', id: user._id });
-    } else if (userType === 'Customer') {
-      res.json({ email, token, userType: 'Customer' });
-    } else {
-      res.status(400).json({ error: 'User type not found' });
-    }
+    res.status(200).json({ email, token })
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
