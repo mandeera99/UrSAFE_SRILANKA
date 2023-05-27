@@ -64,6 +64,10 @@ import OrdersBar from "./pages/dashboard/Charts/OrdersBar";
 import AnnualSalesChart from "./pages/dashboard/Charts/AnnualSalesChart";
 import Alerts from "./pages/dashboard/Alerts";
 import Report from './pages/dashboard/Report';
+import { render } from 'react-dom';
+import { PDFViewer } from '@react-pdf/renderer';
+import Pdfview from './pages/dashboard/pdfview';
+
 //user components
 import UserCartDetailsPage from './pages/user/UserCartDetailsPage';
 import UserOrderPage from './pages/user/UserOrderPage';
@@ -87,7 +91,9 @@ import PharmacistAnalyticsPage from './pages/Pharmacist/PharmacistAnalyticsPage'
 import UpdateProfile from './pages/updateProfile'
 function App() {
   return (
+    
     <div>
+      
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -198,6 +204,7 @@ function App() {
           <Route path="/dashboard/annualSalesChart" element={<AnnualSalesChart/>}/>
           <Route path="/dashboard/alerts" element={<Alerts/>}/>
           <Route path="/dashboard/report" element={<Report/>}/>
+          <Route path="/dashboard/report/pdfview" element={<Pdfview/>}/>
 
 
 
@@ -218,7 +225,9 @@ function App() {
       </Router>
       <Footer />
     </div>
+    
   );
+
 }
 
 export default App;

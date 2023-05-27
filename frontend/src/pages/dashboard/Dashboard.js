@@ -61,9 +61,21 @@ function Dashboard() {
     const[searchmeddCount,setSearchMedCount] = useState(0);
     const[orderCount,setOrderCount] = useState(0);
     const[emailsofusers,setEmailsofusers] = useState([]);
+    const[emailready,setEmailready] = useState([]);
 
 
+    
  
+    useEffect(()=>{
+        const handleEmailButtonClick =async()=>{
+          const userRes=await axios.get(
+            "http://localhost:4000/sendEmailToAllPharmacy"
+          );
+          setEmailready(userRes.data.data);
+    
+        };
+        handleEmailButtonClick();
+      },[]);
 
     useEffect(()=>{
         const fetchCount=async()=>{
@@ -612,7 +624,7 @@ function Dashboard() {
                     
                     <a href="/dashboard/report" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-<button onClick={handleDownloadPDF}>
+<button id="emailButton" onClick="handleEmailButtonClick()">
 <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-email fa-sm text-white-50"></i> Email Report</a></button>
                 </div>
