@@ -91,7 +91,6 @@ userSchema.statics.signup = async function (email,password,userType,name,address
     zipCode,
     state,
     city,
-    // storemeds
   })
   return user
 }

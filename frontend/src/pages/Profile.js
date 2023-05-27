@@ -4,8 +4,9 @@ import { useParams } from "react-router-dom";
 import "../css/profile.css";
 import storeimg from "../Images/storeimg.jpg";
 import Button from 'react-bootstrap/Button';
-import updateProfile from "./updateProfile";
+
 import { Link } from 'react-router-dom';
+import UpdateProfile from "./updateProfile";
 
 
 
@@ -30,6 +31,7 @@ function Profile() {
   return (
     <Fragment>
       <div>
+        
         {user ? (
           <div>
 
@@ -50,17 +52,16 @@ function Profile() {
                       <h4 className="text-right">Profile Settings</h4>
                     </div>
                     <div className="row mt-1">
-                      <div className="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder={user.pharmacyName} value={user.pharmacyName} /></div>
+                    <div className="col-md-6"><label class="labels">Pharmacy Name</label><input type="text" class="form-control" placeholder={user.pharmacyName} value={user.pharmacyName} /></div>
                     </div>
                     <div className="row mt-2">
                       <div className="col-md-6"><label className="labels">Name</label><input type="text" class="form-control" placeholder={user.name} value={user.name} /></div>
-
                     </div>
                     <div className="row mt-3">
                       <div className="col-md-12"><label className="labels">Email</label><input type="text" class="form-control" placeholder={user.email} value={user.email} /></div>
                       <div className="col-md-12"><label className="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value={user.phoneNumber} /></div>
-                      <div className="col-md-12"><label className="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value={user.address} /></div>
-                      <div className="col-md-12"><label className="labels">Address Line 2</label><input type="text" class="form-control" placeholder="enter address line 2" value={user.address} /></div>
+                      <div className="col-md-12"><label className="labels">Address</label><input type="text" class="form-control" placeholder="enter address line 1" value={user.address} /></div>
+                      {/* <div className="col-md-12"><label className="labels">Address Line 2</label><input type="text" class="form-control" placeholder="enter address line 2" value={user.address} /></div> */}
                       <div className="col-md-12"><label className="labels">Province</label><input type="text" class="form-control" placeholder={user.state} value={user.state} /></div>
                       <div className="col-md-12"><label className="labels">City</label><input type="text" class="form-control" placeholder={user.city} value={user.city} /></div>
 
@@ -68,7 +69,7 @@ function Profile() {
 
                     <div>
                       <p>&ensp;&ensp;</p>
-                      <Link to="/updateProfile">
+                      <Link to={`/updateProfile/${user._id}`}>
 
                       <Button variant="primary" >Edit</Button>{' '}
                       </Link>
@@ -78,8 +79,6 @@ function Profile() {
               </div>
             </div>
           </div>
-
-
 
 
         ) : (

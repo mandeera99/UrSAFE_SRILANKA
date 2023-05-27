@@ -26,7 +26,7 @@ const ExpireMedfilter = ({storemed}) => {
         }
     }
  fetchExpirefiltermeds()
-}, [user,storemeds]);
+}, [user]);
     useEffect(() => {
         Aos.init({ duration: 300 });
     }, {});
@@ -50,7 +50,7 @@ const ExpireMedfilter = ({storemed}) => {
 
             <div>
 
-                <h4><u><span style={{ color: 'black' }}>Expired medicine Report</span></u></h4>
+            <h1>Expiry Report</h1>
             </div>
 
             <div>
@@ -73,7 +73,8 @@ const ExpireMedfilter = ({storemed}) => {
 
                         <tbody>
                          {storemeds.slice(0, 5).map((storemed) => (
-                         <tr key={storemed._id}>
+                           <tr 
+                           key={storemed._id} style={new Date(storemed.expiry_date) <= new Date() ? { backgroundColor: '#FFDDDD' } : {}}>
                           <td>{storemed.medicine_name}</td>
                          <td>{storemed.brand}</td>
                           <td>{storemed.quantity}</td>

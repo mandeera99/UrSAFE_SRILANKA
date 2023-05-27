@@ -11,11 +11,7 @@ const EditableRow = ({
   handleEditFormSubmit,
 
 }) => {
-  
-  
-   
 
-  
   return (
     <tr key={storemed?._id}>
       <td>

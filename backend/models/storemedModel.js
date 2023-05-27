@@ -7,7 +7,7 @@ const storemedSchema = new Schema({
     lot_no: {
         type: Number,
         required: true,
-        // unique: true
+        
     },
     medicine_name: {
         type: String,

@@ -5,10 +5,14 @@ const mongoose = require('mongoose')
 const medicine = require('./routes/medicines')
 const userRoutes = require('./routes/user')
 const storemedRoutes = require('./routes/storemeds')
+const exmedRoutes = require('./routes/exmeds')
+const orderRoutes = require('./routes/orders')
+const usereditRoutes =  require('./routes/edituser')
+const ordanalysisRoutes = require('./routes/orderanalysis')
 const Medicine = require('./models/medicinemodel');
 const User = require('./models/userModels');
-const exmedRoutes = require('./routes/exmeds')
 const searchHistoryRoute = require('./routes/searchHistory');
+
 
 const pdf = require('html-pdf')
 const nodemailer = require('nodemailer')
@@ -37,6 +41,10 @@ app.use((req, res, next) => {
 app.use('/api/user', userRoutes)
 app.use('/api/storemeds',storemedRoutes)
 app.use('/api/exmeds',exmedRoutes)
+app.use('/api/orderanalysis',orderRoutes)
+app.use('/api/userediting',usereditRoutes)
+app.use('/api/ordanalysis',ordanalysisRoutes)
+
 // Add the search history route
 app.use('/api/searchHistory', searchHistoryRoute);
 

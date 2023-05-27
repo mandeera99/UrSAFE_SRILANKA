@@ -6,6 +6,7 @@ import ProductCarouselComponent from "../../componenets/PharmacistProductCarouse
 import ExpireMedfilter from "../expireMedfilter";
 import PharmacyHead from "../../components/PharmacyHead";
 import { useAuthContext } from '../../hooks/useAuthContext';
+import OrderIncomeGraph from "../OrderIncomeGraph";
 
 
 const deleteHandler = () => {
@@ -33,6 +34,7 @@ const PharmacistUsersPage = () => {
           <AdminLinksComponent />
         </Col>
         <Col md={10}>
+        <OrderIncomeGraph />
           <h1>User List</h1>
           <Table striped bordered hover responsive>
             <thead>
