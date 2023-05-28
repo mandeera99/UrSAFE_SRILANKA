@@ -1,18 +1,17 @@
-const express =require('express')
-const router=express.Router();
+const express = require('express');
+const router = express.Router();
 
+// Controller functions
+const { loginUser, signupUser, getUserProfile,getUsers } = require('../controllers/userController');
 
+// Signup route
+router.post('/signup', signupUser);
 
-// controller functions
-const { loginUser, signupUser } = require('../controllers/userController')
+// Login route
+router.post('/login', loginUser);
 
-// signup route
-router.post('/signup', signupUser)
+// Get user profile route
+router.get('/profile/:id', getUserProfile);
+router.get('/', getUsers);
 
-// login route
-router.post('/login', loginUser)
-
-// // Get user details route
-// router.get('/me', getUserDetails);
-
-module.exports = router
+module.exports = router;

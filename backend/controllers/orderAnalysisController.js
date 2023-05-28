@@ -1,11 +1,11 @@
-const Orders = require('../models/ordermodel')
+const Order = require('../models/orderModel')
 const User = require('../models/userModels')
 const mongoose = require('mongoose')
 
 const getorderAnalysis = async (req, res) => {
     const { userId } = req.params;
     try {
-      const monthlyIncome = await Orders.find({ pharmacy: userId })
+      const monthlyIncome = await Order.find({ pharmacy: userId })
         .select('order_cost Date')
         .sort('Date')
         .lean();
@@ -39,7 +39,7 @@ const getOrders = async (req, res) => {
     try {
   
       // Find the user's storemeds and sort by lot number
-      const orders = await Orders.find({ user: userId }).sort({ lot_no: 1 });
+      const orders = await Order.find({ user: userId }).sort({ lot_no: 1 });
   
       res.status(200).json(orders)
     } catch (error) {

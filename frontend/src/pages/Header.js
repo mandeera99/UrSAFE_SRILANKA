@@ -83,7 +83,7 @@ function Header() {
                 {/* <!-- Menu For Mobile Device --> */}
                 <div className="mobile-nav">
                     <a href="index.html" className="logo">
-                        <img src="assets/img/logo ursafe-bg.png" className="logo-one" alt="Logo" width="100%" height="100%" />
+                        <img src="/assets/img/logo.png" className="logo-one" alt="Logo" width="100%" height="100%" />
 
                     </a>
                 </div>
@@ -93,8 +93,8 @@ function Header() {
                     <div className="container">
                         <nav className="navbar navbar-expand-md navbar-light ">
                             <a className="navbar-brand" href="index.html">
-                                <img src="assets/img/logo.png" className="logo-one" alt="Logo" width="110px" height="80px" />
-                                <img src="assets/img/logo.png" className="logo-two" alt="Logo" width="110px" height="80px" />
+                                <img src="/assets/img/logo.png" className="logo-one" alt="Logo" width="110px" height="80px" />
+                                <img src="/assets/img/logo.png" className="logo-two" alt="Logo" width="110px" height="80px" />
                             </a>
 
                             <div className="collapse navbar-collapse mean-menu" id="navbarSupportedContent">

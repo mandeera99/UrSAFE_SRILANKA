@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const validator = require('validator')
+const imageSchema = mongoose.Schema({
+    path:{type:String}
+})
 
 const Schema = mongoose.Schema
 
@@ -47,11 +50,9 @@ const userSchema = new Schema({
     type: String,
     required: false
   },
-  // storemeds: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'storemed'
-  // }
- 
+  image: {imageSchema},
+},{
+  timestamps:true,
 })
 
 // static signup method

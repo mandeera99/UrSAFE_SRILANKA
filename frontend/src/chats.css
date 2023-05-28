@@ -39,7 +39,7 @@
     opacity: 1;
   }
   
-  .chat-wrapper {
+  .chat-wrapper3 {
     opacity: 0;
     position: fixed;
     right: 20px;
@@ -51,7 +51,7 @@
     border-radius: 5px;
   }
   
-  .chat-header {
+  .chat-header3 {
     background-color: blue;
     padding: 13px;
     margin-bottom: 10px;

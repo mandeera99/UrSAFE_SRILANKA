@@ -5,16 +5,64 @@ import AdminLinksComponent from "../../componenets/pharmacist/PharmacistLinksCom
 import ProductCarouselComponent from "../../componenets/PharmacistProductCarouselComponent";
 import ExpireMedfilter from "../expireMedfilter";
 import PharmacyHead from "../../components/PharmacyHead";
-import { useAuthContext } from '../../hooks/useAuthContext';
+import { useAuthContext } from '../../hooks/useAuthContext'
 import OrderIncomeGraph from "../OrderIncomeGraph";
+import axios from 'axios';
+import { useState,useEffect } from "react";
+
+// const getOrders = async() => {
+//   const { data } = await axios.get("/api/order/");
+//   return data
+
+// }
 
 
-const deleteHandler = () => {
-  if (window.confirm("Are you sure?")) alert("User deleted!");
-}
 
 const PharmacistUsersPage = () => {
-  const { user } = useAuthContext()
+
+  const [orders, setOrders] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await getOrders();
+  //       console.log(data);
+  //       const filteredOrders = data.filter(
+  //         (order) => order.orderItems[0].pharmacy === "ISURU"
+  //       );
+  //       setOrders(filteredOrders);
+  //     } catch (error) {
+  //       console.log(error.response ? error.response.data : error.message);
+  //     }
+  //   };
+  
+  //   fetchData();
+  // }, []);
+  
+
+  const { user } = useAuthContext();
+  const [users, setUsers] = useState([]);
+
+  const getUsers = async () => {
+    try {
+      const { data } = await axios.get('/api/user/');
+      const filteredUsers = data.filter((user) => user.userType === "Pharmacy");
+      setUsers(filteredUsers);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const deleteHandler = () => {
+    if (window.confirm("Are you sure?")) {
+      alert("User deleted!");
+    }
+  };
+
   if (!user) {
 
     return null;
@@ -36,39 +84,66 @@ const PharmacistUsersPage = () => {
         <Col md={10}>
         <OrderIncomeGraph />
           <h1>User List</h1>
+          <div>
+        <h1>Recent Orders</h1>
+        <Table striped bordered hover responsive>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>User</th>
+              <th>Date</th>
+              <th>Total</th>
+              <th>Delivered</th>
+              <th>Payment Method</th>
+            </tr>
+          </thead>
+          {/* <tbody>
+            {orders.map(
+              (item, idx) => (
+                <tr key={idx}>
+                  <td>{idx +1}</td>
+                  <td>{item.user.name}</td>
+                  <td>{item.createdAt}</td>
+                  <td>{item.orderTotal.cartSubtotal}</td>
+                  <td>
+                  {item.isDelivered ? (
+                  <i className="bi bi-check-lg text-success"></i>
+                  ) : (
+                    <i className="bi bi-x-lg text-danger"></i>
+                   )}
+                  </td>
+                  <td>{item.paymentMethod}</td>
+
+                </tr>
+              )
+            )}
+          </tbody> */}
+        </Table>
+        </div>
+        <div>
+          <h1>Pharmacy Details</h1>
           <Table striped bordered hover responsive>
             <thead>
               <tr>
                 <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Pharmacy Name</th>
                 <th>Email</th>
-                <th>Is Admin</th>
-                <th>Edit/Delete</th>
+                <th>Phone Number</th>
+                <th>Address</th>
               </tr>
             </thead>
             <tbody>
-              {["bi bi-check-lg text-success", "bi bi-x-lg text-danger"].map(
+              {users.map(
                 (item, idx) => (
                   <tr key={idx}>
                     <td>{idx + 1}</td>
-                    <td>Mark</td>
-                    <td>Twain</td>
-                    <td>email@email.com</td>
+                    <td>{item.name}</td>
+                    <td>{item.email}</td>
                     <td>
-                      <i className={item}></i>
+                    {item.phoneNumber}
+                      {/* <i className={item}></i> */}
                     </td>
-                    <td>
-                      <LinkContainer to="/admin/edit-user">
-                        <Button className="btn-sm">
-                          <i className="bi bi-pencil-square"></i>
-                        </Button>
-                      </LinkContainer>
-                      {" / "}
-                      <Button variant="danger" className="btn-sm" onClick={deleteHandler}>
-                        <i className="bi bi-x-circle"></i>
-                      </Button>
-                    </td>
+                    <td>{item.address}</td>
                   </tr>
                 )
               )}
@@ -78,6 +153,7 @@ const PharmacistUsersPage = () => {
             <p>&ensp;&ensp;</p>
           </div>
           <ExpireMedfilter />
+          </div>
         </Col>
       </Row>
 

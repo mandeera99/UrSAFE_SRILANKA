@@ -8,9 +8,15 @@ import {
     Button,
   } from "react-bootstrap";
   import CartItemComponent from "../../componenets/PharmacistCartItemComponent";
+  import NavBar from "../../components/NavBar";
+  import PharmacyHead from "../../components/PharmacyHead";
+  import { Fragment } from "react";
   
   const PharmacistOrderDetailsPage = () => {
     return (
+      <Fragment>
+      <PharmacyHead/>
+      <NavBar fixed="top" />
       <Container fluid>
         <Row className="mt-4">
           <h1>Order Details</h1>
@@ -21,16 +27,11 @@ import {
                 <h2>Shipping</h2>
                 <b>Name</b>: John Doe <br />
                 <b>Address</b>: 8739 Mayflower St. Los Angeles, CA 90063 <br />
-                <b>Phone</b>: 888 777 666
+                <b>Phone</b>: 888 777 666 <br />
+                <b>Payment Method</b>: Paypal
               </Col>
               <Col md={6}>
-                <h2>Payment method</h2>
-                <Form.Select disabled={false}>
-                  <option value="pp">PayPal</option>
-                  <option value="cod">
-                    Cash On Delivery (delivery may be delayed)
-                  </option>
-                </Form.Select>
+
               </Col>
               <Row>
                 <Col>
@@ -81,6 +82,7 @@ import {
           </Col>
         </Row>
       </Container>
+      </Fragment>
     );
   };
   

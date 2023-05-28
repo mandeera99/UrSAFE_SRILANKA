@@ -1,12 +1,12 @@
-require('dotenv').config()
-
 const express = require('express')
 const mongoose = require('mongoose')
-const medicine = require('./routes/medicines')
+const medicine = require('./routes/medicinesRoutes')
+
 const userRoutes = require('./routes/user')
+const orderRoutes = require('./routes/orderRoutes')
 const storemedRoutes = require('./routes/storemeds')
 const exmedRoutes = require('./routes/exmeds')
-const orderRoutes = require('./routes/orders')
+// const orderRoutes2 = require('./routes/orders')
 const usereditRoutes =  require('./routes/edituser')
 const ordanalysisRoutes = require('./routes/orderanalysis')
 const Medicine = require('./models/medicinemodel');
@@ -20,12 +20,14 @@ const path = require('path')
 const Searchmed = require('./models/searchMedimodel');
 const Storemeds =require('./models/storemedModel') ;
 const Oderprogresses =require('./models/oderpregres');
-const Orders = require('./models/ordermodel');
+ const Orders = require('./models/orderModel');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
 // express app
 const app = express()
+
+
 
 // middleware
 app.use(cors());
@@ -39,9 +41,10 @@ app.use((req, res, next) => {
 // routes
 
 app.use('/api/user', userRoutes)
+app.use('/api/order', orderRoutes)
 app.use('/api/storemeds',storemedRoutes)
 app.use('/api/exmeds',exmedRoutes)
-app.use('/api/orderanalysis',orderRoutes)
+// app.use('/api/orderanalysis',orderRoutes2)
 app.use('/api/userediting',usereditRoutes)
 app.use('/api/ordanalysis',ordanalysisRoutes)
 
@@ -49,8 +52,9 @@ app.use('/api/ordanalysis',ordanalysisRoutes)
 app.use('/api/searchHistory', searchHistoryRoute);
 
 //search medicine
-const medicineRoutes = require('./routes/medicines');
+const medicineRoutes = require('./routes/medicinesRoutes');
 app.use('/api/medicines', medicineRoutes);
+
 
 // GET endpoint to get medicine details using _id
 app.get('/api/medicines/:id', async (req, res) => {
@@ -66,6 +70,8 @@ app.get('/api/medicines/:id', async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 });
+
+
 
 //get user details
 app.get('/api/profileofuser/:email', async (req, res) => {
@@ -92,17 +98,20 @@ app.delete('/api/profileofuser/:email', async (req, res) => {
   }
 });
 
+
 // connect to db
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    // listen for requests
-    app.listen(process.env.PORT, () => {
-      console.log('connected to db & listening on port',  )
-    })
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+const connectDB = require("./config/db");
+connectDB();
+
+const port = process.env.PORT || 4000;
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
+
+
+
+
+
 
 // //get usercount
 const userRoute = require('./routes/adminroute');

@@ -1,13 +1,83 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Fragment } from "react";
-import Footer from "./Footer";
+import { Rating } from "react-simple-star-rating";
 import Header from "./Header";
+import axios from 'axios';
+import { useState } from "react";
+import { Card } from "react-bootstrap";
+import { useCartContext } from "../hooks/useCartContext";
+import { useNavigate, useParams } from "react-router-dom";
+import SortOptionsComponent from '../componenets/SortOptionsComponent';
+import  PaginationComponent  from "../componenets/PaginationComponent";
+import { ListGroup } from "react-bootstrap";
+
+
 
 function Medicine () {
+    const [ products, setProducts] = useState([]);
+    const [paginationLinksNumber, setPaginationLinksNumber] = useState(null);
+    const [pageNum, setPageNum] = useState(null);
+    const { dispatch } = useCartContext();
+    const [sortOption, setSortOption] = useState("");
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+    const [searchQuery2, setSearchQuery2] = useState("");
+
+    const { pageNumParam } = useParams() || 1;
+    const { searchQuery } = useParams() || "";
+
+    const getProducts = async (pageNumParam = null, searchQuery = "", sortOption = "") => {
+        const search = searchQuery ? `search/${searchQuery}/` : "";
+        const url = `/api/medicines/${search}?pageNum=${pageNumParam}&sort=${sortOption}`;
+        const { data } = await axios.get(url);
+        return data;
+      };
+      
+
+      useEffect(() => {
+        getProducts(pageNumParam, searchQuery, sortOption)
+          .then((products) => {
+            setProducts(products.medicines);
+            setPaginationLinksNumber(products.paginationLinksNumber);
+            setPageNum(products.pageNum);
+            setLoading(false);
+            console.log(products.medicines);
+          });
+      }, [pageNumParam, searchQuery, sortOption]);
+      
+      
+      const addToCartHandler = (productId) => {
+        const existingCartItems = JSON.parse(localStorage.getItem('cart'))?.cartItems || [];
+        const isProductInCart = existingCartItems.some(item => item.productId === productId);
+      
+        if (isProductInCart) {
+          console.log('Product is already in the cart');
+        } else {
+          const updatedCartItems = [...existingCartItems, { productId, quantity: 1 }];
+          const updatedCart = { cartItems: updatedCartItems, itemsCount: updatedCartItems.length };
+          localStorage.setItem('cart', JSON.stringify(updatedCart));
+          dispatch({ type: 'ADD_TO_CART', payload: updatedCartItems });
+          console.log(updatedCartItems);
+          window.location.href = '/cart';
+        }
+      };
+      
+
+      const submitHandler = (e) => {
+        if (e.keyCode && e.keyCode !== 13) return;
+        e.preventDefault();
+        if (searchQuery2.trim()){
+            navigate(`/medicine/search/${searchQuery2}`);
+        }else {
+         navigate(`/medicine`);
+        }
+     }
+     
+
         return (
             <Fragment><Header/>
                 <div>
-
+                
 {/*                     <!-- Inner Banner -->
  */}        <div className="inner-banner inner-bg11">
             <div className="container">
@@ -36,266 +106,68 @@ function Medicine () {
         <div className="product-area pt-100 pb-70">
             <div className="container">
                 <div className="row align-items-center">
-                    <div className="col-lg-6">
+                    <div className="col-lg-4">
                         <div className="product-result-count">
                             <p>Showing 1-8 of 14 results</p>
                         </div>
                     </div>
 
-              {/*       <div className="col-lg-3 col-md-6">
+                    <div className="col-lg-3 col-md-6">
                         <div className="product-search-widget">
                             <form className="product-search-form">
-                                <input type="search" className="form-control" placeholder="Search..."/>
-                                <button type="submit">
+                                <input type="search" onKeyUp={submitHandler} onChange={(e) => setSearchQuery2(e.target.value)} className="form-control" placeholder="Search..."/>
+                                <button type="submit" onClick={submitHandler} >
                                     <i className="bx bx-search"></i>
                                 </button>
                             </form>
                         </div>
                     </div>
- */}
+
                     <div className="col-lg-3 col-md-6">
-                        <div className="product-top-bar-ordering">
-                            <select>
-                                <option value="1">Default sorting</option>
-                                <option value="2">Sort by popularity</option>
-                                <option value="0">Sort by average rating</option>
-                                <option value="3">Sort by latest</option>
-                                <option value="4">Sort by price: low to high</option>
-                                <option value="5">Sort by price: high to low</option>
-                                <option value="6">Sort by new</option>
-                            </select>
-                        </div>
+                    <ListGroup.Item className="mb-3 mt-3">
+                         <SortOptionsComponent setSortOption={setSortOption} />
+                    </ListGroup.Item>
+                        
                     </div>
                 </div>
                 <div className="row pt-45">
-                    <div className="col-lg-3 col-sm-6">
+            {products.map((product) => (
+                
+                    <Card  className="col-lg-3 col-sm-6" style={{ marginTop: "30px", marginBottom: "20px" ,marginRight: "50px"}}>
                         <div className="product-card">
                             <div className="product-img">
-                                <a href="shop-details.html"><img src="assets/img/product/product1.jpg" alt="Images"/></a>
+                                <Card.Img src={product.images[0] ? product.images[0].path : ''} crossOrigin="annonymous" variant="top"/>
                                
                             </div>
                             <div className="content">
-                                <h4>Care, Health <del className="price">Rs 500</del></h4>
-                                <h3>Panadol <span>Rs 479.23</span></h3>
-                                <div className="rating">
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bx-star'></i>
-                                </div>
+                                <h4>{product.category} <del className="price">Rs {Math.round(product.price * 1.2)}</del></h4>
+                                <h3>{product.medi_name}<span>{product.price}</span></h3>
+                                <Rating readonly size={20} initialValue={product.rating} /> ({product.reviewsNumber})
 
                                 <div className="product-btn">
-                                    <a href="/cart" className="add-btn link-underlines">Add To Cart <i className="flaticon-shopping-cart icon"></i></a>
+                                    <a href="/cart" className="add-btn link-underlines" onClick={() => addToCartHandler(product._id)}>Add To Cart <i className="flaticon-shopping-cart icon"></i></a>
                                     <a href="wishlist.html" className="wishlist-btn"><i className="flaticon-heart"></i></a>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </Card>
+                    
+                ))}
 
-                    <div className="col-lg-3 col-sm-6">
-                        <div className="product-card">
-                            <div className="product-img">
-                                <a href="shop-details.html" className="link-underlines"><img src="assets/img/product/product2.jpg" alt="Images"/></a>
-                               
-                            </div>
-                            <div className="content">
-                                <h4>Care, Health <del className="price">Rs 1300</del></h4>
-                                <h3>paracetamol <span>Rs 1,150</span></h3>
-                                <div className="rating">
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bx-star'></i>
-                                </div>
 
-                                <div className="product-btn">
-                                    <a href="cart.html" className="add-btn link-underlines">Add To Cart <i className="flaticon-shopping-cart icon"></i></a>
-                                    <a href="wishlist.html" className="wishlist-btn"><i className="flaticon-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {/* under */}
 
-                    <div className="col-lg-3 col-sm-6">
-                        <div className="product-card">
-                            <div className="product-img">
-                                <a href="shop-details.html"><img src="assets/img/product/product3.jpg" alt="Images"/></a>
-                                
-                            </div>
-                            <div className="content">
-                                <h4>Care, Health <del className="price">Rs 3300</del></h4>
-                                <h3>Vitamin c <span>Rs 3,250.00</span></h3>
-                                <div className="rating">
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bx-star'></i>
-                                </div>
-
-                                <div className="product-btn">
-                                    <a href="cart.html" className="add-btn link-underlines">Add To Cart <i className="flaticon-shopping-cart icon"></i></a>
-                                    <a href="wishlist.html" className="wishlist-btn"><i className="flaticon-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-3 col-sm-6">
-                        <div className="product-card">
-                            <div className="product-img">
-                                <a href="shop-details.html"><img src="assets/img/product/product4.png" alt="Images"/></a>
-                                <div className="product-add">
-                                    <ul>
-                                        <li><a href="#"><i className="flaticon-view"></i></a></li>
-                                        <li><a href="#"><i className="flaticon-testing"></i></a></li>
-                                    </ul>
-                                </div>
-                                <h3 className="best-sale">Sale</h3>
-                            </div>
-                            <div className="content">
-                                <h4>Care, Health <del className="price">$250</del></h4>
-                                <h3>Xeljanz <span>$200</span></h3>
-                                <div className="rating">
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bx-star'></i>
-                                </div>
-
-                                <div className="product-btn">
-                                    <a href="cart.html" className="add-btn link-underlines">Add To Cart <i className="flaticon-shopping-cart icon"></i></a>
-                                    <a href="wishlist.html" className="wishlist-btn"><i className="flaticon-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-3 col-sm-6">
-                        <div className="product-card">
-                            <div className="product-img">
-                                <a href="shop-details.html"><img src="assets/img/product/product5.png" alt="Images"/></a>
-                                <div className="product-add">
-                                    <ul>
-                                        <li><a href="#"><i className="flaticon-view"></i></a></li>
-                                        <li><a href="#"><i className="flaticon-testing"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="content">
-                                <h4>Care, Health <del className="price">$250</del></h4>
-                                <h3>Jakafi <span>$200</span></h3>
-                                <div className="rating">
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bx-star'></i>
-                                </div>
-
-                                <div className="product-btn">
-                                    <a href="cart.html" className="add-btn link-underlines">Add To Cart <i className="flaticon-shopping-cart icon"></i></a>
-                                    <a href="wishlist.html" className="wishlist-btn"><i className="flaticon-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-3 col-sm-6">
-                        <div className="product-card">
-                            <div className="product-img">
-                                <a href="shop-details.html"><img src="assets/img/product/product6.png" alt="Images"/></a>
-                                <div className="product-add">
-                                    <ul>
-                                        <li><a href="#"><i className="flaticon-view"></i></a></li>
-                                        <li><a href="#"><i className="flaticon-testing"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="content">
-                                <h4>Care, Health <del className="price">$95</del></h4>
-                                <h3>Olumiant <span>$90</span></h3>
-                                <div className="rating">
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bx-star'></i>
-                                </div>
-
-                                <div className="product-btn">
-                                    <a href="cart.html" className="add-btn link-underlines">Add To Cart <i className="flaticon-shopping-cart icon"></i></a>
-                                    <a href="wishlist.html" className="wishlist-btn"><i className="flaticon-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-3 col-sm-6">
-                        <div className="product-card">
-                            <div className="product-img">
-                                <a href="shop-details.html"><img src="assets/img/product/product7.png" alt="Images"/></a>
-                                <div className="product-add">
-                                    <ul>
-                                        <li><a href="#"><i className="flaticon-view"></i></a></li>
-                                        <li><a href="#"><i className="flaticon-testing"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="content">
-                                <h4>Care, Health <del className="price">$75</del></h4>
-                                <h3>Mavrilimumab <span>$70</span></h3>
-                                <div className="rating">
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bx-star'></i>
-                                </div>
-
-                                <div className="product-btn">
-                                    <a href="cart.html" className="add-btn link-underlines">Add To Cart <i className="flaticon-shopping-cart icon"></i></a>
-                                    <a href="wishlist.html" className="wishlist-btn"><i className="flaticon-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-3 col-sm-6">
-                        <div className="product-card">
-                            <div className="product-img">
-                                <a href="shop-details.html"><img src="assets/img/product/product8.png" alt="Images"/></a>
-                                <div className="product-add">
-                                    <ul>
-                                        <li><a href="#"><i className="flaticon-view"></i></a></li>
-                                        <li><a href="#"><i className="flaticon-testing"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="content">
-                                <h4>Care, Health <del className="price">$115</del></h4>
-                                <h3>Tocilizumab <span>$110</span></h3>
-                                <div className="rating">
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bxs-star'></i>
-                                    <i className='bx bx-star'></i>
-                                </div>
-
-                                <div className="product-btn">
-                                    <a href="cart.html" className="add-btn link-underlines">Add To Cart <i className="flaticon-shopping-cart icon"></i></a>
-                                    <a href="wishlist.html" className="wishlist-btn"><i className="flaticon-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-12 col-md-12">
-                        <div className="pagination-area">
+                    <div className="col-lg-12 col-md-12 d-flex justify-content-center">
+                    {paginationLinksNumber > 1 ? (
+                        <PaginationComponent
+                        
+                            searchQuery={searchQuery}
+                            paginationLinksNumber={paginationLinksNumber}
+                            pageNum={pageNum}
+                            />
+                            ) : null}
+                        
+                         {/* <div className="pagination-area">
                             <a href="#" className="prev page-numbers">
                                 <i className="bx bx-chevron-left"></i>
                             </a>
@@ -307,7 +179,8 @@ function Medicine () {
                             <a href="#" className="next page-numbers">
                                 <i className="bx bx-chevron-right"></i>
                             </a>
-                        </div>
+                        </div>  */}
+                    
                     </div>
                 </div>
             </div>
@@ -319,5 +192,4 @@ function Medicine () {
         )
     }
 
-export default Medicine
-;
+export default Medicine;

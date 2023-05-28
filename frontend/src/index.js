@@ -8,7 +8,7 @@ import 'bootstrap';
 import { WorkoutsContextProvider } from './context/WorkoutContext';
 import { AuthContextProvider } from './context/AuthContext';
 import { StoremedsContextProvider } from './context/StoremedsContext';
-import { ChakraProvider, theme } from '@chakra-ui/react'
+import { CartContextProvider } from './context/CartContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -16,9 +16,9 @@ root.render(
     <AuthContextProvider>
       <WorkoutsContextProvider>
         <StoremedsContextProvider>
-         {/* <ChakraProvider theme={theme}> */}
-            <App />
-          {/* </ChakraProvider> */}
+          <CartContextProvider>
+          <App />
+          </CartContextProvider>
         </StoremedsContextProvider>
       </WorkoutsContextProvider>
     </AuthContextProvider>

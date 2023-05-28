@@ -27,12 +27,13 @@ import OrderIncomeGraph from './pages/OrderIncomeGraph';
 import Profileofuser from './pages/Profileofuser';
 import Location from './pages/Location';
 import { ChatEngine } from 'react-chat-engine';
+// import RoutesWithUserChatComponent from "./componenets/user/RoutesWithUserChatComponent";
 
 //admin
 import HomePage from './pages/HomePage';
 import ProductListPage from './pages/ProductListPage';
-import CartPage from './pages/CartPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
+
 
 //dashboardComponents
 import Dashboard from './pages/dashboard/Dashboard';
@@ -75,7 +76,7 @@ import Pdfview from './pages/dashboard/pdfview';
 //user components
 import UserCartDetailsPage from './pages/user/UserCartDetailsPage';
 import UserOrderPage from './pages/user/UserOrderPage';
-import UserOredrDetailsPage from './pages/user/UserOrderDetailsPage';
+import UserOrderDetailsPage from './pages/user/UserOrderDetailsPage';
 // import UserProfilePage from "./pages/user/UserProfilePage";
 
 //admin components
@@ -100,6 +101,7 @@ function App() {
       
       <Router>
         <Routes>
+          {/* <Route element={<RoutesWithUserChatComponent/>}/> */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
@@ -109,6 +111,9 @@ function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/upcoming" element={<Upcoming />} />
           <Route path="/medicine" element={<Medicine />} />
+          <Route path="/medicine/search/:searchQuery/:pageNumParam" element={<Medicine />} />
+          <Route path="/medicine/:pageNumParam" element={<Medicine />} />
+          <Route path="/medicine/search/:searchQuery" element={<Medicine />} />
           <Route path="/services" element={<Services />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/cart" element={<Cart />} />
@@ -137,7 +142,6 @@ function App() {
 
           <Route path="/adminhome" element={<HomePage />} />
           <Route path="/product-list" element={<ProductListPage />} />
-          <Route path="/cart" element={<CartPage />} />
           <Route path="/product-details" element={<ProductDetailsPage />} />
           <Route path="/product-details/:id" element={<ProductDetailsPage />} />
           <Route path="*" element="Page not exist 404" />
@@ -168,7 +172,11 @@ function App() {
           <Route path="/user/cart-details" element={<UserCartDetailsPage />} />
           <Route
             path="/user/order-details"
-            element={<UserOredrDetailsPage />}
+            element={<UserOrderDetailsPage />}
+          />
+          <Route
+            path="/user/order-details/:id"
+            element={<UserOrderDetailsPage />}
           />
 
           <Route path="/admin/users" element={<AdminUsersPage />} />
@@ -219,9 +227,9 @@ function App() {
             path="/Pharmacist/analytics"
             element={<PharmacistAnalyticsPage />}
           />
-          <Route path="/Orders" element={<PharmacistOrdersPage />} />
+          <Route path="/Pharmacist/Orders" element={<PharmacistOrdersPage />} />
           <Route
-            path="/Pharmacist/order-details"
+            path="/Pharmacists/order-details"
             element={<PharmacistOrderDetailsPage />}
           />
 

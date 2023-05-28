@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from 'react-router-dom';
+import { Link ,Outlet} from 'react-router-dom';
 import { Fragment } from "react";
 import Footer from "./Footer";
 import Header from "./Header";

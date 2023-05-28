@@ -1,5 +1,3 @@
-const Orders = require("../models/ordermodel")
-const User = require("../models/userModels")
 const {getorderAnalysis, getOrders} = require("../controllers/orderAnalysisController");
 const express = require('express');
 const router = express.Router();
