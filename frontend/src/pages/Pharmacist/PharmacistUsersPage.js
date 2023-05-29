@@ -86,11 +86,7 @@ const PharmacistUsersPage = () => {
         <ExpireMedfilter />
          
           <div>
-          <div style={{
-        height: "40vh"
-      }}>
-        <PieChart />
-      </div>
+        
         <h1>Recent Orders</h1>
         <Table striped bordered hover responsive>
           <thead>
@@ -175,7 +171,11 @@ const PharmacistUsersPage = () => {
         </Table>
         </div>
         <div>
-          
+        <div style={{
+        height: "40vh"
+      }}>
+        <PieChart />
+      </div>
           <div>
             <p>&ensp;&ensp;</p>
           </div>

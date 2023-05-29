@@ -22,6 +22,7 @@ const Storemeds =require('./models/storemedModel') ;
 const Oderprogresses =require('./models/oderpregres');
 // const Orders = require('./models/ordermodel');
 const Order= require('./models/orderModel');
+const Orders=require('./models/orderModel')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
