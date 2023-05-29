@@ -5,64 +5,16 @@ import AdminLinksComponent from "../../componenets/pharmacist/PharmacistLinksCom
 import ProductCarouselComponent from "../../componenets/PharmacistProductCarouselComponent";
 import ExpireMedfilter from "../expireMedfilter";
 import PharmacyHead from "../../components/PharmacyHead";
-import { useAuthContext } from '../../hooks/useAuthContext'
+import { useAuthContext } from '../../hooks/useAuthContext';
 import OrderIncomeGraph from "../OrderIncomeGraph";
-import axios from 'axios';
-import { useState,useEffect } from "react";
-import {PieChart} from "../../componenets/pharmacist/PieChart"
-// const getOrders = async() => {
-//   const { data } = await axios.get("/api/order/");
-//   return data
-
-// }
 
 
+const deleteHandler = () => {
+  if (window.confirm("Are you sure?")) alert("User deleted!");
+}
 
 const PharmacistUsersPage = () => {
-
-  const [orders, setOrders] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const data = await getOrders();
-  //       console.log(data);
-  //       const filteredOrders = data.filter(
-  //         (order) => order.orderItems[0].pharmacy === "ISURU"
-  //       );
-  //       setOrders(filteredOrders);
-  //     } catch (error) {
-  //       console.log(error.response ? error.response.data : error.message);
-  //     }
-  //   };
-  
-  //   fetchData();
-  // }, []);
-  
-
-  const { user } = useAuthContext();
-  const [users, setUsers] = useState([]);
-
-  const getUsers = async () => {
-    try {
-      const { data } = await axios.get('/api/user/');
-      const filteredUsers = data.filter((user) => user.userType === "Pharmacy");
-      setUsers(filteredUsers);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  };
-
-  useEffect(() => {
-    getUsers();
-  }, []);
-
-  const deleteHandler = () => {
-    if (window.confirm("Are you sure?")) {
-      alert("User deleted!");
-    }
-  };
-
+  const { user } = useAuthContext()
   if (!user) {
 
     return null;
@@ -83,109 +35,54 @@ const PharmacistUsersPage = () => {
         </Col>
         <Col md={10}>
         <OrderIncomeGraph />
-        <ExpireMedfilter />
-         
-          <div>
-        
-        <h1>Recent Orders</h1>
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>User</th>
-              <th>medicine name</th>
-              <th>Date</th>
-              <th>Total</th>
-              <th>Delivered</th>
-              <th>Payment Method</th>
-            </tr>
-          </thead>
-          <tbody>
-              <th>1</th>
-              <th>alice</th>
-              <th>paracetamol</th>
-              <th>2022-11-20</th>
-              <th>7500</th>
-              <th>false</th>
-              <th>pp</th>
+          <h1>User List</h1>
+          <Table striped bordered hover responsive>
+            <thead>
               <tr>
-              <th>2</th>
-              <th>alice</th>
-              <th>Piriton</th>
-              <th>2023-05-28</th>
-              <th>5000</th>
-              <th>false</th>
-              <th>Paypal</th>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Is Admin</th>
+                <th>Edit/Delete</th>
               </tr>
-              <tr>
-              <th>3</th>
-              <th>alice</th>
-              <th>seneflo</th>
-              <th>2022-08-20</th>
-              <th>2100</th>
-              <th>false</th>
-              <th>Paypal</th>
-              </tr>
-              <tr>
-               <th>4</th>
-              <th>alice</th>
-              <th>asthalin</th>
-              <th>2022-12-20</th>
-              <th>27000</th>
-              <th>true</th>
-              <th>Paypal</th>
-              </tr>
-              <tr>
-              <th>5</th>
-              <th>alice</th>
-              <th>Furosemaid</th>
-              <th>2022-01-19</th>
-              <th>300</th>
-              <th>false</th>
-              <th>Paypal</th>
-              
-              </tr>
-              
-          </tbody>
-          {/* <tbody>
-            {orders.map(
-              (item, idx) => (
-                <tr key={idx}>
-                  <td>{idx +1}</td>
-                  <td>{item.user.name}</td>
-                  <td>{item.createdAt}</td>
-                  <td>{item.orderTotal.cartSubtotal}</td>
-                  <td>
-                  {item.isDelivered ? (
-                  <i className="bi bi-check-lg text-success"></i>
-                  ) : (
-                    <i className="bi bi-x-lg text-danger"></i>
-                   )}
-                  </td>
-                  <td>{item.paymentMethod}</td>
-
-                </tr>
-              )
-            )}
-          </tbody> */}
-        </Table>
-        </div>
-        <div>
-        <div style={{
-        height: "40vh"
-      }}>
-        <PieChart />
-      </div>
+            </thead>
+            <tbody>
+              {["bi bi-check-lg text-success", "bi bi-x-lg text-danger"].map(
+                (item, idx) => (
+                  <tr key={idx}>
+                    <td>{idx + 1}</td>
+                    <td>Mark</td>
+                    <td>Twain</td>
+                    <td>email@email.com</td>
+                    <td>
+                      <i className={item}></i>
+                    </td>
+                    <td>
+                      <LinkContainer to="/admin/edit-user">
+                        <Button className="btn-sm">
+                          <i className="bi bi-pencil-square"></i>
+                        </Button>
+                      </LinkContainer>
+                      {" / "}
+                      <Button variant="danger" className="btn-sm" onClick={deleteHandler}>
+                        <i className="bi bi-x-circle"></i>
+                      </Button>
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </Table>
           <div>
             <p>&ensp;&ensp;</p>
           </div>
-         
-          </div>
+          <ExpireMedfilter />
         </Col>
       </Row>
 
 
-      
+
 
 
 
