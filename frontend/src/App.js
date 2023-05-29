@@ -16,10 +16,14 @@ import UserProfilePage from './pages/user/UserProfilePage';
 import Header from './pages/Header';
 import Footer from './pages/Footer';
 import Pharmacy from './pages/Pharmacy';
+
+//Phamacist part - Manuja
 import Store from './pages/Store';
 import Expiredmedreport from './pages/Expiredmedreport';
-import Analysis from './pages/Analysis';
 import Profile from './pages/Profile';
+import UpdateProfile from './pages/updateProfile';
+import OrderIncomeGraph from './pages/OrderIncomeGraph';
+
 import Profileofuser from './pages/Profileofuser';
 import Location from './pages/Location';
 import { ChatEngine } from 'react-chat-engine';
@@ -64,6 +68,10 @@ import OrdersBar from "./pages/dashboard/Charts/OrdersBar";
 import AnnualSalesChart from "./pages/dashboard/Charts/AnnualSalesChart";
 import Alerts from "./pages/dashboard/Alerts";
 import Report from './pages/dashboard/Report';
+import { render } from 'react-dom';
+import { PDFViewer } from '@react-pdf/renderer';
+import Pdfview from './pages/dashboard/pdfview';
+
 //user components
 import UserCartDetailsPage from './pages/user/UserCartDetailsPage';
 import UserOrderPage from './pages/user/UserOrderPage';
@@ -84,10 +92,12 @@ import PharmacistUsersPage from './pages/Pharmacist/PharmacistUsersPage';
 import PharmacistOrdersPage from './pages/Pharmacist/PharmacistOrdersPage';
 import PharmacistOrderDetailsPage from './pages/Pharmacist/PharmacistOrderDetailsPage';
 import PharmacistAnalyticsPage from './pages/Pharmacist/PharmacistAnalyticsPage';
-import UpdateProfile from './pages/updateProfile'
+
 function App() {
   return (
+    
     <div>
+      
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -122,9 +132,10 @@ function App() {
 
           <Route path="/view-store" element={<Store />} />
           <Route path="/view-more2" element={<Expiredmedreport />} />
-          <Route path="/analysis" element={<Analysis />} />
+          <Route path="/analysis" element={<OrderIncomeGraph />} />
           <Route path="/profile/:email" element={<Profile />} />
-          
+          <Route path="/updateProfile/:id" element={<UpdateProfile />} />
+
           <Route path="/adminhome" element={<HomePage />} />
           <Route path="/product-list" element={<ProductListPage />} />
           <Route path="/cart" element={<CartPage />} />
@@ -199,6 +210,7 @@ function App() {
           <Route path="/dashboard/annualSalesChart" element={<AnnualSalesChart/>}/>
           <Route path="/dashboard/alerts" element={<Alerts/>}/>
           <Route path="/dashboard/report" element={<Report/>}/>
+          <Route path="/dashboard/report/pdfview" element={<Pdfview/>}/>
 
 
 
@@ -219,7 +231,9 @@ function App() {
       </Router>
       <Footer />
     </div>
+    
   );
+
 }
 
 export default App;

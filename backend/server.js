@@ -5,13 +5,18 @@ const mongoose = require('mongoose')
 const medicine = require('./routes/medicines')
 const userRoutes = require('./routes/user')
 const storemedRoutes = require('./routes/storemeds')
+const exmedRoutes = require('./routes/exmeds')
+const orderRoutes = require('./routes/orders')
+const usereditRoutes =  require('./routes/edituser')
+const ordanalysisRoutes = require('./routes/orderanalysis')
 const Medicine = require('./models/medicinemodel');
 const User = require('./models/userModels');
-const exmedRoutes = require('./routes/exmeds')
 const searchHistoryRoute = require('./routes/searchHistory');
+
 
 const pdf = require('html-pdf')
 const nodemailer = require('nodemailer')
+const path = require('path')
 const Searchmed = require('./models/searchMedimodel');
 const Storemeds =require('./models/storemedModel') ;
 const Oderprogresses =require('./models/oderpregres');
@@ -35,6 +40,10 @@ app.use((req, res, next) => {
 app.use('/api/user', userRoutes)
 app.use('/api/storemeds',storemedRoutes)
 app.use('/api/exmeds',exmedRoutes)
+app.use('/api/orderanalysis',orderRoutes)
+app.use('/api/userediting',usereditRoutes)
+app.use('/api/ordanalysis',ordanalysisRoutes)
+
 // Add the search history route
 app.use('/api/searchHistory', searchHistoryRoute);
 
@@ -99,14 +108,42 @@ const userRoute = require('./routes/adminroute');
 app.use('/', userRoute);
 // app.get("/getusercount",async(req,res)=>{
 //   try{
+//cjegtnuijrvwggdj
+//email create
+let mailTransporter = nodemailer.createTransport({
+  service:'gmail',
+  auth:{
+    user:"ursafesrilankateam9@gmail.com",
+    pass:"cjegtnuijrvwggdj"
+  }
+})
 
-//     const userCount=await User.find().count();
-//     res.send({status:"ok",data:userCount});
-//   }catch(error){
+let details ={
+  from:"ursafesrilankateam9@gmail.com",
+  to:"shashi97dilhani@gmail.com",
+  subject:"testing nodemailer",
+  text:"here is monthly report"
+}
 
-//     console.log(error);
-//   }
-// })
+mailTransporter.sendMail(details,(err)=>{
+  if(err){
+    console.log("it has an error",err)
+  }else{
+    console.log("email has send")
+  }
+})
+
+//get usercount
+app.get("/getusercount",async(req,res)=>{
+  try{
+
+    const userCount=await User.find().count();
+    res.send({status:"ok",data:userCount});
+  }catch(error){
+
+    console.log(error);
+  }
+})
 
 //get medicinecount
 app.get("/getmedicinecount",async(req,res)=>{
@@ -148,6 +185,64 @@ app.get("/getAllUser",async(req,res)=>{
   }
 
 })
+
+//get all emails
+
+
+// app.get("/getAllPharmacyEmail", async (req, res) => {
+//   try {
+//     const allUsers = await User.find({ userType: "Pharmacy" });
+//     const emailArray = allUsers.map(user => user.email); // Extract email addresses from user objects
+//     res.send({ status: "ok", data: emailArray });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send({ status: "error", message: "Internal server error" });
+//   }
+// });
+
+
+
+app.get("/sendEmailToAllPharmacy", async (req, res) => {
+  try {
+    const allUsers = await User.find({ userType: "Pharmacy" });
+    const emailArray = allUsers.map(user => user.email); // Extract email addresses from user objects
+
+    const mailTransporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: "ursafesrilankateam9@gmail.com",
+        pass: "cjegtnuijrvwggdj"
+      }
+    });
+
+    const emailPromises = emailArray.map(email => {
+      const mailOptions = {
+        from: "ursafesrilankateam9@gmail.com",
+        to: email,
+        subject: "Testing nodemailer",
+        text: "Here is a monthly report...grab it",
+       
+      };
+
+      return mailTransporter.sendMail(mailOptions);
+    });
+
+    Promise.all(emailPromises)
+      .then(() => {
+        console.log("Emails have been sent");
+        res.send({ status: "ok", message: "Emails have been sent" });
+      })
+      .catch(error => {
+        console.log("Error sending emails", error);
+        res.status(500).send({ status: "error", message: "Error sending emails" });
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ status: "error", message: "Internal server error" });
+  }
+});
+
+
 
 
 //get all pharmcy details
