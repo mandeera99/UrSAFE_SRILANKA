@@ -33,16 +33,6 @@ exports.saveSearchHistory = async (req, res) => {
       res.status(500).json({ message: 'Error retrieving search history' });
     }
   
-  // exports.getSearchHistory = async (req, res) => {
-  //   try {
-  //     // Fetch all search history
-  //     const searchHistory = await SearchHistory.find();
-    
-  //     res.status(200).json(searchHistory);
-  //   } catch (error) {
-  //     console.error('Error retrieving search history:', error);
-  //     res.status(500).json({ message: 'Error retrieving search history' });
-  //   }
-  // }
+ 
   
 };

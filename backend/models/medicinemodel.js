@@ -13,6 +13,31 @@ const MedicineSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  price:{
+    type: String,
+    required: true
+  },
+  location:{
+    type: String,
+    required: true
+  }, lot_no: {
+    type: Number,
+    required: false,
+  },
+  brand: {
+    type: String,
+    required: false
+  },
+ 
+  expiry_date: {
+    type: Date,
+    required: false,
+
+  },
+  supplier_name: {
+    type: String,
+    required: false
+  },
   // Add more fields as necessary
 });
 

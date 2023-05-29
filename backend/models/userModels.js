@@ -47,14 +47,11 @@ const userSchema = new Schema({
     type: String,
     required: false
   },
-  // storemeds: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'storemed'
-  // }
+ 
  
 })
 
-// static signup method
+// static signup method used to direct call without make instance then it create new user in the database
 userSchema.statics.signup = async function (email,password,userType,name,address,phoneNumber,pharmacyName,zipCode,state,city) {
 
   // validation
@@ -76,7 +73,7 @@ userSchema.statics.signup = async function (email,password,userType,name,address
   if (exists) {
     throw Error('Email already in use')
   }
-
+//to prevent attackers it added some characters to the password
   const salt = await bcrypt.genSalt(10)
   const hash = await bcrypt.hash(password, salt)
 

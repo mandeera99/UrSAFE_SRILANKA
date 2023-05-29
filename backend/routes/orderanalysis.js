@@ -1,4 +1,4 @@
-const Orders = require("../models/ordermodel")
+const Orders = require("../models/orderModel")
 const User = require("../models/userModels")
 const {getorderAnalysis, getOrders} = require("../controllers/orderAnalysisController");
 const express = require('express');
