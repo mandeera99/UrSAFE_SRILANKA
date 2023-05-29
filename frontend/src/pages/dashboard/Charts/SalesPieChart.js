@@ -19,12 +19,12 @@ function SalesPieChart() {
     const value=[];
 
     const fetchCount = async () => {
-      const dataReq = await fetch("http://localhost:4000/getorderCostbyyear");
+      const dataReq = await fetch("http://localhost:4000/getorderamountbyyear");
       const dataRes = await dataReq.json();
       console.log(dataRes);
 
       for(let i=0; i<dataRes.length; i++){
-        year.push(dataRes[i]._id);
+        year.push(dataRes[i].year);
         value.push(dataRes[i].countValue);
 
     }
