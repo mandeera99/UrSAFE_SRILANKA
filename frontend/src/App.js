@@ -23,7 +23,7 @@ import Profile from './pages/Profile';
 import Profileofuser from './pages/Profileofuser';
 import Location from './pages/Location';
 import { ChatEngine } from 'react-chat-engine';
-
+import StoremedForm from "./components/StoremedForm";
 //admin
 import HomePage from './pages/HomePage';
 import ProductListPage from './pages/ProductListPage';
@@ -105,6 +105,7 @@ function App() {
           <Route path="/medicines/:id" element={<Pharmacy/>}/>
           <Route path="/user-profile" element={<UserProfilePage />} />
           <Route path="/profileofuser/:email" element={<Profileofuser />} />
+          <Route path="/profileofuser/:email" element={<StoremedForm/>} />
           <Route path="/location" element={<Location/>} />
           <Route path="/Dashboard/adminchat" element={<ChatEngine 
                                             height='100vh'
@@ -123,7 +124,7 @@ function App() {
           <Route path="/view-more2" element={<Expiredmedreport />} />
           <Route path="/analysis" element={<Analysis />} />
           <Route path="/profile/:email" element={<Profile />} />
-
+          
           <Route path="/adminhome" element={<HomePage />} />
           <Route path="/product-list" element={<ProductListPage />} />
           <Route path="/cart" element={<CartPage />} />

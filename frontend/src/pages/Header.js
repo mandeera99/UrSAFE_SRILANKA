@@ -26,7 +26,7 @@ function Header() {
                                             <div class="head-icon">
                                                 <i class='bx bx-mail-send'></i>
                                             </div>
-                                            <a href="mailto:nomashikarunadasa@gmail.com" className="link-underlines">hello@UrSAFE.com</a>
+                                            <a href="mailto:helloUrSAFE@gmail.com" className="link-underlines">helloUrSAFE@gmail.com</a>
                                         </li>
 
                                         <li>

@@ -18,10 +18,10 @@ const Oderprogresses =require('./models/oderpregres');
 const Orders = require('./models/ordermodel');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-// express app
+// express app simplifies the process of building web applications and APIs.
 const app = express()
 
-// middleware
+// middleware CORS (Cross-Origin Resource Sharing) is a mechanism that allows web browsers to make cross-origin HTTP requests securely.
 app.use(cors());
 app.use(express.json())
 
