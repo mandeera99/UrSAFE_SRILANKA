@@ -83,17 +83,14 @@ const PharmacistUsersPage = () => {
         </Col>
         <Col md={10}>
         <OrderIncomeGraph />
-        <ExpireMedfilter />
-         
+          <h1>User List</h1>
           <div>
-        
         <h1>Recent Orders</h1>
         <Table striped bordered hover responsive>
           <thead>
             <tr>
               <th>#</th>
               <th>User</th>
-              <th>medicine name</th>
               <th>Date</th>
               <th>Total</th>
               <th>Delivered</th>
@@ -101,53 +98,6 @@ const PharmacistUsersPage = () => {
             </tr>
           </thead>
           <tbody>
-              <th>1</th>
-              <th>alice</th>
-              <th>paracetamol</th>
-              <th>2022-11-20</th>
-              <th>7500</th>
-              <th>false</th>
-              <th>pp</th>
-              <tr>
-              <th>2</th>
-              <th>alice</th>
-              <th>Piriton</th>
-              <th>2023-05-28</th>
-              <th>5000</th>
-              <th>false</th>
-              <th>Paypal</th>
-              </tr>
-              <tr>
-              <th>3</th>
-              <th>alice</th>
-              <th>seneflo</th>
-              <th>2022-08-20</th>
-              <th>2100</th>
-              <th>false</th>
-              <th>Paypal</th>
-              </tr>
-              <tr>
-               <th>4</th>
-              <th>alice</th>
-              <th>asthalin</th>
-              <th>2022-12-20</th>
-              <th>27000</th>
-              <th>true</th>
-              <th>Paypal</th>
-              </tr>
-              <tr>
-              <th>5</th>
-              <th>alice</th>
-              <th>Furosemaid</th>
-              <th>2022-01-19</th>
-              <th>300</th>
-              <th>false</th>
-              <th>Paypal</th>
-              
-              </tr>
-              
-          </tbody>
-          {/* <tbody>
             {orders.map(
               (item, idx) => (
                 <tr key={idx}>
@@ -167,25 +117,52 @@ const PharmacistUsersPage = () => {
                 </tr>
               )
             )}
-          </tbody> */}
+          </tbody>
         </Table>
         </div>
         <div>
-        <div style={{
-        height: "40vh"
-      }}>
-        <PieChart />
-      </div>
+          <h1>Pharmacy Details</h1>
+          <Table striped bordered hover responsive>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Pharmacy Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map(
+                (item, idx) => (
+                  <tr key={idx}>
+                    <td>{idx + 1}</td>
+                    <td>{item.name}</td>
+                    <td>{item.email}</td>
+                    <td>
+                    {item.phoneNumber}
+                      {/* <i className={item}></i> */}
+                    </td>
+                    <td>{item.address}</td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </Table>
           <div>
             <p>&ensp;&ensp;</p>
           </div>
-         
+          <ExpireMedfilter />
           </div>
         </Col>
       </Row>
 
 
-      
+      <div style={{
+        height: "40vh"
+      }}>
+        <PieChart />
+      </div>
 
 
 

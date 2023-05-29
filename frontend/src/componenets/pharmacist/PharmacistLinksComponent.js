@@ -5,7 +5,7 @@ const PharmacistLinksComponent = () => {
   return (
     <Navbar bg="light" variant="light">
       <Nav className="flex-column">
-        <LinkContainer to="/admin/orders">
+        <LinkContainer to="/Orders">
           <Nav.Link>Orders</Nav.Link>
         </LinkContainer>
         <LinkContainer to="/view-more2">
