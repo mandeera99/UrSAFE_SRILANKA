@@ -225,7 +225,9 @@ function App() {
             element={<PharmacistAnalyticsPage />}
           />
           <Route path="/Orders" element={<PharmacistOrdersPage />} />
-          <Route path="/Pharmacist/order-details"element={<PharmacistOrderDetailsPage />}
+          <Route
+            path="/Pharmacist/order-details"
+            element={<PharmacistOrderDetailsPage />}
           />
 
           <Route path="/updateProfile" element={<updateProfile />} />
