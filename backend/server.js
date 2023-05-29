@@ -213,7 +213,7 @@ app.get("/generateReport", async (req, res) => {
       },
       {
         name: "Most orderd Medicines",
-        data: mostorderedmedicines.map(medicine => `${medicine._id}: ${medicine.countValue}`).join(', '),
+        data: mostorderedmedicines.map(medicine => `${medicine.medicine_name}: ${medicine.countValue}`).join(', '),
       }
       
     ];
