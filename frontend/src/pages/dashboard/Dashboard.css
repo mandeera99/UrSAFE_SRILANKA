@@ -35,3 +35,7 @@
     width: 0!important;
     overflow: hidden;
 }
+
+button:focus {
+    outline: none;
+  }

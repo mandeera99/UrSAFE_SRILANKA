@@ -62,14 +62,24 @@ function Dashboard() {
     const[orderCount,setOrderCount] = useState(0);
     const[emailsofusers,setEmailsofusers] = useState([]);
     const[emailready,setEmailready] = useState([]);
+    const[contactadmin,setcontactAdmin] = useState([]);
 
 
+    useEffect(()=>{
+        const handleAdminEmailButtonClick =async()=>{
+          const userRes=await axios.get(
+            "http://localhost:4000/sendEmailToAlladmin"
+          );
+          setcontactAdmin(userRes.data.data);
     
+        };
+        handleAdminEmailButtonClick();
+      },[]);
  
     useEffect(()=>{
         const handleEmailButtonClick =async()=>{
           const userRes=await axios.get(
-            "http://localhost:4000/sendEmailToAllPharmacy"
+            "http://localhost:4000/generateReport"
           );
           setEmailready(userRes.data.data);
     
@@ -80,7 +90,7 @@ function Dashboard() {
     useEffect(()=>{
         const fetchCount=async()=>{
           const userRes=await axios.get(
-            "http://localhost:4000/getordercount"
+            "http://localhost:4000/getOrdercountVal"
           );
           setOrderCount(userRes.data.data);
     
@@ -624,9 +634,14 @@ function Dashboard() {
                     
                     <a href="/dashboard/report" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-<button id="emailButton" onClick="handleEmailButtonClick()">
+
+<button id="emailButton" onClick="handleEmailButtonClick()" >
 <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-email fa-sm text-white-50"></i> Email Report</a></button>
+                            class="fas fa-envelope fa-sm text-white-50"></i> Email Report</a></button>
+
+<button id="adminButton" onClick="handleAdminEmailButtonClick()"  >
+<a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-user-cog fa-sm text-white-50"></i> Contact Admin</a></button>
                 </div>
 
                 {/* <!-- Content Row --> */}

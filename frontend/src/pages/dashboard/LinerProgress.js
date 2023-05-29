@@ -78,15 +78,15 @@ function ProgressBar() {
         </div> 
         <h2>Placed Order Amount</h2>
         <div className="progress-bar">
-          <div className="html" style={{animation: `html 10s linear forwards`, width: `${ordercountpracentage}%`,transition: 'width 1s ease-in-out' }}><span>{ordercountpracentage+'%'}</span></div>
+          <div className="html" style={{animation: `html 10s linear forwards`, width: `${ordercountpracentage}%`,transition: 'width 1s ease-in-out' }}><span>{Math.round(ordercountpracentage)+'%'}</span></div>
         </div>
         <h2>Succesfully Completed orders</h2>
         <div className="progress-bar">
-          <div className="css" style={{animation: `html 10s linear forwards`, width: `${sucessfullcountpracentage}%`,transition: 'width 1s ease-in-out' }}><span>{sucessfullcountpracentage+'%'}</span></div>
+          <div className="css" style={{animation: `html 10s linear forwards`, width: `${sucessfullcountpracentage}%`,transition: 'width 1s ease-in-out' }}><span>{Math.round(sucessfullcountpracentage)+'%'}</span></div>
         </div>
         <h2>Cancled Orders </h2>
         <div className="progress-bar">
-          <div className="javaScript"  style={{animation: `html 10s linear forwards`, width: `${canclecountpracentage}%`,transition: 'width 1s ease-in-out' }}><span>{canclecountpracentage+'%'}</span></div>
+          <div className="javaScript"  style={{animation: `html 10s linear forwards`, width: `${canclecountpracentage}%`,transition: 'width 1s ease-in-out' }}><span>{Math.round(canclecountpracentage)+'%'}</span></div>
         </div>
        
         

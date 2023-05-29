@@ -145,7 +145,7 @@ function Charts() {
                         {/* <!-- Area Chart --> */}
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Annual Sales Count Chart</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Variantion of PaymentMethods</h6>
                             </div>
                             <div class="card-body" style={{ padding: "0  250px" }}>
                                 <div >

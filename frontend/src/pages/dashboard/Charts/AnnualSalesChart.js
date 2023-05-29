@@ -8,7 +8,7 @@ function AnnualSalesChart() {
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const mediRes = await axios.get('http://localhost:4000/getorderamountbyyear');
+        const mediRes = await axios.get('http://localhost:4000/getorderPricebymethod');
         setMedicines(mediRes.data);
       } catch (error) {
         console.error(error);
@@ -22,8 +22,8 @@ function AnnualSalesChart() {
   let dataValues = [];
 
   if (Array.isArray(medicines)) {
-    labels = medicines.map((medicine) => medicine._id);
-    dataValues = medicines.map((medicine) => medicine.countValue);
+    labels = medicines.map((medicine) => medicine.paymentMethod);
+    dataValues = medicines.map((medicine) => medicine.totalPrice);
   }
   const data = {
     labels: labels,
