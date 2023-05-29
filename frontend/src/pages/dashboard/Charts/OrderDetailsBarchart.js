@@ -7,7 +7,7 @@ function OrderDetailsBarchart() {
 
   useEffect(() => {
     const fetchCount = async () => {
-        const mediRes = await axios.get('http://localhost:4000/getordercountbyitsname');
+        const mediRes = await axios.get('http://localhost:4000/getorderCountbymediname');
         setMedicines(mediRes.data);
     };
       
@@ -15,7 +15,7 @@ function OrderDetailsBarchart() {
   }, []);
 
   const data = {
-    labels: medicines.map(med => med._id),
+    labels: medicines.map(med => med.medicine_name),
     datasets: [
       {
         label: 'Medicine Count',
