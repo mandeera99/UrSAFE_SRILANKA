@@ -24,6 +24,8 @@ const Oderprogresses =require('./models/oderpregres');
 const Order= require('./models/orderModel');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
+const medDailyCountRoutes = require("./routes/medDailyCountRoutes")
 // express app simplifies the process of building web applications and APIs.
 let ejs = require("ejs");
 const axios = require('axios');
@@ -933,4 +935,4 @@ app.get('/send-pdf-email', async (req, res) => {
   }
 });
 
-  
+app.use('/api/medDailyCount', medDailyCountRoutes);
