@@ -103,7 +103,7 @@ const Report = () => {
 
   useEffect(() => {
     const fetchCount = async () => {
-        const mediRes = await axios.get('http://localhost:4000/getordercountbyitsname');
+        const mediRes = await axios.get('http://localhost:4000/getorderCountbymediname');
         setOrders(mediRes.data);
     };
       
@@ -111,7 +111,7 @@ const Report = () => {
   }, []);
 
   const data1= {
-    labels: orders.map(med => med._id),
+    labels: orders.map(med => med.medicine_name),
     datasets: [
       {
         label: 'Order Count',
