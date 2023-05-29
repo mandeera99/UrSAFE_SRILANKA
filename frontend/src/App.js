@@ -16,6 +16,9 @@ import UserProfilePage from './pages/user/UserProfilePage';
 import Header from './pages/Header';
 import Footer from './pages/Footer';
 import Pharmacy from './pages/Pharmacy';
+import AdminCustomersPage from "./pages/admin/AdminCustomersPage";
+import AdminPharmaciesPage from "./pages/admin/AdminPharmaciesPage"
+
 
 //Phamacist part - Manuja
 import Store from './pages/Store';
@@ -95,9 +98,9 @@ import PharmacistAnalyticsPage from './pages/Pharmacist/PharmacistAnalyticsPage'
 
 function App() {
   return (
-    
+
     <div>
-      
+
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -112,23 +115,23 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/medicines/:id" element={<Pharmacy/>}/>
+          <Route path="/medicines/:id" element={<Pharmacy />} />
           <Route path="/user-profile" element={<UserProfilePage />} />
           <Route path="/profileofuser/:email" element={<Profileofuser />} />
-          <Route path="/profileofuser/:email" element={<StoremedForm/>} />
-          <Route path="/location" element={<Location/>} />
-          <Route path="/Dashboard/adminchat" element={<ChatEngine 
-                                            height='100vh'
-                                            projectID='7f2e3b60-a8b9-4d84-b4e8-2add86ea6b05'
-                                            userName='nomashi'
-                                            userSecret='nomashi123@' 
-                                          />} />
-       <Route path="/chat" element={<ChatEngine 
-                                            height='100vh'
-                                            projectID='7f2e3b60-a8b9-4d84-b4e8-2add86ea6b05'
-                                            userName='alice'
-                                            userSecret='Qwert123@' 
-                                          />} />
+          <Route path="/profileofuser/:email" element={<StoremedForm />} />
+          <Route path="/location" element={<Location />} />
+          <Route path="/Dashboard/adminchat" element={<ChatEngine
+            height='100vh'
+            projectID='7f2e3b60-a8b9-4d84-b4e8-2add86ea6b05'
+            userName='nomashi'
+            userSecret='nomashi123@'
+          />} />
+          <Route path="/chat" element={<ChatEngine
+            height='100vh'
+            projectID='7f2e3b60-a8b9-4d84-b4e8-2add86ea6b05'
+            userName='alice'
+            userSecret='Qwert123@'
+          />} />
 
           <Route path="/view-store" element={<Store />} />
           <Route path="/view-more2" element={<Expiredmedreport />} />
@@ -163,7 +166,8 @@ function App() {
           <Route path="/dashboard/linechart" element={<LineCharts />} />
           <Route path="/dashboard/barchart" element={<BarCharts />} />
           <Route path="/dashboard/skillbar" element={<SkillBar />} />
-
+          <Route path="/admin/customers" element={<AdminCustomersPage />} />
+          <Route path="/admin/pharmacies" element={<AdminPharmaciesPage />} />
           <Route path="/user" element={<UserProfilePage />} />
           <Route path="/user/my-orders" element={<UserOrderPage />} />
           <Route path="/user/cart-details" element={<UserCartDetailsPage />} />
@@ -191,26 +195,26 @@ function App() {
             element={<AdminOrderDetailsPage />}
           />
 
-<Route path="/dashboard/admintable" element={<AdminTable  />}/>
-          <Route path="/dashboard/dypiechart" element={< DynamicPieChart/>}/>
-          <Route path="/dashboard/dybarchart" element={< DynamicBarChart/>}/>
-          <Route path="/dashboard/userAmount" element={<UserAmountLine  />}/>
-          <Route path="/dashboard/mostsearchedMedicine" element={< MostsearchedMedicine/>}/>
-          <Route path="/dashboard/mostSearchinLine" element={< MostSearchinLine/>}/>
-          <Route path="/dashboard/mediuserbarchart" element={< MediUserBarchart/>}/>
-          <Route path="/dashboard/salepiechart" element={<SalesPieChart />}/>
-          <Route path="/dashboard/orderdetailbarchart" element={< OrderDetailsBarchart/>}/>
-          <Route path="/dashboard/threewaylinechart" element={<ThreewayLineChart />}/>
-          <Route path="/dashboard/twowaybarchart" element={<TwowayBarChart  />}/>
-          <Route path="/dashboard/barchartgain" element={<UserGainBarChart  />}/>
-          <Route path="/dashboard/barchartlost" element={<UserLostBarChart  />}/>
-          <Route path="/dashboard/PharmacyTable" element={<PharmacyDetails  />}/>
-          <Route path="/dashboard/customerTable" element={<CustomerDetailsTable  />}/>
-          <Route path="/dashboard/ordersBar" element={<OrdersBar  />}/>
-          <Route path="/dashboard/annualSalesChart" element={<AnnualSalesChart/>}/>
-          <Route path="/dashboard/alerts" element={<Alerts/>}/>
-          <Route path="/dashboard/report" element={<Report/>}/>
-          <Route path="/dashboard/report/pdfview" element={<Pdfview/>}/>
+          <Route path="/dashboard/admintable" element={<AdminTable />} />
+          <Route path="/dashboard/dypiechart" element={< DynamicPieChart />} />
+          <Route path="/dashboard/dybarchart" element={< DynamicBarChart />} />
+          <Route path="/dashboard/userAmount" element={<UserAmountLine />} />
+          <Route path="/dashboard/mostsearchedMedicine" element={< MostsearchedMedicine />} />
+          <Route path="/dashboard/mostSearchinLine" element={< MostSearchinLine />} />
+          <Route path="/dashboard/mediuserbarchart" element={< MediUserBarchart />} />
+          <Route path="/dashboard/salepiechart" element={<SalesPieChart />} />
+          <Route path="/dashboard/orderdetailbarchart" element={< OrderDetailsBarchart />} />
+          <Route path="/dashboard/threewaylinechart" element={<ThreewayLineChart />} />
+          <Route path="/dashboard/twowaybarchart" element={<TwowayBarChart />} />
+          <Route path="/dashboard/barchartgain" element={<UserGainBarChart />} />
+          <Route path="/dashboard/barchartlost" element={<UserLostBarChart />} />
+          <Route path="/dashboard/PharmacyTable" element={<PharmacyDetails />} />
+          <Route path="/dashboard/customerTable" element={<CustomerDetailsTable />} />
+          <Route path="/dashboard/ordersBar" element={<OrdersBar />} />
+          <Route path="/dashboard/annualSalesChart" element={<AnnualSalesChart />} />
+          <Route path="/dashboard/alerts" element={<Alerts />} />
+          <Route path="/dashboard/report" element={<Report />} />
+          <Route path="/dashboard/report/pdfview" element={<Pdfview />} />
 
 
 
@@ -226,12 +230,12 @@ function App() {
             element={<PharmacistOrderDetailsPage />}
           />
 
-          <Route path="/updateProfile" element={<updateProfile />}/>
+          <Route path="/updateProfile" element={<updateProfile />} />
         </Routes>
       </Router>
       <Footer />
     </div>
-    
+
   );
 
 }
